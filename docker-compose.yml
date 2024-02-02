@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_ss_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=socialsparkz
+      - POSTGRES_USER=socialsparkzuser
+      - POSTGRES_PASSWORD=socialsparkzpassword
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_ss_data:
