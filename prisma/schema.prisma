@@ -4,16 +4,98 @@ generator client {
 
 datasource db {
     provider = "postgresql"
-    url      = "postgresql://socialsparkzuser:socialsparkzpassword@127.0.0.1:5432/socialsparkz" // uses connection pooling
+    url      = env("DATABASE_URL")
+}
+
+enum gameType {
+    CARD
+    DICE
+    PHONE
+    OTHER
+}
+
+enum reportType {
+    GAME
+    REVIEW
 }
 
 model User {
-    id        String   @id @default(cuid())
-    name      String?
-    email     String?  @unique
-    createdAt DateTime @default(now()) @map(name: "created_at")
-    updatedAt DateTime @updatedAt @map(name: "updated_at")
-    admin     Boolean
+    id         Int        @id @default(autoincrement())
+    name       String?
+    email      String     @unique
+    createdAt  DateTime   @default(now()) @map(name: "created_at")
+    updatedAt  DateTime?  @updatedAt @map(name: "updated_at")
+    admin      Boolean    @default(false)
+    Games      Game[]
+    Review     Review[]
+    Favorite   Favorite[]
+    Queue      Queue[]
+    Report     Report[]
+    followedBy Follows[]  @relation("followedBy")
+    following  Follows[]  @relation("following")
 
     @@map(name: "users")
+}
+
+model Game {
+    id                Int                 @id @default(autoincrement())
+    name              String              @default("")
+    description       String              @default("")
+    type              gameType[]          @default([])
+    author            User                @relation(fields: [userId], references: [id])
+    userId            Int
+    Review            Review[]
+    Favorite          Favorite[]
+    QueueContainsGame QueueContainsGame[]
+}
+
+model Review {
+    id          Int    @id @default(autoincrement())
+    title       String @default("")
+    description String @default("")
+    rating      Int    @default(3)
+    author      User   @relation(fields: [userId], references: [id])
+    userId      Int
+    game        Game   @relation(fields: [gameId], references: [id])
+    gameId      Int
+}
+
+model Favorite {
+    id     String @id @default(cuid())
+    user   User   @relation(fields: [userId], references: [id])
+    game   Game   @relation(fields: [gameId], references: [id])
+    userId Int
+    gameId Int
+}
+
+model Queue {
+    id                String              @id @default(cuid())
+    author            User                @relation(fields: [userId], references: [id])
+    userId            Int
+    QueueContainsGame QueueContainsGame[]
+}
+
+model QueueContainsGame {
+    id      String @id @default(cuid())
+    game    Game   @relation(fields: [gameId], references: [id])
+    gameId  Int
+    queue   Queue  @relation(fields: [queueId], references: [id])
+    queueId String
+}
+
+model Report {
+    id          String     @id @default(cuid())
+    author      User       @relation(fields: [userId], references: [id])
+    userId      Int
+    reportId    Int //This is the FK of the reported object
+    contentType reportType //Type of reported object
+}
+
+model Follows {
+    followedBy   User @relation("followedBy", fields: [followedById], references: [id])
+    followedById Int
+    following    User @relation("following", fields: [followingId], references: [id])
+    followingId  Int
+
+    @@id([followingId, followedById])
 }
