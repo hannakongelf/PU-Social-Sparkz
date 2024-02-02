@@ -14,6 +14,10 @@ Start the Postgres server:
 
 `docker compose up -d`
 
+Run migrations:
+
+`npx prisma generate`
+
 Then, run the development server:
 
 ```bash
