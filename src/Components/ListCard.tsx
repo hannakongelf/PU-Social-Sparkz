@@ -1,3 +1,4 @@
+'use client';
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -6,11 +7,15 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Game } from '@prisma/client';
+import { useRouter } from 'next/navigation';
 
 
 export default function ListCard({ game }: { game: Game }) {
+
+  const router = useRouter();
+
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345 }} className='content-center'>
       <CardMedia
         sx={{ height: 140 }}
         image="/static/images/cards/contemplative-reptile.jpg"
@@ -25,8 +30,7 @@ export default function ListCard({ game }: { game: Game }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <Button size="small" onClick={() => {router.push(`/detail/${game.id}/`)}}>Read more</Button>
       </CardActions>
     </Card>
   );

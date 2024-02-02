@@ -10,9 +10,10 @@
     "prettier": "prettier '**/*.{js,ts,tsx,css,md,yml}' --write",
     "prisma:reset": "npx prisma migrate reset",
     "prisma:migrate": "npx prisma db push",
-    "prisma:seed": "yarn ts-node prisma/seed.ts"
+    "prisma:seed": "npx ts-node prisma/seed.ts"
   },
   "dependencies": {
+    "@emotion/styled": "^11.11.0",
     "@mui/base": "^5.0.0-beta.34",
     "@prisma/client": "^5.9.1",
     "next": "14.1.0",
@@ -21,6 +22,8 @@
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@emotion/react": "^11.11.3",
+    "@mui/material": "^5.15.7",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
