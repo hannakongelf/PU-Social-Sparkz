@@ -20,17 +20,19 @@ enum reportType {
 }
 
 model User {
-    id        Int        @id @default(autoincrement())
-    name      String?
-    email     String     @unique
-    createdAt DateTime   @default(now()) @map(name: "created_at")
-    updatedAt DateTime?  @updatedAt @map(name: "updated_at")
-    admin     Boolean    @default(false)
-    Games     Game[]
-    Review    Review[]
-    Favorite  Favorite[]
-    Queue     Queue[]
-    Report    Report[]
+    id         Int        @id @default(autoincrement())
+    name       String?
+    email      String     @unique
+    createdAt  DateTime   @default(now()) @map(name: "created_at")
+    updatedAt  DateTime?  @updatedAt @map(name: "updated_at")
+    admin      Boolean    @default(false)
+    Games      Game[]
+    Review     Review[]
+    Favorite   Favorite[]
+    Queue      Queue[]
+    Report     Report[]
+    followedBy Follows[]  @relation("followedBy")
+    following  Follows[]  @relation("following")
 
     @@map(name: "users")
 }
@@ -87,4 +89,13 @@ model Report {
     userId      Int
     reportId    Int //This is the FK of the reported object
     contentType reportType //Type of reported object
+}
+
+model Follows {
+    followedBy   User @relation("followedBy", fields: [followedById], references: [id])
+    followedById Int
+    following    User @relation("following", fields: [followingId], references: [id])
+    followingId  Int
+
+    @@id([followingId, followedById])
 }
