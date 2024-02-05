@@ -1,23 +1,17 @@
 'use client';
-import { User } from "@prisma/client";
-import { createUser, getUser } from "./actions/user";
 
+import Navbar from '@/components/Navbar';
+import { useSession } from 'next-auth/react';
 
 export default function Home() {
-
-  async function getUser2(){
-    const u = await getUser();
-    
-    console.log(u)
-  }
-
+  const session = useSession();
   return (
     <main>
-      <button onClick={() => createUser()}>
-        createuser
-      </button>
+      <header>
+        <Navbar />
+      </header>
       <h1>Social Sparkz</h1>
-      <button onClick={() => (getUser2())}>testuser</button>
+      {session.data?.user && <div>Velkommen {session.data.user.name}</div>}
     </main>
   );
 }
