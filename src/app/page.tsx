@@ -1,23 +1,16 @@
-'use client';
-import { User } from "@prisma/client";
-import { createUser, getUser } from "./actions/user";
+"use server";
+import { Game, User } from "@prisma/client";
+import ListCard from "../Components/ListCard";
+import { getAllGames } from "../actions/game";
 
-
-export default function Home() {
-
-  async function getUser2(){
-    const u = await getUser();
-    
-    console.log(u)
-  }
+export default async function Home() {
+  const games = await getAllGames();
 
   return (
-    <main>
-      <button onClick={() => createUser()}>
-        createuser
-      </button>
-      <h1>Social Sparkz</h1>
-      <button onClick={() => (getUser2())}>testuser</button>
+    <main className="flex content-center">
+      {games.map((game) => (
+        <ListCard key={game.id} game={game} />
+      ))}
     </main>
   );
 }
