@@ -16,7 +16,7 @@ Start the Postgres server:
 
 Run migrations:
 
-`npx prisma generate`
+`yarn prisma:migrate`
 
 Then, run the development server:
 
@@ -29,6 +29,14 @@ pnpm dev
 # or
 bun dev
 ```
+
+To populate the database with dummy data run:
+
+`yarn prisma:seed`
+
+To reset the database run:
+
+`yarn prisma:reset`
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 

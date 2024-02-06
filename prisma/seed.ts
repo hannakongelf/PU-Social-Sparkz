@@ -1,20 +1,20 @@
-import { gameType } from '@prisma/client';
-import prisma from '../lib/prisma.ts';
+import { gameType } from "@prisma/client";
+import prisma from "../lib/prisma.ts";
 
 async function main() {
   const user = await prisma.user.create({
     data: {
-      name: 'John Doe',
-      email: 'john.doe@example.com',
+      name: "John Doe",
+      email: "john.doe@example.com",
       admin: false,
     },
   });
 
   const game = await prisma.game.create({
     data: {
-      name: 'Sample Game',
-      description: 'A sample game description',
-      type: [gameType.CARD], 
+      name: "Sample Game",
+      description: "A sample game description",
+      type: [gameType.CARD],
       author: {
         connect: { id: user.id },
       },
