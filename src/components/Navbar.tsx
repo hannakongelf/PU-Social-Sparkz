@@ -1,14 +1,11 @@
 import * as actions from '@/actions';
+import AuthHeader from '@/components/auth-header';
 
 const Navbar = () => {
   return (
-    <nav className='flex justify-between p-4'>
+    <nav className='flex justify-between py-4 items-center'>
       <section>Social Sparkz</section>
-      <section>
-        <form action={actions.signIn}>
-          <button>Log in</button>
-        </form>
-      </section>
+      <AuthHeader />
     </nav>
   );
 };
