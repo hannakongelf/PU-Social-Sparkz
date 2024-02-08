@@ -1,7 +1,7 @@
 "use server";
 import { Game } from "@prisma/client";
-import ListCard from "../../../Components/ListCard";
-import { getGameById } from "../../../actions/game";
+import ListCard from "../../../components/ListCard";
+import { getGameById } from "../../../db/queries/game";
 
 export default async function Page({
   params: { id },
