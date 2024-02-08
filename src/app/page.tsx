@@ -1,16 +1,12 @@
-"use server";
-import { Game, User } from "@prisma/client";
-import ListCard from "../Components/ListCard";
-import { getAllGames } from "../actions/game";
+import Navbar from '@/components/Navbar';
 
-export default async function Home() {
-  const games = await getAllGames();
-
+export default function Home() {
   return (
-    <main className="flex content-center">
-      {games.map((game) => (
-        <ListCard key={game.id} game={game} />
-      ))}
+    <main>
+      <header>
+        <Navbar />
+      </header>
+      <h1>Social Sparkz</h1>
     </main>
   );
 }
