@@ -36,25 +36,25 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String     @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?    @unique
   emailVerified DateTime?
   image         String?
   // createdAt     DateTime   @default(now()) @map(name: "created_at")
   // updatedAt     DateTime?  @updatedAt @map(name: "updated_at")
-  // admin         Boolean    @default(false)
+  admin         Boolean    @default(false)
   accounts      Account[]
   sessions      Session[]
-  // Games         Game[]
-  // Review        Review[]
-  // Favorite      Favorite[]
-  // Queue         Queue[]
-  // Report        Report[]
-  // followedBy    Follows[]  @relation("followedBy")
-  // following     Follows[]  @relation("following")
+  Games         Game[]
+  Review        Review[]
+  Favorite      Favorite[]
+  Queue         Queue[]
+  Report        Report[]
+  followedBy    Follows[]  @relation("followedBy")
+  following     Follows[]  @relation("following")
 
-  // @@map(name: "users")
+  @@map(name: "users")
 }
 
 model VerificationToken {
@@ -65,77 +65,79 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-// enum gameType {
-//   CARD
-//   DICE
-//   PHONE
-//   OTHER
-// }
+enum gameType {
+  CARD
+  DICE
+  PHONE
+  OTHER
+}
 
-// enum reportType {
-//   GAME
-//   REVIEW
-// }
+enum reportType {
+  GAME
+  REVIEW
+}
 
-// model Game {
-//   id                Int                 @id @default(autoincrement())
-//   name              String              @default("")
-//   description       String              @default("")
-//   type              gameType[]          @default([])
-//   author            User                @relation(fields: [userId], references: [id])
-//   userId            String
-//   Review            Review[]
-//   Favorite          Favorite[]
-//   QueueContainsGame QueueContainsGame[]
-// }
+model Game {
+  id                Int           @id @default(autoincrement())
+  name              String
+  description       String
+  type              gameType
+  author            User          @relation(fields: [userId], references: [id])
+  userId            String
+  playerMax         Int?
+  playerMin         Int           @default(2)
+  Review            Review[]
+  Favorite          Favorite[]
+  QueueContainsGame QueueOnGame[]
+}
 
-// model Review {
-//   id          Int    @id @default(autoincrement())
-//   title       String @default("")
-//   description String @default("")
-//   rating      Int    @default(3)
-//   author      User   @relation(fields: [userId], references: [id])
-//   userId      String
-//   game        Game   @relation(fields: [gameId], references: [id])
-//   gameId      Int
-// }
+model Review {
+  id          Int     @id @default(autoincrement())
+  description String?
+  rating      Int
+  author      User    @relation(fields: [userId], references: [id])
+  userId      String
+  game        Game    @relation(fields: [gameId], references: [id])
+  gameId      Int
+}
 
-// model Favorite {
-//   id     String @id @default(cuid())
-//   user   User   @relation(fields: [userId], references: [id])
-//   game   Game   @relation(fields: [gameId], references: [id])
-//   userId String
-//   gameId Int
-// }
+model Favorite {
+  id     String @id @default(cuid())
+  user   User   @relation(fields: [userId], references: [id])
+  game   Game   @relation(fields: [gameId], references: [id])
+  userId String
+  gameId Int
+}
 
-// model Queue {
-//   id                String              @id @default(cuid())
-//   author            User                @relation(fields: [userId], references: [id])
-//   userId            String
-//   QueueContainsGame QueueContainsGame[]
-// }
+model Queue {
+  id                String        @id @default(cuid())
+  author            User          @relation(fields: [userId], references: [id])
+  userId            String
+  QueueContainsGame QueueOnGame[]
+}
 
-// model QueueContainsGame {
-//   id      String @id @default(cuid())
-//   game    Game   @relation(fields: [gameId], references: [id])
-//   gameId  Int
-//   queue   Queue  @relation(fields: [queueId], references: [id])
-//   queueId String
-// }
+model QueueOnGame {
+  id      String @id @default(cuid())
+  game    Game   @relation(fields: [gameId], references: [id])
+  gameId  Int
+  queue   Queue  @relation(fields: [queueId], references: [id])
+  queueId String
+}
 
-// model Report {
-//   id          String     @id @default(cuid())
-//   author      User       @relation(fields: [userId], references: [id])
-//   userId      String
-//   reportId    Int //This is the FK of the reported object
-//   contentType reportType //Type of reported object
-// }
+model Report {
+  id          String     @id @default(cuid())
+  author      User       @relation(fields: [userId], references: [id])
+  userId      String
+  reportId    Int //This is the FK of the reported object
+  contentType reportType //Type of reported object
+  description String
+}
 
-// model Follows {
-//   followedBy   User   @relation("followedBy", fields: [followedById], references: [id])
-//   followedById String
-//   following    User   @relation("following", fields: [followingId], references: [id])
-//   followingId  String
+model Follows {
+  followedBy   User   @relation("followedBy", fields: [followedById], references: [id])
+  followedById String
+  following    User   @relation("following", fields: [followingId], references: [id])
+  followingId  String
 
-//   @@id([followingId, followedById])
-// }
+  @@id([followingId, followedById])
+}
