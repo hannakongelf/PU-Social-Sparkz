@@ -11,14 +11,22 @@ async function main() {
     },
   });
 
+  const gameTypes = Object.values(gameType);
+
+  const getRandomGameType = () => {
+    const randomIndex = Math.floor(Math.random() * gameTypes.length);
+    return gameTypes[randomIndex];
+  };
+
   const gamesData = Array.from({ length: 25 }, (_, index) => ({
     name: `Sample Game ${index}`,
     description: "A sample game description",
-    type: gameType.CARD,
-    userId: user.id, 
+    type: getRandomGameType(),
+    userId: user.id,
     playerMin: 2,
     playerMax: 4,
-    image: "https://cdn.pixabay.com/photo/2014/06/03/19/38/road-sign-361514_960_720.png",
+    image:
+      "https://cdn.pixabay.com/photo/2014/06/03/19/38/road-sign-361514_960_720.png",
   }));
 
   const games = await prisma.game.createMany({
@@ -31,7 +39,6 @@ async function main() {
     userId: user.id,
     gameId: index + 1,
   }));
-
 
   for (let i = 0; i < reviewsData.length; i++) {
     await prisma.review.create({

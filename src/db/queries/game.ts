@@ -1,5 +1,5 @@
 import prisma from "../../../lib/prisma";
-import { Game, Review } from "@prisma/client";
+import { Game, Review, gameType } from "@prisma/client";
 
 export type GameWithReviews = Game & {
   Review: Review[];
@@ -9,6 +9,7 @@ export const getAllGames = async (): Promise<GameWithReviews[]> => {
   const games = await prisma.game.findMany({
     include: {
       Review: true,
+      
     },
   });
   return games;

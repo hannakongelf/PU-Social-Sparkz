@@ -19,10 +19,11 @@ const GameContent = ({ game }: { game: GameWithReviews }) => {
           "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg"
         }
         alt="Sample Image"
-        width={500} // Desired width
-        height={300} // Desired height
-        objectFit="cover" // Crop or resize to cover the container without stretching
+        width={500}
+        height={300}
+        objectFit="cover"
       />
+      {game.type} {game.description}
     </>
   );
 };
