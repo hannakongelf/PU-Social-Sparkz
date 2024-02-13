@@ -63,6 +63,7 @@ export default function ListContent({ games }: { games: GameWithReviews[] }) {
           onChange={handleSearchChange}
         />
       </div>
+
       <Button onClick={() => handleSortChange("name")}>
         Sort by Name {sortDirection}
       </Button>
