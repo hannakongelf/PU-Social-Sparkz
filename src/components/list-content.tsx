@@ -10,30 +10,46 @@ export default function ListContent({ games }: { games: GameWithReviews[] }) {
   const [filteredGames, setFilteredGames] = useState<GameWithReviews[]>(games);
   const [searchTerm, setSearchTerm] = useState("");
   const [category, setCategory] = useState<gameType | null>(null);
+  const [sortKey, setSortKey] = useState<keyof GameWithReviews | null>(null);
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
 
   useEffect(() => {
-    const filterGames = () => {
-      let tempFilteredGames = games;
+    let tempFilteredGames = games.filter((game) => {
+      const matchesSearchTerm =
+        searchTerm === "" ||
+        game.name.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesCategory = category === null || game.type === category;
+      return matchesSearchTerm && matchesCategory;
+    });
 
-      if (searchTerm !== "") {
-        tempFilteredGames = tempFilteredGames.filter((game) =>
-          game.name.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-      }
+    if (sortKey) {
+      tempFilteredGames.sort((a, b) => {
+        let valueA = a[sortKey];
+        let valueB = b[sortKey];
 
-      if (category !== null) {
-        tempFilteredGames = tempFilteredGames.filter(
-          (g: GameWithReviews) => g.type === category
-        );
-      }
+        if (typeof valueA === "string" && typeof valueB === "string") {
+          valueA = valueA.toLowerCase();
+          valueB = valueB.toLowerCase();
+        }
 
-      setFilteredGames(tempFilteredGames);
-    };
+        if (sortDirection === "asc") {
+          return valueA < valueB ? -1 : valueA > valueB ? 1 : 0;
+        } else {
+          return valueA > valueB ? -1 : valueA < valueB ? 1 : 0;
+        }
+      });
+    }
 
-    filterGames();
-  }, [searchTerm, category, games]);
+    setFilteredGames(tempFilteredGames);
+  }, [searchTerm, category, games, sortKey, sortDirection]);
+
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
+  };
+
+  const handleSortChange = (key: keyof GameWithReviews) => {
+    setSortKey(key);
+    setSortDirection(sortDirection === "asc" ? "desc" : "asc");
   };
 
   return (
@@ -47,6 +63,10 @@ export default function ListContent({ games }: { games: GameWithReviews[] }) {
           onChange={handleSearchChange}
         />
       </div>
+      <Button onClick={() => handleSortChange("name")}>
+        Sort by Name {sortDirection}
+      </Button>
+
       <div className="flex justify-center my-6 flex-wrap gap-2">
         {Object.values(gameType).map((t) => (
           <Button
