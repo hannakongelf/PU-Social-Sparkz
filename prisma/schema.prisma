@@ -86,6 +86,7 @@ model Game {
   userId            String
   playerMax         Int?
   playerMin         Int           @default(2)
+  image             String?
   Review            Review[]
   Favorite          Favorite[]
   QueueContainsGame QueueOnGame[]
