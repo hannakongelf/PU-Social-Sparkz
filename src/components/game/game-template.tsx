@@ -22,7 +22,7 @@ export default function GameTemplate() {
       <div className='flex flex-col'>
         <label htmlFor='name'>Game name:</label>
         <Input name='name' required error={!!formState.errors.name}></Input>
-        <p className="bg-red-500">
+        <p className="bg-red-500 text-white">
           {formState.errors.name}
         </p>
       </div>
@@ -34,14 +34,25 @@ export default function GameTemplate() {
 
       <div className='flex flex-col'>
         <label htmlFor='description'>Game description:</label>
-        <textarea id='desc' name='description' rows={4} cols={50} required />
+        <textarea id='desc' name='description' rows={4} cols={50} required/>
+        <p className='bg-red-500 text-white'>
+          (formState.errors.description)
+        </p>
       </div>
 
       <div className='flex flex-col'>
         <label htmlFor='minplayers'>Minimum number of players:</label>
-        <Input type='number' name='minplayers' value={1} required></Input>
+        <Input type='number' name='minplayers' required error={!!formState.errors.playerMin}></Input>
+        <p className='bg-red-500 text-white'>
+          {formState.errors.playerMin}
+        </p>
+
+
         <label htmlFor='maxplayers'>Maximum number of players:</label>
-        <Input type='number' name='maxplayers' required></Input>
+        <Input type='number' name='maxplayers' required pattern="[0-9]*" error={!!formState.errors.playerMax}></Input>
+        <p className='bg-red-500 text-white'>
+          {formState.errors.playerMax && formState.errors.playerMax[0]}
+        </p>
       </div>
 
       <div className='flex flex-col'>

@@ -7,10 +7,10 @@ import { z } from 'zod';
 
 const createGameSchema = z.object({
   name: z.string().min(2, {message:"Name must contain at least two characters"}),
-  description: z.string().min(50),
+  description: z.string().min(50, {message: "Description must be at least 50 characters"}),
   category: z.enum(['CARD', 'DICE', 'PHONE', 'OTHER']),
-  playerMax: z.number().min(2).optional(),
-  playerMin: z.number().min(2).optional(),
+  playerMax: z.number().min(2, {message:"The game should require at least two players"}).optional(),
+  playerMin: z.number().min(2, {message:"The game should require at least two playeres"}).optional(),
   image: z.string().min(5).optional(),
 });
 

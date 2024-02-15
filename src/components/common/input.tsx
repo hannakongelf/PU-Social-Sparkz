@@ -10,7 +10,7 @@ const Input = (
     <input
         className={clsx(
             '',
-            className, "border border-red-500" && error
+            className, {"border border-red-500": error}
         )}
         {...rest}
         name={name} id={name} 
