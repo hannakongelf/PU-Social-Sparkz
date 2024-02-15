@@ -7,7 +7,7 @@ import { z } from 'zod';
 
 const ratingSchema = z.object({
   description: z.string().min(1).optional(),
-  rating: z.number().min(0.5).max(5),
+  rating: z.number().int().gte(1).lte(5),
 });
 
 interface CreateRatingFormState {
@@ -32,15 +32,18 @@ export async function createRating(
     };
   const result = ratingSchema.safeParse({
     description: formData.get('description'),
-    rating: formData.get('rating'),
+    rating: Number(formData.get('rating')),
   });
 
-  if (!result.success) console.log('iam here');
-  return {
-    errors: result.error.flatten().fieldErrors,
-  };
+  if (!result.success) {
+    console.log(result.error.flatten());
+    return {
+      errors: result.error.flatten().fieldErrors,
+    };
+  }
 
   try {
+    console.log('yeyy');
     await db.review.create({
       data: {
         description: result.data.description,
@@ -50,6 +53,7 @@ export async function createRating(
       },
     });
   } catch (err: unknown) {
+    console.log(err);
     if (err instanceof Error) {
       return {
         errors: {
