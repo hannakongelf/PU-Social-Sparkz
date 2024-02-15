@@ -21,7 +21,10 @@ export default function GameTemplate() {
 
       <div className='flex flex-col'>
         <label htmlFor='name'>Game name:</label>
-        <Input name='name' required></Input>
+        <Input name='name' required error={!!formState.errors.name}></Input>
+        <p className="bg-red-500">
+          {formState.errors.name}
+        </p>
       </div>
 
       <div className='flex flex-col'>

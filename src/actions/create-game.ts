@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation';
 import { z } from 'zod';
 
 const createGameSchema = z.object({
-  name: z.string().min(2),
+  name: z.string().min(2, {message:"Name must contain at least two characters"}),
   description: z.string().min(50),
   category: z.enum(['CARD', 'DICE', 'PHONE', 'OTHER']),
   playerMax: z.number().min(2).optional(),
