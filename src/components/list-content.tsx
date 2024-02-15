@@ -43,12 +43,6 @@ export default function ListContent({ games }: { games: GameWithReviews[] }) {
     setFilteredGames(tempFilteredGames);
   }, [searchTerm, category, games, sortKey, sortDirection]);
 
-<<<<<<< HEAD
-=======
-    filterGames();
-  }, [searchTerm, category, games]);
-
->>>>>>> 7c73b22 (Create detail view for game with title, description, rating, and)
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
