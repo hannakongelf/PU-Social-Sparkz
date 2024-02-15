@@ -1,12 +1,26 @@
 import prisma from "../../../lib/prisma";
-import { Game } from "@prisma/client";
+import { Game, Review, gameType } from "@prisma/client";
 
-export const getAllGames = async (): Promise<Game[]> => {
-  const games = await prisma.game.findMany();
+export type GameWithReviews = Game & {
+  Review: Review[];
+};
+
+export const getAllGames = async (): Promise<GameWithReviews[]> => {
+  const games = await prisma.game.findMany({
+    include: {
+      Review: true,
+      
+    },
+  });
   return games;
 };
 
-export const getGameById = async (id: number): Promise<Game | null> => {
-  const game = await prisma.game.findUnique({ where: { id: id } });
+export const getGameById = async (id: number): Promise<GameWithReviews | null> => {
+  const game = await prisma.game.findUnique({
+    where: { id: id },
+    include: {
+      Review: true,
+    },
+  });
   return game;
 };
