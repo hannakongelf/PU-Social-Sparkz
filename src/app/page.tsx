@@ -1,16 +1,19 @@
 "use server";
-import { Game, User } from "@prisma/client";
-import ListCard from "../Components/ListCard";
-import { getAllGames } from "../actions/game";
+
+import ListCard from "@/components/list-card";
+import Grid from "@/components/common/grid";
+import { GameWithReviews, getAllGames } from "@/db/queries/game";
+import { Game } from "@prisma/client";
+import { TextField } from "@mui/material";
+import ListContent from "@/components/list-content";
 
 export default async function Home() {
-  const games = await getAllGames();
+  const games: GameWithReviews[] = await getAllGames();
 
   return (
-    <main className="flex content-center">
-      {games.map((game) => (
-        <ListCard key={game.id} game={game} />
-      ))}
+    <main>
+      <h1 className="text-4xl my-4">Leker</h1>
+      <ListContent games={games} />
     </main>
   );
 }

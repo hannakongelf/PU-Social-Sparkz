@@ -1,7 +1,8 @@
 "use server";
 import { Game } from "@prisma/client";
-import ListCard from "../../../Components/ListCard";
-import { getGameById } from "../../../actions/game";
+import ListCard from "../../../components/list-card";
+import { getGameById } from "../../../db/queries/game";
+import GameContent from "@/components/game-content";
 
 export default async function Page({
   params: { id },
@@ -11,13 +12,15 @@ export default async function Page({
   const game = await getGameById(parseInt(id));
 
   return (
+    <>
+    <h1>{game?.name}</h1>
     <main className="flex content-center">
       {game ? (
-        <ListCard key={game.id.toString()} game={game} />
+        <GameContent key={game.id.toString()} game={game} />
       ) : (
         <p>Game not found.</p>
       )}
-      Detail page.
     </main>
+    </>
   );
 }
