@@ -1,15 +1,19 @@
-import Navbar from '@/components/Navbar';
-import { gameType } from '@prisma/client';
+'use server';
 
-export default function Home() {
-  const GAME_CATEGORIES = Object.values(gameType).map((type) => type);
-  console.log(GAME_CATEGORIES);
+import ListCard from '@/components/list-card';
+import Grid from '@/components/common/grid';
+import { GameWithReviews, getAllGames } from '@/db/queries/game';
+import { Game } from '@prisma/client';
+import { TextField } from '@mui/material';
+import ListContent from '@/components/list-content';
+
+export default async function Home() {
+  const games: GameWithReviews[] = await getAllGames();
+
   return (
     <main>
-      <header>
-        <Navbar />
-      </header>
-      <h1>Social Sparkz</h1>
+      <h1 className='text-4xl my-4'>Leker</h1>
+      <ListContent games={games} />
     </main>
   );
 }
