@@ -4,12 +4,12 @@ import { auth } from '@/auth';
 import { db } from '@/db';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
-import { gameType } from '@prisma/client';
 
 const createGameSchema = z.object({
   name: z.string(),
   description: z.string().min(150),
-  type: z.enum([GAME_CATEGORIES]),
+  type: z.enum(['DICE', 'CARD', 'PHONE', 'OTHER']),
+  userId: z.string(),
 });
 
 interface CreateGameFormState {
@@ -32,9 +32,9 @@ export async function createGame(
     };
 
   const result = createGameSchema.safeParse({
-    name: formData.get('name'),
-    description: formData.get('description'),
-    type: formData.get('type'),
+    name: formData.get('gname'),
+    description: formData.get('desc'),
+    type: formData.get('gcategory'),
   });
 
   if (!result.success)
@@ -48,6 +48,7 @@ export async function createGame(
         name: result.data.name,
         description: result.data.description,
         type: result.data.type,
+        userId: session.user.id,
       },
     });
   } catch (err: unknown) {
