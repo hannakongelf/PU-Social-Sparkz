@@ -19,34 +19,29 @@ export default function GameTemplate() {
         are required, while some are optional.
       </p>
 
-      <div className='flex-col'>
+      <div className='flex flex-col'>
         <label htmlFor='gname'>Game name:</label>
         <Input name='gname' required></Input>
       </div>
 
-      <div className='flex-col'>
+      <div className='flex flex-col'>
         <label htmlFor='pic'>Upload a picture-url</label>
         <Input name='pic'></Input>
       </div>
 
-      <div className='flex-col'>
-        <label htmlFor='pic'>Upload a picture-url</label>
-        <input type='text' id='pic' name='pic' />
-      </div>
-
-      <div className='flex-col'>
+      <div className='flex flex-col'>
         <label htmlFor='description'>Game description:</label>
         <textarea id='desc' name='description' rows={4} cols={50} required />
       </div>
 
-      <div className='flex-col'>
+      <div className='flex flex-col'>
         <label htmlFor='minplayers'>Minimum number of players:</label>
         <Input type='number' name='minplayers' value={1} required></Input>
         <label htmlFor='maxplayers'>Maximum number of players:</label>
         <Input type='number' name='maxplayers' required></Input>
       </div>
 
-      <div className='flex-col'>
+      <div className='flex flex-col'>
         <label htmlFor='minplayers'>Minimum number of players:</label>
         <input
           type='number'
