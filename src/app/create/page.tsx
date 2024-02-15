@@ -3,6 +3,7 @@
 import { TextField } from "@mui/material";
 import GameTemplate from "@/components/game-template";
 
+
 export default async function Home() {
   return (
     <main>

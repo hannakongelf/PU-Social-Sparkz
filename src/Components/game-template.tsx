@@ -1,10 +1,12 @@
 "use client";
-import * as React from "react";
-import { useRouter } from "next/navigation";
+import * as React from "react"
+import Link from "next/link";
+import Input from "./common/input";
+import Button from "./common/button";
+
 
 
 export default function GameTemplate() {
-    const router = useRouter();
 
     return (
         <form id="newGameForm" name="newGameForm" className="">
@@ -18,12 +20,12 @@ export default function GameTemplate() {
 
             <div>
                 <label htmlFor="gname">Game name:</label><br></br>
-                <input type="text" id="gname" name="gname" required></input><br></br>
+                <Input name="gname" required></Input><br></br>
             </div>
 
             <div>
                 <label htmlFor="pic">Upload a picture-url</label><br></br>
-                <input type="text" id="pic" name="pic"></input><br></br>
+                <Input name="pic"></Input><br></br>
             </div>
 
             <div>
@@ -38,9 +40,9 @@ export default function GameTemplate() {
 
             <div>
                 <label htmlFor="minplayers">Minimum number of players:</label><br></br>
-                <input type="number" id="minplayers" name="minplayers" value={1} required></input><br></br>
+                <Input type="number" name="minplayers" value={1} required></Input><br></br>
                 <label htmlFor="maxplayers">Maximum number of players:</label><br></br>
-                <input type="number" id="maxplayers" name="maxplayers" required></input><br></br>
+                <Input type="number" name="maxplayers" required></Input><br></br>
             </div>
 
             <div>
@@ -53,7 +55,7 @@ export default function GameTemplate() {
             </div>
 
             <div>
-                <button className="bg-violet-500 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300">Create game</button>
+                <Button className="bg-violet-500 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300">Create game</Button>
             </div>
         
         </form>
