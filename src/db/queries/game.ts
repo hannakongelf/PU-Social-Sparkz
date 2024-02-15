@@ -15,12 +15,33 @@ export const getAllGames = async (): Promise<GameWithReviews[]> => {
   return games;
 };
 
-export const getGameById = async (id: number): Promise<GameWithReviews | null> => {
+export const getGameById = async (id: number): Promise<(Game & { Review: (Review & { author: { name: string | null } })[] }) | null> => {
   const game = await prisma.game.findUnique({
     where: { id: id },
     include: {
-      Review: true,
+      Review: {
+        include: {
+          author: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      },
     },
   });
+
+  if (game) {
+    return {
+      ...game,
+      Review: game.Review.map(review => ({
+        ...review,
+        username: review.author.name, 
+        author: undefined,
+      })),
+    };
+  }
+
   return game;
 };
+
