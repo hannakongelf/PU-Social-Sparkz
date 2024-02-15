@@ -20,8 +20,8 @@ export default function GameTemplate() {
       </p>
 
       <div className='flex flex-col'>
-        <label htmlFor='gname'>Game name:</label>
-        <Input name='gname' required></Input>
+        <label htmlFor='name'>Game name:</label>
+        <Input name='name' required></Input>
       </div>
 
       <div className='flex flex-col'>
