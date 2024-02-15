@@ -2,7 +2,7 @@
 
 import * as actions from '@/actions';
 import { useSession } from 'next-auth/react';
-import Button from './common/button';
+import Button from '../common/button';
 
 const AuthHeader = () => {
   const session = useSession();
