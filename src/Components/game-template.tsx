@@ -2,11 +2,14 @@
 import * as React from 'react';
 import * as actions from '@/actions';
 import { useFormState } from 'react-dom';
+import { usePathname } from 'next/navigation';
 
 export default function GameTemplate() {
   const [formState, action] = useFormState(actions.createGame, {
     errors: {},
   });
+
+  const path = usePathname();
   return (
     <form action={action} id='newGameForm' name='newGameForm' className=''>
       <h1>Make a new game!</h1>
@@ -15,24 +18,29 @@ export default function GameTemplate() {
         are required, while some are optional.
       </p>
 
+      <p className='bg-red-500'>
+        {formState.errors._form}
+        {formState.errors.name}
+      </p>
+
       <div>
-        <label htmlFor='gname'>Game name:</label>
+        <label htmlFor='name'>Game name:</label>
         <br></br>
-        <input type='text' id='gname' name='gname' required></input>
+        <input type='text' id='gname' name='name' required />
         <br></br>
       </div>
 
       <div>
         <label htmlFor='pic'>Upload a picture-url</label>
         <br></br>
-        <input type='text' id='pic' name='pic'></input>
+        <input type='text' id='pic' name='pic' />
         <br></br>
       </div>
 
       <div>
-        <label htmlFor='desc'>Game description:</label>
+        <label htmlFor='description'>Game description:</label>
         <br></br>
-        <textarea id='desc' name='desc' rows={4} cols={50} required></textarea>
+        <textarea id='desc' name='description' rows={4} cols={50} required />
         <br></br>
       </div>
 
@@ -45,7 +53,7 @@ export default function GameTemplate() {
           rows={4}
           cols={50}
           className='content-\2022 block '
-        ></textarea>
+        />
         <br></br>
       </div>
 
@@ -58,11 +66,11 @@ export default function GameTemplate() {
           name='minplayers'
           value={1}
           required
-        ></input>
+        />
         <br></br>
         <label htmlFor='maxplayers'>Maximum number of players:</label>
         <br></br>
-        <input type='number' id='maxplayers' name='maxplayers' required></input>
+        <input type='number' id='maxplayers' name='maxplayers' required />
         <br></br>
       </div>
 
@@ -70,7 +78,7 @@ export default function GameTemplate() {
         <label htmlFor='gcategory'>Choose a suitable category:</label>
         <br></br>
         <select id='gcategory' name='gcategory' required>
-          <option value='music'>Card</option>
+          <option value='CARD'>Card</option>
           <option value='pregame'>Pregame</option>
           <option value='boardgames'>Boardgames</option>
         </select>
