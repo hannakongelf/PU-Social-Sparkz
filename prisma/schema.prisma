@@ -90,6 +90,7 @@ model Game {
   Review            Review[]
   Favorite          Favorite[]
   QueueContainsGame QueueOnGame[]
+  createdAt         DateTime @default(now())
 }
 
 model Review {
