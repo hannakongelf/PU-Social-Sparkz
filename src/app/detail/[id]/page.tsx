@@ -14,13 +14,9 @@ export default async function Page({
 
   return (
     <>
-      <h1>{game?.name}</h1>
-      <main className='flex content-center'>
+      <main className='flex flex-col content-center'>
         {game ? (
-          <>
-            <GameContent key={game.id.toString()} game={game} />
-            <ReviewForm gameId={game.id} />
-          </>
+          <GameContent key={game.id.toString()} game={game} />
         ) : (
           <p>Game not found.</p>
         )}
