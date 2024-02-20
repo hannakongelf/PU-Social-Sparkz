@@ -2,7 +2,7 @@
 
 import * as actions from '@/actions';
 import { useSession } from 'next-auth/react';
-import Button from './common/button';
+import { Button } from '@mui/material';
 
 const AuthHeader = () => {
   const session = useSession();
@@ -13,7 +13,9 @@ const AuthHeader = () => {
       <section className='flex gap-4 items-center'>
         <div>{session.data.user.name}</div>
         <form action={actions.signOut}>
-          <Button type='submit'>Sign out</Button>
+          <Button type='submit' variant='contained'>
+            Sign out
+          </Button>
         </form>
       </section>
     );
@@ -21,7 +23,9 @@ const AuthHeader = () => {
     return (
       <section>
         <form action={actions.signIn}>
-          <Button type='submit'>Sign in</Button>
+          <Button type='submit' variant='contained'>
+            Sign in
+          </Button>
         </form>
       </section>
     );

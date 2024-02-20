@@ -1,17 +1,17 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import Providers from "./providers";
-import Navbar from "@/components/navbar";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import Providers from './providers';
+import Navbar from '@/components/navbar';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '@/app/theme/theme';
 import CssBaseline from '@mui/material/CssBaseline';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Social Sparkz",
+  title: 'Social Sparkz',
   description: "En nettside med flere 'bli-kjent' leker.",
 };
 
@@ -21,13 +21,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang='en'>
       <body className={inter.className}>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline>
               <main className='container mx-auto max-w-6xl p-4'>
-                <Providers>{children}</Providers>
+                <Providers>
+                  <Navbar />
+                  {children}
+                </Providers>
               </main>
             </CssBaseline>
           </ThemeProvider>

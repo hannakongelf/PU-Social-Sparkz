@@ -2,7 +2,7 @@
 
 import { useFormState } from 'react-dom';
 import * as actions from '@/actions';
-import Button from './common/button';
+import { Button } from '@mui/material';
 
 interface ReviewFormProps {
   gameId: number;

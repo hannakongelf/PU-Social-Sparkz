@@ -2,11 +2,13 @@
 
 import { auth } from '@/auth';
 import { db } from '@/db';
+import { gamePath } from '@/paths';
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 
 const ratingSchema = z.object({
-  description: z.string().min(1).optional(),
+  description: z.string().optional(),
   rating: z.number().int().gte(1).lte(5),
 });
 
@@ -43,7 +45,6 @@ export async function createRating(
   }
 
   try {
-    console.log('yeyy');
     await db.review.create({
       data: {
         description: result.data.description,
@@ -69,5 +70,6 @@ export async function createRating(
     }
   }
 
-  redirect('/');
+  revalidatePath(gamePath(gameId));
+  redirect(gamePath(gameId));
 }

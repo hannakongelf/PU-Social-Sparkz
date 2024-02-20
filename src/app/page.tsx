@@ -2,6 +2,7 @@
 
 import { GameWithReviews, getAllGames } from '@/db/queries/game';
 import ListContent from '@/components/list-content';
+import { Button } from '@mui/material';
 
 export default async function Home() {
   const games: GameWithReviews[] = await getAllGames();
