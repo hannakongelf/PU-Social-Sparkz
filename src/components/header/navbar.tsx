@@ -1,4 +1,4 @@
-import AuthHeader from '@/components/auth-header';
+import AuthHeader from '@/components/header/auth-header';
 import Link from 'next/link';
 
 const Navbar = () => {
