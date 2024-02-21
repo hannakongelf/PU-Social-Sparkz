@@ -12,7 +12,7 @@ const GameContent = ({ game }: { game: GameWithReviews }) => {
       <div className="flex gap-2">
         <section className="bg-[#845EC2] text-white shadow-2xl rounded">
           <h1 className="text-center p-4">{game.type}</h1>
-          <Image
+          <img
             src={
               game.image && game.image?.length > 0
                 ? game.image
