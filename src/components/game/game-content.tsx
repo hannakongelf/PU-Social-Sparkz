@@ -4,7 +4,7 @@ import { GameWithReviews } from '@/db/queries/game';
 import Image from 'next/image';
 import { Rating } from '@mui/material';
 import ReviewContent from './review-content';
-import RatingCard from '@/components/rating-card';
+import RatingCard from '@/components/game/rating-Card';
 
 const GameContent = ({ game }: { game: GameWithReviews }) => {
   return (

@@ -2,8 +2,8 @@
 import { Game } from '@prisma/client';
 import ListCard from '../../../components/list-card';
 import { getGameById } from '../../../db/queries/game';
-import GameContent from '@/components/game-content';
-import ReviewForm from '@/components/create-review-form';
+import GameContent from '@/components/game/game-content';
+import ReviewForm from '@/components/game/create-review-form';
 
 export default async function Page({
   params: { id },
