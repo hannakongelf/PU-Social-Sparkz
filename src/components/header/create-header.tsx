@@ -2,7 +2,6 @@
 
 import { Button } from '@mui/material';
 import Link from 'next/link';
-import * as actions from '@/actions';
 import { useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 
@@ -17,9 +16,7 @@ const CreateHeader = () => {
     return (
       <section className='flex gap-4 items-center'>
         <Link href={'/create'} className={'ml-4'}>
-          <Button type='submit' className='bg-purple-500'>
-            Create new game
-          </Button>
+          <Button className='bg-purple-500'>Create new game</Button>
         </Link>
       </section>
     );
