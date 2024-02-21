@@ -8,7 +8,9 @@ const Input = (
   const { className, name, type, error, ...rest } = props;
   return (
     <input
-      className={clsx('', className, { 'border border-red-500': error })}
+      className={clsx('border p-2 rounded', '', className, {
+        'border border-red-500': error,
+      })}
       {...rest}
       name={name}
       id={name}
