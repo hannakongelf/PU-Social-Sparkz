@@ -88,8 +88,7 @@ export default function GameTemplate() {
         </label>
       </div>
       <div>
-        <input name='category' type='text' value={'DICE'} />
-        {/* <FormControl sx={{ m: 1, minWidth: 200 }}>
+        <FormControl sx={{ m: 1, minWidth: 200 }}>
           <InputLabel id='category'>Select a category:</InputLabel>
           <Select
             labelId='category'
@@ -107,7 +106,7 @@ export default function GameTemplate() {
             <MenuItem value='PHONE'>Phone</MenuItem>
             <MenuItem value='OTHER'>Other</MenuItem>
           </Select>
-        </FormControl> */}
+        </FormControl>
       </div>
 
       <div className='mt-3'>

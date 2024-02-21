@@ -2,6 +2,7 @@
 
 import { auth } from '@/auth';
 import { db } from '@/db';
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 
@@ -11,7 +12,7 @@ const createGameSchema = z.object({
   category: z.enum(['CARD', 'DICE', 'PHONE', 'OTHER']),
   playerMax: z.number().min(2).optional(),
   playerMin: z.number().min(2).optional(),
-  image: z.string().min(5).optional(),
+  image: z.string().optional(),
 });
 
 interface CreateGameFormState {
@@ -53,8 +54,9 @@ export async function createGame(
     };
   }
 
+  let newGame;
   try {
-    await db.game.create({
+    newGame = await db.game.create({
       data: {
         name: result.data.name,
         description: result.data.description,
@@ -79,6 +81,6 @@ export async function createGame(
         },
       };
   }
-
-  redirect('/');
+  revalidatePath('/');
+  redirect(`/detail/${newGame.id}`);
 }
