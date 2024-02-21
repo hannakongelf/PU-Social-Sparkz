@@ -1,7 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
 import ListCard from '@/components/list-card';
-import Grid from '@/components/common/grid';
 import { Button, TextField } from '@mui/material';
 import { GameWithReviews } from '@/db/queries/game';
 import { gameType } from '@prisma/client';
@@ -88,11 +87,11 @@ export default function ListContent({ games }: { games: GameWithReviews[] }) {
         </Button>
       </div>
 
-      <Grid className='grid-cols-5 gap-5'>
+      <div className='grid grid-cols-5 gap-5'>
         {filteredGames.map((g) => (
           <ListCard game={g} key={g.id} />
         ))}
-      </Grid>
+      </div>
     </div>
   );
 }
