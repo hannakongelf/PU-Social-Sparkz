@@ -10,8 +10,8 @@ const createGameSchema = z.object({
   name: z.string().min(2),
   description: z.string().min(50),
   category: z.enum(['CARD', 'DICE', 'PHONE', 'OTHER']),
-  playerMax: z.number().min(2).optional(),
-  playerMin: z.number().min(2).optional(),
+  playerMax: z.number().optional(),
+  playerMin: z.number().optional(),
   image: z.string().optional(),
 });
 
