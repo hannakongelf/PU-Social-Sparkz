@@ -6,11 +6,11 @@ import { redirect } from 'next/navigation';
 import { z } from 'zod';
 
 const createGameSchema = z.object({
-  name: z.string().min(2, {message:"Name must contain at least two characters"}),
-  description: z.string().min(50, {message: "Description must be at least 50 characters"}),
+  name: z.string().min(2),
+  description: z.string().min(50),
   category: z.enum(['CARD', 'DICE', 'PHONE', 'OTHER']),
-  playerMax: z.number().min(2, {message:"The game should require at least two players"}).optional(),
-  playerMin: z.number().min(2, {message:"The game should require at least two playeres"}).optional(),
+  playerMax: z.number().min(2).optional(),
+  playerMin: z.number().min(2).optional(),
   image: z.string().min(5).optional(),
 });
 
@@ -41,13 +41,13 @@ export async function createGame(
   const result = createGameSchema.safeParse({
     name: formData.get('name'),
     description: formData.get('description'),
-    category: formData.get('gcategory'),
-    playerMax: formData.get('maxplayers'),
-    playerMin: formData.get('minplayers'),
+    category: formData.get('category'),
+    playerMax: Number(formData.get('maxplayers')),
+    playerMin: Number(formData.get('minplayers')),
     image: formData.get('pic'),
   });
-
   if (!result.success) {
+    console.log(result);
     return {
       errors: result.error.flatten().fieldErrors,
     };

@@ -9,12 +9,14 @@ const Input = (
   return (
     <input
         className={clsx(
+          'border p-2 rounded',
             '',
             className, {"border border-red-500": error}
         )}
         {...rest}
         name={name} id={name} 
         type={type ? type: 'text'}
+        
 
    />
      
