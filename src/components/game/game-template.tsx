@@ -10,6 +10,7 @@ import {
   FormControl,
   InputLabel,
   MenuItem,
+  Paper,
   Select,
   TextField,
 } from '@mui/material';
@@ -24,11 +25,14 @@ export default function GameTemplate() {
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
   };
-
   return (
-    <form action={action}>
-      <h1>Make a new game!</h1>
-      <p className='mb-4'>
+    <div className='flex-col justify-center'>
+    <div className='w-4/5 flex justify-center pt-8 pb-8 bg-[#845EC2] bg-im' >
+    <h1 className='text-4xl flex justify-center text-white'>Create New Game</h1>
+    </div>
+    <Paper elevation={3} className='w-4/5 flex justify-center mb-5 pb-10' >
+    <form action={action} className='w-4/5'>
+      <p className='mb-4 mt-5 text-center'>
         Please fill out the fields below. Please note that some fields are
         required, while others are optional.
       </p>
@@ -50,7 +54,12 @@ export default function GameTemplate() {
         <label htmlFor='description'>
           Game description: <span className='text-red-500'>*</span>
         </label>
-        <TextField id='desc' name='description' required />
+        <TextField 
+          id='desc' 
+          name='description' 
+          required multiline
+          minRows={3} 
+        />
       </div>
 
       <div className='flex flex-col mb-3'>
@@ -112,11 +121,14 @@ export default function GameTemplate() {
       <div className='mt-3'>
         <Button
           type='submit'
-          className='text-white bg-violet-500 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300'
-        >
+          variant='contained'
+          className='mb-5'
+          >
           Create game
         </Button>
       </div>
     </form>
+    </Paper>
+    </div>
   );
 }
