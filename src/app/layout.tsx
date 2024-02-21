@@ -3,10 +3,6 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import Providers from './providers';
 import Navbar from '@/components/header/navbar';
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
-import { ThemeProvider } from '@mui/material/styles';
-import theme from '@/app/theme/theme';
-import CssBaseline from '@mui/material/CssBaseline';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,18 +19,12 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <AppRouterCacheProvider>
-          <ThemeProvider theme={theme}>
-            <CssBaseline>
-              <main className='container mx-auto max-w-6xl p-4'>
-                <Providers>
-                  <Navbar />
-                  {children}
-                </Providers>
-              </main>
-            </CssBaseline>
-          </ThemeProvider>
-        </AppRouterCacheProvider>
+        <Providers>
+          <main className='container mx-auto max-w-6xl p-4'>
+            <Navbar />
+            {children}
+          </main>
+        </Providers>
       </body>
     </html>
   );
