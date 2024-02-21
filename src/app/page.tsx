@@ -1,11 +1,8 @@
 'use server';
 
-import ListCard from '@/components/list-card';
-import Grid from '@/components/common/grid';
 import { GameWithReviews, getAllGames } from '@/db/queries/game';
-import { Game } from '@prisma/client';
-import { TextField } from '@mui/material';
 import ListContent from '@/components/list-content';
+import { Button } from '@mui/material';
 
 export default async function Home() {
   const games: GameWithReviews[] = await getAllGames();

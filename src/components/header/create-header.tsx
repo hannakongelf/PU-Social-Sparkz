@@ -1,6 +1,6 @@
 'use client';
 
-import Button from '../common/button';
+import { Button } from '@mui/material';
 import Link from 'next/link';
 import * as actions from '@/actions';
 import { useSession } from 'next-auth/react';

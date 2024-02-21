@@ -3,6 +3,7 @@ import { Game } from '@prisma/client';
 import ListCard from '../../../components/list-card';
 import { getGameById } from '../../../db/queries/game';
 import GameContent from '@/components/game/game-content';
+import ReviewForm from '@/components/game/create-review-form';
 
 export default async function Page({
   params: { id },
@@ -13,8 +14,7 @@ export default async function Page({
 
   return (
     <>
-      <h1>{game?.name}</h1>
-      <main className='flex content-center'>
+      <main className='flex flex-col content-center'>
         {game ? (
           <GameContent key={game.id.toString()} game={game} />
         ) : (
