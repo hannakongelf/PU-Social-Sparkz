@@ -1,6 +1,5 @@
 'use server';
 
-import { TextField } from '@mui/material';
 import GameTemplate from '@/components/game/game-template';
 
 export default async function Home() {

@@ -1,6 +1,4 @@
-import * as actions from '@/actions';
 import AuthHeader from '@/components/header/auth-header';
-import { ClassNames } from '@emotion/react';
 import Link from 'next/link';
 import CreateHeader from '@/components/header/create-header';
 

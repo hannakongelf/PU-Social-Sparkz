@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Input from '../common/input';
-import Button from '../common/button';
+import { Button } from '@mui/material';
 import { useFormState } from 'react-dom';
 import * as actions from '@/actions';
 
@@ -22,9 +22,7 @@ export default function GameTemplate() {
       <div className='flex flex-col'>
         <label htmlFor='name'>Game name:</label>
         <Input name='name' required error={!!formState.errors.name}></Input>
-        <p className="bg-red-500 text-white">
-          {formState.errors.name}
-        </p>
+        <p className='bg-red-500 text-white'>{formState.errors.name}</p>
       </div>
 
       <div className='flex flex-col'>
@@ -34,22 +32,28 @@ export default function GameTemplate() {
 
       <div className='flex flex-col'>
         <label htmlFor='description'>Game description:</label>
-        <textarea id='desc' name='description' rows={4} cols={50} required/>
-        <p className='bg-red-500 text-white'>
-          (formState.errors.description)
-        </p>
+        <textarea id='desc' name='description' rows={4} cols={50} required />
+        <p className='bg-red-500 text-white'>(formState.errors.description)</p>
       </div>
 
       <div className='flex flex-col'>
         <label htmlFor='minplayers'>Minimum number of players:</label>
-        <Input type='number' name='minplayers' required error={!!formState.errors.playerMin}></Input>
-        <p className='bg-red-500 text-white'>
-          {formState.errors.playerMin}
-        </p>
-
+        <Input
+          type='number'
+          name='minplayers'
+          required
+          error={!!formState.errors.playerMin}
+        ></Input>
+        <p className='bg-red-500 text-white'>{formState.errors.playerMin}</p>
 
         <label htmlFor='maxplayers'>Maximum number of players:</label>
-        <Input type='number' name='maxplayers' required pattern="[0-9]*" error={!!formState.errors.playerMax}></Input>
+        <Input
+          type='number'
+          name='maxplayers'
+          required
+          pattern='[0-9]*'
+          error={!!formState.errors.playerMax}
+        ></Input>
         <p className='bg-red-500 text-white'>
           {formState.errors.playerMax && formState.errors.playerMax[0]}
         </p>
