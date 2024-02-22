@@ -35,7 +35,6 @@ const RatingCard = ({ game }: { game: number }) => {
               id='description'
               name='description'
               label='Description'
-              rows={2}
               error={!!formState.errors.description}
               helperText={formState.errors.description}
             />
