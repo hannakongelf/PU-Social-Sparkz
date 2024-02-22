@@ -8,7 +8,7 @@ export default async function Home() {
 
   return (
     <main>
-      <h1 className='text-4xl my-4'>Leker</h1>
+      {/* <h1 className='text-4xl my-4'>Games</h1> */}
       <ListContent games={games} />
     </main>
   );

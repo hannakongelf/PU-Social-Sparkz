@@ -20,10 +20,8 @@ export default function RootLayout({
     <html lang='en'>
       <body className={inter.className}>
         <Providers>
-          <main className='container mx-auto max-w-6xl p-4'>
-            <Navbar />
-            {children}
-          </main>
+          <Navbar />
+          <main className='container mx-auto max-w-6xl p-4'>{children}</main>
         </Providers>
       </body>
     </html>

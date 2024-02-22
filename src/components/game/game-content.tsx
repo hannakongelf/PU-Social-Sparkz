@@ -24,7 +24,13 @@ const GameContent = ({ game }: { game: GameWithReviews }) => {
             objectFit="cover"
           />
           <div className="flex gap-2 p-2">
-            <p>Brukeres vurdering av leken</p>
+            <div className="flex flex-col">
+              <p>Brukeres vurdering av leken</p>
+              <p>
+                Fra {game.playerMin} til {game.playerMax} spillere
+              </p>
+            </div>
+
             <Rating
               name="read-only"
               value={
