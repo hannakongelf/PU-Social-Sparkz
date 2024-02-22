@@ -12,7 +12,7 @@ const createGameSchema = z.object({
     .min(2, { message: 'Name must be longer than one character.' }),
   description: z
     .string()
-    .min(50, { message: 'The description must be longer than 50 characters.' }),
+    .min(50, { message: 'Description must be longer than 50 characters.' }),
   category: z.enum(['CARD', 'DICE', 'PHONE', 'OTHER']),
   playerMax: z.number().optional(),
   playerMin: z.number().optional(),
