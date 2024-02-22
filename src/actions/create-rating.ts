@@ -9,7 +9,11 @@ import { z } from 'zod';
 
 const ratingSchema = z.object({
   description: z.string().optional(),
-  rating: z.number().int().gte(1).lte(5),
+  rating: z
+    .number()
+    .int()
+    .gte(1, { message: 'Rating value is required.' })
+    .lte(5),
 });
 
 interface CreateRatingFormState {
