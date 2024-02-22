@@ -26,7 +26,7 @@ const RatingCard = ({ game }: { game: number }) => {
         <form action={action}>
           <Typography>What do you think about this game?</Typography>
           <StarRating name='rating' />
-          {formState.errors.rating && (
+          {formState?.errors.rating && (
             <p className='text-xs text-red-500'>{formState.errors.rating}</p>
           )}
 
@@ -35,8 +35,8 @@ const RatingCard = ({ game }: { game: number }) => {
               id='description'
               name='description'
               label='Description'
-              error={!!formState.errors.description}
-              helperText={formState.errors.description}
+              error={!!formState?.errors.description}
+              helperText={formState?.errors.description}
             />
           </div>
 
