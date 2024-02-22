@@ -18,15 +18,48 @@ async function main() {
     return gameTypes[randomIndex];
   };
 
+const lekNavn = [
+  "Stiv Heks",
+  "Bro, Bro, Brille",
+  "Kongen befaler",
+  "Haien kommer",
+  "Rødt lys, Grønt lys",
+  "Fruktsalat",
+  "Museumsvokteren",
+  "Limbo",
+  "Stolleken",
+  "Flasketuten peker på",
+  "Tre på rad med bevegelse",
+  "Boksen går",
+  "Sisten",
+  "Hauk og due",
+  "Paradis",
+  "Løkken",
+  "Dødball",
+  "Kims lek",
+  "Gjemsel",
+  "Hopp i havet",
+  "Fotballkongen",
+  "Tau trekking",
+  "Ballongdans",
+  "Sekkeløp",
+  "Eggløp",
+  "Potetløp",
+  "Tug of War (Taukrig)",
+  "Vannballongstafett",
+  "Hinderløype",
+  "Ballongstafett"
+];
+
+
+
   const gamesData = Array.from({ length: 25 }, (_, index) => ({
-    name: `Sample Game ${index}`,
-    description: "A sample game description",
+    name: lekNavn[index],
+    description: "Bli kjent-leken er en morsom og engasjerende aktivitet designet for å bryte isen og fremme samhold i nye grupper. Deltakerne samles i en sirkel, og en ball eller et annet lett gjenkjennelig objekt kastes mellom deltakerne. Når en person mottar ballen, må vedkommende si navnet sitt og dele en interessant fakta om seg selv før ballen kastes videre til neste person. Målet er å huske så mange navn og fakta som mulig, noe som oppmuntrer til lytting og gir en unik mulighet til å lære om de andre i gruppen. Denne leken er perfekt for skoleklasser, teambyggingsøkter, eller sosiale sammenkomster, og tilrettelegger for et inkluderende og vennlig miljø.",
     type: getRandomGameType(),
     userId: user.id,
     playerMin: 2,
     playerMax: 4,
-    image:
-      "https://cdn.pixabay.com/photo/2014/06/03/19/38/road-sign-361514_960_720.png",
   }));
 
   const games = await prisma.game.createMany({
