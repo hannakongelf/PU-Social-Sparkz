@@ -1,10 +1,10 @@
+import { ReviewWithAuthor } from '@/db/queries/reviews';
 import { Rating } from '@mui/material';
-import { Review } from '@prisma/client';
 
-const ReviewContent = ({ review }: { review: Review }) => {
+const ReviewContent = ({ review }: { review: ReviewWithAuthor }) => {
   return (
     <div className='border border-sky-500 my-2 p-2'>
-      <h3>{review.}</h3>
+      <h3>{review.author.name}</h3>
       <Rating
         name='read-only'
         value={review.rating}

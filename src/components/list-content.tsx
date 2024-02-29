@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import ListCard from '@/components/list-card';
 import { Button, Paper, TextField } from '@mui/material';
-import { GameWithReviews } from '@/db/queries/game';
+import type { GameWithReviews } from '@/db/queries/game';
 import { gameType } from '@prisma/client';
 
 export default function ListContent({ games }: { games: GameWithReviews[] }) {
