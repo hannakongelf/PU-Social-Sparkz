@@ -49,12 +49,22 @@ export async function createRating(
   }
 
   try {
-    await db.review.create({
-      data: {
+    await db.review.upsert({
+      where: {
+        usergame: {
+          userId: session.user.id,
+          gameId,
+        },
+      },
+      update: {
+        description: result.data.description,
+        rating: result.data.rating,
+      },
+      create: {
         description: result.data.description,
         rating: result.data.rating,
         userId: session.user.id,
-        gameId: gameId,
+        gameId,
       },
     });
   } catch (err: unknown) {

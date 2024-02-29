@@ -4,7 +4,7 @@ import * as actions from '@/actions';
 import { useSession } from 'next-auth/react';
 import { Button } from '@mui/material';
 
-export const AuthHeader = () => {
+const AuthHeader = () => {
   const session = useSession();
 
   if (session.status === 'loading') return null;
@@ -30,3 +30,5 @@ export const AuthHeader = () => {
       </section>
     );
 };
+
+export default AuthHeader;

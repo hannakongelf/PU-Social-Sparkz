@@ -3,7 +3,7 @@
 import Rating from '@mui/material/Rating';
 import { styled } from '@mui/material/styles';
 
-export const StarRating = styled(Rating)({
+const StarRating = styled(Rating)({
   '& .MuiRating-iconFilled': {
     color: '#845EC2',
   },
@@ -11,3 +11,5 @@ export const StarRating = styled(Rating)({
     color: '#845FF9',
   },
 });
+
+export default StarRating;

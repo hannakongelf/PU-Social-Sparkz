@@ -15,7 +15,7 @@ import {
   FormHelperText,
 } from '@mui/material';
 
-export function GameTemplate() {
+const GameTemplate = () => {
   const [formState, action] = useFormState(actions.createGame, {
     errors: {},
   });
@@ -149,4 +149,6 @@ export function GameTemplate() {
       </Paper>
     </div>
   );
-}
+};
+
+export default GameTemplate;

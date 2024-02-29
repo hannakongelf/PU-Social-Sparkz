@@ -1,12 +1,13 @@
 'use client';
 
 import { Rating } from '@mui/material';
-import { ReviewContent, RatingCard } from '@/components/game';
+import ReviewContent from '@/components/game/review-content';
+import RatingCard from '@/components/game/rating-card';
 import Image from 'next/image';
 import { Game } from '@prisma/client';
 import { ReviewWithAuthor } from '@/db/queries';
 
-export const GameContent = ({
+const GameContent = ({
   game,
   reviews,
 }: {
@@ -59,3 +60,5 @@ export const GameContent = ({
     </>
   );
 };
+
+export default GameContent;

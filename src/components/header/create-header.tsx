@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 
-export const CreateHeader = () => {
+const CreateHeader = () => {
   const session = useSession();
   const pathname = usePathname();
   console.log(pathname);
@@ -21,3 +21,5 @@ export const CreateHeader = () => {
       </section>
     );
 };
+
+export default CreateHeader;
