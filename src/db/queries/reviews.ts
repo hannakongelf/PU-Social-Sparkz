@@ -1,9 +1,4 @@
 import { db } from '@/db';
-import type { Review, User } from '@prisma/client';
-
-export type ReviewWithAuthor = {
-  author: User;
-} & Review;
 
 export const getReviewsByGame = async (gameId: number) => {
   return db.review.findMany({

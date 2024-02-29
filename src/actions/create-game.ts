@@ -6,6 +6,7 @@ import { gameType } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
+import * as paths from '@/paths';
 
 const createGameSchema = z.object({
   name: z
@@ -96,6 +97,6 @@ export async function createGame(
         },
       };
   }
-  revalidatePath('/');
-  redirect(`/detail/${newGame.id}`);
+  revalidatePath(paths.home());
+  redirect(paths.gamePath(newGame.id));
 }

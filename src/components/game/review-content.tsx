@@ -1,7 +1,7 @@
-import { ReviewWithAuthor } from '@/db/queries/reviews';
+import { ReviewWithAuthor } from '@/db/queries';
 import { Rating } from '@mui/material';
 
-const ReviewContent = ({ review }: { review: ReviewWithAuthor }) => {
+export const ReviewContent = ({ review }: { review: ReviewWithAuthor }) => {
   return (
     <div className='border border-sky-500 my-2 p-2'>
       <h3>{review.author.name}</h3>
@@ -15,4 +15,3 @@ const ReviewContent = ({ review }: { review: ReviewWithAuthor }) => {
     </div>
   );
 };
-export default ReviewContent;

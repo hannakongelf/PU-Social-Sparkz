@@ -1,9 +1,8 @@
-import AuthHeader from '@/components/header/auth-header';
+import { AuthHeader, CreateHeader } from '@/components/header';
 import Link from 'next/link';
-import CreateHeader from '@/components/header/create-header';
 import Image from 'next/image';
 
-const Navbar = () => {
+export const Navbar = () => {
   return (
     <nav className='py-4 shadow flex justify-center'>
       <div className='container max-w-6xl flex justify-between items-center'>
@@ -25,5 +24,3 @@ const Navbar = () => {
     </nav>
   );
 };
-
-export default Navbar;

@@ -15,7 +15,7 @@ import {
   FormHelperText,
 } from '@mui/material';
 
-export default function GameTemplate() {
+export function GameTemplate() {
   const [formState, action] = useFormState(actions.createGame, {
     errors: {},
   });

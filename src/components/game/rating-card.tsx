@@ -2,12 +2,12 @@
 
 import * as actions from '@/actions';
 import { useSession } from 'next-auth/react';
-import StarRating from '@/components/common/star-rating';
+import { StarRating } from '@/components/common';
 import { Button, Paper, TextField, Typography } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { useFormState } from 'react-dom';
 
-const RatingCard = ({ game }: { game: number }) => {
+export const RatingCard = ({ game }: { game: number }) => {
   const session = useSession();
   const [formState, action] = useFormState(
     actions.createRating.bind(null, game),
@@ -64,5 +64,3 @@ const RatingCard = ({ game }: { game: number }) => {
     </Paper>
   );
 };
-
-export default RatingCard;

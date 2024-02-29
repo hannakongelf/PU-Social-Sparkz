@@ -1,6 +1,6 @@
 'use server';
 
-import GameTemplate from '@/components/game/game-template';
+import { GameTemplate } from '@/components/game';
 
 export default async function Home() {
   return (

@@ -5,7 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import { Rating } from '@mui/material';
-import type { GameWithReviews } from '@/db/queries/game';
+import type { GameWithReviews } from '@/db/queries';
 
 export default function ListCard({ game }: { game: GameWithReviews }) {
   return (

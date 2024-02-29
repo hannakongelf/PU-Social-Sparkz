@@ -1,9 +1,4 @@
 import { db } from '@/db';
-import { Game, Review } from '@prisma/client';
-
-export type GameWithReviews = Game & {
-  review: Review[];
-};
 
 export const getAllGames = async () => {
   return db.game.findMany({

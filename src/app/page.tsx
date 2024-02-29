@@ -1,6 +1,6 @@
 'use server';
 
-import { GameWithReviews, getAllGames } from '@/db/queries/game';
+import { GameWithReviews, getAllGames } from '@/db/queries';
 import ListContent from '@/components/list-content';
 
 export default async function Home() {
@@ -8,7 +8,6 @@ export default async function Home() {
 
   return (
     <main>
-      {/* <h1 className='text-4xl my-4'>Games</h1> */}
       <ListContent games={games} />
     </main>
   );

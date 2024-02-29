@@ -2,10 +2,10 @@
 
 import { auth } from '@/auth';
 import { db } from '@/db';
-import { gamePath } from '@/paths';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
+import * as paths from '@/paths';
 
 const ratingSchema = z.object({
   description: z.string().optional(),
@@ -74,6 +74,6 @@ export async function createRating(
     }
   }
 
-  revalidatePath(gamePath(gameId));
-  redirect(gamePath(gameId));
+  revalidatePath(paths.gamePath(gameId));
+  redirect(paths.gamePath(gameId));
 }
