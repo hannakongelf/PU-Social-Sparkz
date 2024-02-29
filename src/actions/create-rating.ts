@@ -2,10 +2,10 @@
 
 import { auth } from '@/auth';
 import { db } from '@/db';
-import { gamePath } from '@/paths';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
+import * as paths from '@/paths';
 
 const ratingSchema = z.object({
   description: z.string().optional(),
@@ -49,12 +49,22 @@ export async function createRating(
   }
 
   try {
-    await db.review.create({
-      data: {
+    await db.review.upsert({
+      where: {
+        usergame: {
+          userId: session.user.id,
+          gameId,
+        },
+      },
+      update: {
+        description: result.data.description,
+        rating: result.data.rating,
+      },
+      create: {
         description: result.data.description,
         rating: result.data.rating,
         userId: session.user.id,
-        gameId: gameId,
+        gameId,
       },
     });
   } catch (err: unknown) {
@@ -74,6 +84,6 @@ export async function createRating(
     }
   }
 
-  revalidatePath(gamePath(gameId));
-  redirect(gamePath(gameId));
+  revalidatePath(paths.gamePath(gameId));
+  redirect(paths.gamePath(gameId));
 }

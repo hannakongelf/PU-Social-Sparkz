@@ -1,6 +1,6 @@
 import AuthHeader from '@/components/header/auth-header';
-import Link from 'next/link';
 import CreateHeader from '@/components/header/create-header';
+import Link from 'next/link';
 import Image from 'next/image';
 
 const Navbar = () => {

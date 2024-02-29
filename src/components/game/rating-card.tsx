@@ -17,15 +17,15 @@ const RatingCard = ({ game }: { game: number }) => {
   );
 
   if (session.status === 'loading') return null;
-  else if (session.data?.user)
-    return (
-      <Paper
-        elevation={3}
-        className='text-center flex flex-col items-center justify-center p-4 gap-5 w-1/4'
-      >
+  return (
+    <Paper
+      elevation={3}
+      className='text-center flex flex-col items-center justify-center p-4 gap-5 w-1/4'
+    >
+      {session.data?.user ? (
         <form action={action}>
           <Typography>What do you think about this game?</Typography>
-          <StarRating name='rating' />
+          <StarRating precision={1} name='rating' />
           {formState?.errors.rating && (
             <p className='text-xs text-red-500'>{formState.errors.rating}</p>
           )}
@@ -50,14 +50,7 @@ const RatingCard = ({ game }: { game: number }) => {
             Add your rating
           </Button>
         </form>
-      </Paper>
-    );
-  else
-    return (
-      <Paper
-        elevation={3}
-        className='text-center flex flex-col items-center justify-center p-4 gap-5 w-1/4'
-      >
+      ) : (
         <section>
           <Typography>You have to be signed in to rate this game.</Typography>
 
@@ -67,8 +60,9 @@ const RatingCard = ({ game }: { game: number }) => {
             </Button>
           </form>
         </section>
-      </Paper>
-    );
+      )}
+    </Paper>
+  );
 };
 
 export default RatingCard;

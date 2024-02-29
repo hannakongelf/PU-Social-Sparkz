@@ -46,11 +46,11 @@ model User {
   admin         Boolean    @default(false)
   accounts      Account[]
   sessions      Session[]
-  Games         Game[]
-  Review        Review[]
-  Favorite      Favorite[]
-  Queue         Queue[]
-  Report        Report[]
+  games         Game[]
+  review        Review[]
+  favorite      Favorite[]
+  queue         Queue[]
+  report        Report[]
   followedBy    Follows[]  @relation("followedBy")
   following     Follows[]  @relation("following")
 
@@ -86,11 +86,11 @@ model Game {
   userId            String
   playerMax         Int?
   playerMin         Int           @default(2)
-  image             String?       
-  Review            Review[]
-  Favorite          Favorite[]
-  QueueContainsGame QueueOnGame[]
-  createdAt         DateTime @default(now())
+  image             String?
+  review            Review[]
+  favorite          Favorite[]
+  queueContainsGame QueueOnGame[]
+  createdAt         DateTime      @default(now())
 }
 
 model Review {
@@ -101,6 +101,8 @@ model Review {
   userId      String
   game        Game    @relation(fields: [gameId], references: [id])
   gameId      Int
+
+  @@unique(name: "usergame", [userId, gameId])
 }
 
 model Favorite {
@@ -115,7 +117,7 @@ model Queue {
   id                String        @id @default(cuid())
   author            User          @relation(fields: [userId], references: [id])
   userId            String
-  QueueContainsGame QueueOnGame[]
+  queueContainsGame QueueOnGame[]
 }
 
 model QueueOnGame {
