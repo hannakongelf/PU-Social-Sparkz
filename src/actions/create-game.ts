@@ -2,6 +2,7 @@
 
 import { auth } from '@/auth';
 import { db } from '@/db';
+import { gameType } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
@@ -13,9 +14,19 @@ const createGameSchema = z.object({
   description: z
     .string()
     .min(50, { message: 'Description must be longer than 50 characters.' }),
-  category: z.enum(['CARD', 'DICE', 'PHONE', 'OTHER']),
-  playerMax: z.number().optional(),
-  playerMin: z.number().optional(),
+  category: z.nativeEnum(gameType, {
+    errorMap: (issue, ctx) => {
+      return { message: 'You must choose a category.' };
+    },
+  }),
+  playerMax: z
+    .number()
+    .min(2, { message: 'The game must be for at least two people.' })
+    .optional(),
+  playerMin: z
+    .number()
+    .min(2, { message: 'The game must be for at least two people.' })
+    .optional(),
   image: z.string().optional(),
 });
 

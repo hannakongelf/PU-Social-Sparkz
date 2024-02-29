@@ -1,8 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import Input from '../common/input';
-
 import { useFormState } from 'react-dom';
 import * as actions from '@/actions';
 import {
@@ -13,6 +11,8 @@ import {
   Paper,
   Select,
   TextField,
+  SelectChangeEvent,
+  FormHelperText,
 } from '@mui/material';
 
 export default function GameTemplate() {
@@ -22,7 +22,7 @@ export default function GameTemplate() {
 
   const [selectedCategory, setSelectedCategory] = React.useState('');
 
-  const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCategoryChange = (event: SelectChangeEvent<string>) => {
     setSelectedCategory(event.target.value);
   };
   return (
@@ -33,7 +33,7 @@ export default function GameTemplate() {
         </h1>
       </div>
       <Paper elevation={3} className='flex justify-center mb-5 pb-10'>
-        <form action={action} className='w-4/5'>
+        <form action={action} noValidate className='w-4/5'>
           <p className='mb-4 mt-5 text-center'>
             Please fill out the fields below. Please note that some fields are
             required, while others are optional.
@@ -77,35 +77,38 @@ export default function GameTemplate() {
             <label htmlFor='minplayers'>
               Minimum number of players: <span className='text-red-500'>*</span>
             </label>
-            <Input
+            <TextField
               type='number'
               name='minplayers'
               required
-              min={2}
               defaultValue={2}
+              InputProps={{
+                inputProps: {
+                  min: 2,
+                },
+              }}
               error={!!formState.errors.playerMin}
+              helperText={formState.errors.playerMin}
             />
-            <p className='bg-red-500 text-white'>
-              {formState.errors.playerMin}
-            </p>
           </div>
 
           <div className='flex flex-col mb-3'>
             <label htmlFor='maxplayers'>
               Maximum number of players: <span className='text-red-500'>*</span>
             </label>
-            <Input
+            <TextField
               type='number'
               name='maxplayers'
               required
-              pattern='[0-9]*'
-              min={2}
               defaultValue={2}
+              InputProps={{
+                inputProps: {
+                  min: 2,
+                },
+              }}
               error={!!formState.errors.playerMax}
+              helperText={formState.errors.playerMax}
             />
-            <p className='bg-red-500 text-white'>
-              {formState.errors.playerMax && formState.errors.playerMax[0]}
-            </p>
           </div>
 
           <div className='flex flex-col mb-3'>
@@ -115,14 +118,15 @@ export default function GameTemplate() {
           </div>
           <div>
             <FormControl sx={{ m: 1, minWidth: 200 }}>
-              <InputLabel id='category'>Select a category:</InputLabel>
+              <InputLabel id='category'>Category</InputLabel>
               <Select
                 labelId='category'
                 id='category'
                 value={selectedCategory}
                 label='Category'
                 name='category'
-                onChange={handleCategoryChange}
+                onChange={(e) => handleCategoryChange(e)}
+                error={!!formState.errors.category}
               >
                 <MenuItem value=''>
                   <em>None</em>
@@ -132,6 +136,7 @@ export default function GameTemplate() {
                 <MenuItem value='PHONE'>Phone</MenuItem>
                 <MenuItem value='OTHER'>Other</MenuItem>
               </Select>
+              <FormHelperText>{formState.errors.category}</FormHelperText>
             </FormControl>
           </div>
 

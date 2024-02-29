@@ -31,6 +31,8 @@ export default function ListContent({ games }: { games: GameWithReviews[] }) {
           valueB = valueB.toLowerCase();
         }
 
+        if (!valueA || !valueB) return 0;
+
         if (sortDirection === 'asc') {
           return valueA < valueB ? -1 : valueA > valueB ? 1 : 0;
         } else {
@@ -52,46 +54,48 @@ export default function ListContent({ games }: { games: GameWithReviews[] }) {
   };
 
   return (
-    
     <div>
-      <Paper elevation={1} className='pt-1 pb-1 pr-6 pl-6 mb-8 mt-10  flex justify-between'>
-      <div className='my-6 flex justify-center'>
-        <TextField
-          id='outlined-basic'
-          label='Search'
-          variant='outlined'
-          value={searchTerm}
-          onChange={handleSearchChange}
-          size='small'
-        />
-      </div>
-
-      <Button onClick={() => handleSortChange('name')} size='small'>
-        Sort by Name {sortDirection}
-      </Button>
-
-      <div className='flex justify-center my-9 flex-wrap gap-2'>
-        {Object.values(gameType).map((t) => (
-          <Button 
+      <Paper
+        elevation={1}
+        className='pt-1 pb-1 pr-6 pl-6 mb-8 mt-10  flex justify-between'
+      >
+        <div className='my-6 flex justify-center'>
+          <TextField
+            id='outlined-basic'
+            label='Search'
+            variant='outlined'
+            value={searchTerm}
+            onChange={handleSearchChange}
             size='small'
-            key={t}
-            onClick={() => {
-              setCategory(t);
-            }}
-          >
-            {t}
-          </Button>
-        ))}
-        <Button
-          onClick={() => {
-            setCategory(null);
-          }}
-          variant='contained'
-          size='small'
-        >
-          Reset category filter
+          />
+        </div>
+
+        <Button onClick={() => handleSortChange('name')} size='small'>
+          Sort by Name {sortDirection}
         </Button>
-      </div>
+
+        <div className='flex justify-center my-9 flex-wrap gap-2'>
+          {Object.values(gameType).map((t) => (
+            <Button
+              size='small'
+              key={t}
+              onClick={() => {
+                setCategory(t);
+              }}
+            >
+              {t}
+            </Button>
+          ))}
+          <Button
+            onClick={() => {
+              setCategory(null);
+            }}
+            variant='contained'
+            size='small'
+          >
+            Reset category filter
+          </Button>
+        </div>
       </Paper>
 
       <div className='grid grid-cols-5 gap-5'>
@@ -100,6 +104,5 @@ export default function ListContent({ games }: { games: GameWithReviews[] }) {
         ))}
       </div>
     </div>
-
   );
 }

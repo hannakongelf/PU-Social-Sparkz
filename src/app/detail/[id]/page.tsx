@@ -1,6 +1,6 @@
 'use server';
 
-import { getGameById } from '../../../db/queries/game';
+import { getGameById } from '@/db/queries/game';
 import GameContent from '@/components/game/game-content';
 
 export default async function Page({
