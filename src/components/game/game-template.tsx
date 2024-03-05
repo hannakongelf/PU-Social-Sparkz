@@ -14,6 +14,7 @@ import {
   SelectChangeEvent,
   FormHelperText,
 } from '@mui/material';
+import { gameType } from '@prisma/client';
 
 const GameTemplate = () => {
   const [formState, action] = useFormState(actions.createGame, {
@@ -131,10 +132,15 @@ const GameTemplate = () => {
                 <MenuItem value=''>
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value='CARD'>Card</MenuItem>
-                <MenuItem value='DICE'>Dice</MenuItem>
-                <MenuItem value='PHONE'>Phone</MenuItem>
-                <MenuItem value='OTHER'>Other</MenuItem>
+                {Object.values(gameType).map((type, idx) => {
+                  const formatType =
+                    type[0].toUpperCase() + type.slice(1).toLowerCase();
+                  return (
+                    <MenuItem key={idx} value={type}>
+                      {formatType}
+                    </MenuItem>
+                  );
+                })}
               </Select>
               <FormHelperText>{formState.errors.category}</FormHelperText>
             </FormControl>
