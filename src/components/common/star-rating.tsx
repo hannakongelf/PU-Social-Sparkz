@@ -1,7 +1,4 @@
-'use client';
-
-import Rating from '@mui/material/Rating';
-import { styled } from '@mui/material/styles';
+import { Rating, styled } from '@mui/material';
 
 const StarRating = styled(Rating)({
   '& .MuiRating-iconFilled': {
