@@ -1,11 +1,13 @@
 'use client';
 
-import { Rating } from '@mui/material';
+import { Button, Rating } from '@mui/material';
 import ReviewContent from '@/components/game/review-content';
 import RatingCard from '@/components/game/rating-card';
 import Image from 'next/image';
 import { Game } from '@prisma/client';
 import { ReviewWithAuthor } from '@/db/queries';
+import { useState } from 'react';
+import ReportForm from '../report-form';
 
 const GameContent = ({
   game,
@@ -14,6 +16,9 @@ const GameContent = ({
   game: Game;
   reviews: ReviewWithAuthor[];
 }) => {
+  const [openGameReport, setOpenGameReport] = useState<boolean>(false);
+  const [openCommentReport, setOpenCommentReport] = useState<boolean>(false);
+
   return (
     <>
       <div className='flex gap-2'>
@@ -53,6 +58,23 @@ const GameContent = ({
 
       <h2 className='text-4xl'>{game.name}</h2>
       <p>{game.description}</p>
+
+      <section className='my-4'>
+        <Button
+          variant='outlined'
+          color='error'
+          onClick={() => setOpenGameReport(true)}
+        >
+          Report this game
+        </Button>
+      </section>
+
+      <ReportForm
+        open={openGameReport}
+        setOpen={setOpenGameReport}
+        id={1}
+        type='GAME'
+      />
 
       {reviews.map((review) => (
         <ReviewContent key={review.id} review={review} />
