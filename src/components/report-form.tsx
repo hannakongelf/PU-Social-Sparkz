@@ -6,18 +6,6 @@ import { useFormState } from 'react-dom';
 import * as actions from '@/actions';
 import { reportType } from '@prisma/client';
 
-const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
-
 const ReportForm = ({
   open,
   setOpen,
@@ -37,8 +25,11 @@ const ReportForm = ({
   );
   return (
     <Modal open={open} onClose={() => setOpen(false)}>
-      <Box sx={style}>
+      <div className='absolute top-1/2 left-1/2 -translate-x-2/4 -translate-y-2/4 bg-white p-8 rounded shadow'>
         <form action={action} className='space-y-4'>
+          <label htmlFor='report' className='font-bold'>
+            {type[0].toUpperCase() + type.slice(1).toLowerCase()}
+          </label>
           <TextField
             className='w-full'
             multiline
@@ -58,7 +49,7 @@ const ReportForm = ({
             Submit
           </Button>
         </form>
-      </Box>
+      </div>
     </Modal>
   );
 };

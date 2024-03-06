@@ -8,6 +8,7 @@ import { Game } from '@prisma/client';
 import { ReviewWithAuthor } from '@/db/queries';
 import { useState } from 'react';
 import ReportForm from '../report-form';
+import { useSession } from 'next-auth/react';
 
 const GameContent = ({
   game,
@@ -16,8 +17,9 @@ const GameContent = ({
   game: Game;
   reviews: ReviewWithAuthor[];
 }) => {
-  const [openGameReport, setOpenGameReport] = useState<boolean>(false);
-  const [openCommentReport, setOpenCommentReport] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
+
+  const session = useSession();
 
   return (
     <>
@@ -56,25 +58,24 @@ const GameContent = ({
         <RatingCard game={game.id} />
       </div>
 
-      <h2 className='text-4xl'>{game.name}</h2>
+      <h2 className='text-4xl mt-8 mb-2'>{game.name}</h2>
       <p>{game.description}</p>
 
-      <section className='my-4'>
-        <Button
-          variant='outlined'
-          color='error'
-          onClick={() => setOpenGameReport(true)}
-        >
-          Report this game
-        </Button>
-      </section>
+      {session.data?.user ? (
+        <>
+          <section className='my-4'>
+            <Button
+              variant='outlined'
+              color='error'
+              onClick={() => setOpen(true)}
+            >
+              Report this game
+            </Button>
+          </section>
 
-      <ReportForm
-        open={openGameReport}
-        setOpen={setOpenGameReport}
-        id={1}
-        type='GAME'
-      />
+          <ReportForm open={open} setOpen={setOpen} id={game.id} type='GAME' />
+        </>
+      ) : null}
 
       {reviews.map((review) => (
         <ReviewContent key={review.id} review={review} />
