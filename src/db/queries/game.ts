@@ -26,3 +26,11 @@ export const getGameWithAuthor = async (id: number) => {
     },
   });
 };
+
+export const getGamesByAuthor = async (id: string) => {
+  return db.game.findMany({
+    where: {
+      userId: id,
+    },
+  });
+};
