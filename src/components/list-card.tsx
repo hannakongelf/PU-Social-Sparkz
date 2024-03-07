@@ -5,9 +5,10 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import { Rating } from '@mui/material';
-import type { GameWithReviews } from '@/db/queries';
+import type { FavoriteWithGameId, GameWithReviews } from '@/db/queries';
+import FavoriteGame from './favorite';
 
-export default function ListCard({ game }: { game: GameWithReviews }) {
+export default function ListCard({ game, favorite }: { game: GameWithReviews, favorite: FavoriteWithGameId }) {
   return (
     <Card
       sx={{
@@ -35,6 +36,7 @@ export default function ListCard({ game }: { game: GameWithReviews }) {
           }
           title={game.name}
         />
+        <FavoriteGame gameId={game.id} favorite={favorite}/>
         <CardContent>
           <Typography gutterBottom variant='h5' component='div'>
             {game.name}
