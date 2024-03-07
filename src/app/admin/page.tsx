@@ -1,10 +1,8 @@
+import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { Folder } from '@mui/icons-material';
+
 const AdminPage = () => {
-  return (
-    <main className='flex w-full justify-evenly'>
-      <section>Hei</section>
-      <section>PÅ</section>
-    </main>
-  );
+  return <div>Test</div>;
 };
 
 export default AdminPage;
