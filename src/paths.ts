@@ -5,3 +5,7 @@ export function gamePath(id: number) {
 export function home() {
   return '/';
 }
+
+export function admin() {
+  return '/admin';
+}
