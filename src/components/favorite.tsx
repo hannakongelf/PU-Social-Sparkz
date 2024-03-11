@@ -1,35 +1,48 @@
-'use client'
+"use client";
 
-import { IconButton } from '@mui/material';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { getAllFavoritesGameId } from '@/db/queries/favorite';
-import { FavoriteWithGameId } from '@/db/queries';
-import { useSession } from 'next-auth/react';
+import { IconButton } from "@mui/material";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import type { FavoriteWithGameId } from "@/db/queries";
+import { useSession } from "next-auth/react";
+import * as actions from "@/actions";
 
 interface Favorite {
-    gameId: number
-    favorite: FavoriteWithGameId
+  gameId: number;
+  favorite: FavoriteWithGameId;
 }
 
 const FavoriteGame = ({ gameId, favorite }: Favorite) => {
-  const session = useSession()
+  const session = useSession();
 
-  if (!session.data?.user) return null
+  if (!session.data?.user) return null;
+  const isFavorite = favorite?.games.includes({ id: gameId });
 
-    const isFavorite = favorite?.games.includes({ id: gameId });
-  
-    return (
-      <section>
-        <IconButton aria-label='favorite' className='bg-purple-500'>
-          {isFavorite ? (
-            <FavoriteIcon /> // Full heart when the game is in favorites
-          ) : (
-            <FavoriteBorderIcon /> // Border heart when the game is not in favorites
-          )}
+  return (
+    <>
+      {isFavorite ? (
+        <form action={actions.addFavoriteGame.bind(null, gameId)}>
+          <IconButton
+            type="submit"
+            aria-label="favorite"
+            className="bg-purple-500"
+          >
+            <FavoriteIcon />
           </IconButton>
-      </section>
-    );
+        </form>
+      ) : (
+        <form action={actions.removeFavoriteGame.bind(null, gameId)}>
+          <IconButton
+            type="submit"
+            aria-label="favorite"
+            className="bg-purple-500"
+          >
+            <FavoriteBorderIcon />
+          </IconButton>
+        </form>
+      )}
+    </>
+  );
 };
 
 export default FavoriteGame;

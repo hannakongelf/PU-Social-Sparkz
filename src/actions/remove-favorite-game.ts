@@ -3,25 +3,17 @@
 import { auth } from "@/auth";
 import { db } from "@/db";
 
-export async function addFavoriteGame(gameId: number) {
+export async function removeFavoriteGame(gameId: number) {
   const session = await auth();
   if (!session || !session.user) return;
   try {
-    await db.favorite.upsert({
+    await db.favorite.update({
       where: {
         userId: session.user.id,
       },
-      update: {
+      data: {
         games: {
-          connect: {
-            id: gameId,
-          },
-        },
-      },
-      create: {
-        userId: session.user.id,
-        games: {
-          connect: {
+          disconnect: {
             id: gameId,
           },
         },
