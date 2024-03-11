@@ -1,47 +1,50 @@
 "use client";
 
+import { GameWithReviews } from "@/db/queries";
+import { Button } from "@mui/material";
+import Link from "next/link";
+import { useState } from "react";
 import WheelComponent from "react-wheel-of-prizes";
 
-const SpinTheWheel = () => {
-  const segments = [
-    "better luck next time",
-    "won 70",
-    "won 10",
-    "better luck next time",
-    "won 2",
-    "won uber pass",
-    "better luck next time",
-    "won a voucher",
-  ];
-  const segColors = [
-    "#EE4040",
-    "#F0CF50",
-    "#815CD1",
-    "#3DA5E0",
-    "#34A24F",
-    "#F9AA1F",
-    "#EC3F3F",
-    "#FF9000",
-  ];
+const SpinTheWheel = ({ games }: { games: GameWithReviews[] }) => {
+  const [winner, setWinner] = useState<number | null>(null);
+  const segments = games.map((g) => g.name);
+  const segColors = games.map(
+    (g) =>
+      `#${(g.id * 5).toString(16)}${(g.id * 1).toString(16)}${(
+        g.id * 2
+      ).toString(16)}`
+  );
   const onFinished = (winner: any) => {
-    console.log(winner);
+    const winningGame = games.find((g) => g.name === winner);
+    if (winningGame) {
+      setWinner(winningGame.id);
+    }
   };
 
   return (
-    <WheelComponent
-      segments={segments}
-      segColors={segColors}
-      winningSegment="won 10"
-      onFinished={(winner: any) => onFinished(winner)}
-      primaryColor="black"
-      contrastColor="white"
-      buttonText="Spin"
-      isOnlyOnce={false}
-      size={290}
-      upDuration={100}
-      downDuration={1000}
-      fontFamily="Arial"
-    />
+    <div className="flex flex-col align-middle">
+      <WheelComponent
+        segments={segments}
+        segColors={segColors}
+        onFinished={(winner: any) => onFinished(winner)}
+        primaryColor="black"
+        contrastColor="white"
+        buttonText="Spinn!"
+        isOnlyOnce={false}
+        size={290}
+        upDuration={1000}
+        downDuration={1000}
+        fontFamily="Arial"
+      />
+      {winner !== null && (
+        <Link href={`/detail/${winner ?? 0}`}>
+          <Button type="submit" variant="contained" className="mb-5">
+            Spill denne leken
+          </Button>
+        </Link>
+      )}
+    </div>
   );
 };
 
