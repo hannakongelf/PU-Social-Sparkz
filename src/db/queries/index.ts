@@ -1,4 +1,4 @@
-import type { User, Review, Game } from '@prisma/client';
+import type { User, Review, Game, Favorite } from '@prisma/client';
 
 export {
   getAllGames,
@@ -15,6 +15,8 @@ export {
 
 export { getUserById } from '@/db/queries/user';
 
+export { getAllFavoritesGameId } from '@/db/queries/favorite'
+
 // Types
 
 export type ReviewWithAuthor = {
@@ -24,3 +26,9 @@ export type ReviewWithAuthor = {
 export type GameWithReviews = Game & {
   review: Review[];
 };
+
+export type FavoriteWithGameId = Favorite & {
+  games: {
+    id: number
+  }[] 
+} | null
