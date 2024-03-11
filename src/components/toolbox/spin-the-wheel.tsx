@@ -23,7 +23,7 @@ const SpinTheWheel = ({ games }: { games: GameWithReviews[] }) => {
   };
 
   return (
-    <div className="flex flex-col align-middle">
+    <div className="flex flex-col align-middle items-center my-5">
       <WheelComponent
         segments={segments}
         segColors={segColors}
@@ -33,9 +33,9 @@ const SpinTheWheel = ({ games }: { games: GameWithReviews[] }) => {
         buttonText="Spinn!"
         isOnlyOnce={false}
         size={290}
-        upDuration={1000}
-        downDuration={1000}
-        fontFamily="Arial"
+        upDuration={250}
+        downDuration={250}
+        fontFamily="Inter"
       />
       {winner !== null && (
         <Link href={`/detail/${winner ?? 0}`}>
