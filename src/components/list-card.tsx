@@ -30,7 +30,7 @@ export default function ListCard({
           borderColor: "darkpurple",
         },
       }}
-      className="content-center"
+      className="static content-center"
     >
       <Link href={`/detail/${game.id}/`}>
         <CardMedia
@@ -42,8 +42,16 @@ export default function ListCard({
           }
           title={game.name}
         />
+      </Link>
 
-        <CardContent>
+      <FavoriteGame
+        className="absolute bottom-10 right-0 mb-2 mr-2"
+        gameId={game.id}
+        favorite={favorite}
+      />
+
+      <Link href={`/detail/${game.id}/`}>
+        <CardContent className="relative bottom-5">
           <Typography gutterBottom variant="h5" component="div">
             {game.name}
           </Typography>
