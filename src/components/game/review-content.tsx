@@ -5,8 +5,10 @@ import { Button, Rating } from '@mui/material';
 import { FlagOutlined } from '@mui/icons-material';
 import ReportForm from '@/components/report-form';
 import { useState } from 'react';
+import { useSession } from 'next-auth/react';
 
 const ReviewContent = ({ review }: { review: ReviewWithAuthor }) => {
+  const session = useSession()
   const [open, setOpen] = useState<boolean>(false);
   return (
     <div className='border border-sky-500 my-2 p-2'>
@@ -20,7 +22,7 @@ const ReviewContent = ({ review }: { review: ReviewWithAuthor }) => {
             className='margin-y-3'
           />
         </div>
-        {
+        {session.data?.user ?
           <>
             <Button
               onClick={() => setOpen(true)}
@@ -38,7 +40,7 @@ const ReviewContent = ({ review }: { review: ReviewWithAuthor }) => {
               setOpen={setOpen}
             />
           </>
-        }
+        : null}
       </section>
       <p>{review.description}</p>
     </div>
