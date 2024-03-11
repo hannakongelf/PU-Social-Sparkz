@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 import * as actions from "@/actions";
 
 interface Favorite {
+  className?: string;
   gameId: number;
   favorite: FavoriteWithGameId;
 }
