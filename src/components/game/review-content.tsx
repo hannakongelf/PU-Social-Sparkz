@@ -1,38 +1,58 @@
-'use client';
+"use client";
 
-import { ReviewWithAuthor } from '@/db/queries';
-import { Button, Rating } from '@mui/material';
-import { FlagOutlined } from '@mui/icons-material';
-import ReportForm from '@/components/report-form';
-import { useState } from 'react';
+import { ReviewWithAuthor } from "@/db/queries";
+import { Button, Rating } from "@mui/material";
+import { FlagOutlined } from "@mui/icons-material";
+import ReportForm from "@/components/report-form";
+import { useState } from "react";
+import { User } from "@prisma/client";
+import { useSession } from "next-auth/react";
 
-const ReviewContent = ({ review }: { review: ReviewWithAuthor }) => {
+const ReviewContent = ({
+  review,
+  user,
+}: {
+  review: ReviewWithAuthor;
+  user: User;
+}) => {
   const [open, setOpen] = useState<boolean>(false);
+  const [edit, setEdit] = useState(false);
   return (
-    <div className='border border-sky-500 my-2 p-2'>
-      <section className='flex justify-between'>
+    <div className="border border-sky-500 my-2 p-2">
+      <section className="flex justify-between">
         <div>
           <h3>{review.author.name}</h3>
           <Rating
-            name='read-only'
+            name="read-only"
             value={review.rating}
             readOnly
-            className='margin-y-3'
+            className="margin-y-3"
           />
         </div>
         {
           <>
             <Button
               onClick={() => setOpen(true)}
-              className='size-8'
-              variant='outlined'
-              color='error'
+              className="size-8"
+              variant="outlined"
+              color="error"
             >
               <FlagOutlined />
             </Button>
 
+            {user.id === review.author.id && (
+              <Button
+                onClick={() => setEdit(true)}
+                className="size-8"
+                variant="outlined"
+                color="error"
+              >
+                Rediger
+              </Button>
+            )}
+
             <ReportForm
-              type='REVIEW'
+              type="REVIEW"
               id={review.id}
               open={open}
               setOpen={setOpen}
