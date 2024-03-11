@@ -2,6 +2,8 @@
 
 import { auth } from "@/auth";
 import { db } from "@/db";
+import * as paths from "@/paths";
+import { revalidatePath } from "next/cache";
 
 export async function addFavoriteGame(gameId: number) {
   const session = await auth();
@@ -28,4 +30,6 @@ export async function addFavoriteGame(gameId: number) {
       },
     });
   } catch {}
+
+  revalidatePath(paths.gamePath(gameId));
 }

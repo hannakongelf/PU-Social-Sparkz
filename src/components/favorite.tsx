@@ -17,17 +17,18 @@ const FavoriteGame = ({ gameId, favorite }: Favorite) => {
 
   if (!session.data?.user) return null;
   const isFavorite = favorite?.games.includes({ id: gameId });
+  console.log(`${isFavorite}`);
 
   return (
     <>
-      {isFavorite ? (
+      {!isFavorite ? (
         <form action={actions.addFavoriteGame.bind(null, gameId)}>
           <IconButton
             type="submit"
             aria-label="favorite"
             className="bg-purple-500"
           >
-            <FavoriteIcon />
+            <FavoriteBorderIcon />
           </IconButton>
         </form>
       ) : (
@@ -37,7 +38,7 @@ const FavoriteGame = ({ gameId, favorite }: Favorite) => {
             aria-label="favorite"
             className="bg-purple-500"
           >
-            <FavoriteBorderIcon />
+            <FavoriteIcon />
           </IconButton>
         </form>
       )}
