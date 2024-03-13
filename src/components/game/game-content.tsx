@@ -1,16 +1,5 @@
 "use client";
 
-<<<<<<< HEAD
-import { Button, Rating } from "@mui/material";
-import ReviewContent from "@/components/game/review-content";
-import RatingCard from "@/components/game/rating-card";
-import Image from "next/image";
-import { Game } from "@prisma/client";
-import { ReviewWithAuthor } from "@/db/queries";
-import { useState } from "react";
-import ReportForm from "../report-form";
-import { useSession } from "next-auth/react";
-=======
 import { Button, Rating } from '@mui/material';
 import ReviewContent from '@/components/game/review-content';
 import RatingCard from '@/components/game/rating-card';
@@ -21,7 +10,6 @@ import { useState } from 'react';
 import ReportForm from '../report-form';
 import { useSession } from 'next-auth/react';
 import FavoriteGame from '../favorite';
->>>>>>> main
 
 const GameContent = ({
   game,
