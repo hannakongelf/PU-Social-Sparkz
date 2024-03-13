@@ -55,7 +55,13 @@ const GameContent = ({
             />
           </div>
         </section>
-        <RatingCard game={game.id} />
+        <RatingCard
+          game={game.id}
+          oldReview={
+            reviews.filter((r) => r.author.id === session.data?.user?.id)[0] ??
+            null
+          }
+        />
       </div>
 
       <h2 className="text-4xl mt-8 mb-2">{game.name}</h2>
