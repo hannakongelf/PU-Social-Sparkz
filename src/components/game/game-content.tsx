@@ -1,24 +1,24 @@
 "use client";
 
-import { Button, Rating } from '@mui/material';
-import ReviewContent from '@/components/game/review-content';
-import RatingCard from '@/components/game/rating-card';
-import Image from 'next/image';
-import { Game } from '@prisma/client';
-import { FavoriteWithGameId, ReviewWithAuthor } from '@/db/queries';
-import { useState } from 'react';
-import ReportForm from '../report-form';
-import { useSession } from 'next-auth/react';
-import FavoriteGame from '../favorite';
+import { Button, Rating } from "@mui/material";
+import ReviewContent from "@/components/game/review-content";
+import RatingCard from "@/components/game/rating-card";
+import Image from "next/image";
+import { Game } from "@prisma/client";
+import { FavoriteWithGameId, ReviewWithAuthor } from "@/db/queries";
+import { useState } from "react";
+import ReportForm from "../report-form";
+import { useSession } from "next-auth/react";
+import FavoriteGame from "../favorite";
 
 const GameContent = ({
   game,
   reviews,
-  favorite
+  favorite,
 }: {
   game: Game;
   reviews: ReviewWithAuthor[];
-  favorite: FavoriteWithGameId
+  favorite: FavoriteWithGameId;
 }) => {
   const [open, setOpen] = useState<boolean>(false);
 
@@ -40,14 +40,9 @@ const GameContent = ({
             height={300}
             objectFit="cover"
           />
-<<<<<<< HEAD
+          <FavoriteGame gameId={game.id} favorite={favorite} />
           <div className="flex gap-2 p-2">
             <div className="flex flex-col">
-=======
-          <FavoriteGame gameId={game.id} favorite={favorite}/>
-          <div className='flex gap-2 p-2'>
-            <div className='flex flex-col'>
->>>>>>> main
               <p>Brukeres vurdering av leken</p>
               <p>
                 Fra {game.playerMin} til {game.playerMax} spillere
