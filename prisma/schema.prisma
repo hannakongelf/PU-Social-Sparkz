@@ -36,14 +36,14 @@ model Session {
 }
 
 model User {
-  id            String     @id @default(cuid())
+  id            String    @id @default(cuid())
   name          String?
-  email         String?    @unique
+  email         String?   @unique
   emailVerified DateTime?
   image         String?
   // createdAt     DateTime   @default(now()) @map(name: "created_at")
   // updatedAt     DateTime?  @updatedAt @map(name: "updated_at")
-  admin         Boolean    @default(false)
+  admin         Boolean   @default(false)
   accounts      Account[]
   sessions      Session[]
   games         Game[]
@@ -51,8 +51,8 @@ model User {
   favorite      Favorite?
   queue         Queue[]
   report        Report[]
-  followedBy    Follows[]  @relation("followedBy")
-  following     Follows[]  @relation("following")
+  followedBy    Follows[] @relation("followedBy")
+  following     Follows[] @relation("following")
 
   @@map(name: "users")
 }
@@ -108,12 +108,13 @@ model Review {
 model Favorite {
   id     String @id @default(cuid())
   user   User   @relation(fields: [userId], references: [id])
-  games   Game[]
+  games  Game[]
   userId String @unique
 }
 
 model Queue {
   id                String        @id @default(cuid())
+  name              String
   author            User          @relation(fields: [userId], references: [id])
   userId            String
   queueContainsGame QueueOnGame[]

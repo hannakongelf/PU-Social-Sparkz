@@ -9,7 +9,9 @@ import { FavoriteWithGameId, ReviewWithAuthor } from "@/db/queries";
 import { useState } from "react";
 import ReportForm from "../report-form";
 import { useSession } from "next-auth/react";
-import FavoriteGame from "../favorite";
+import FavoriteGame from "../profile/favorite";
+import PersonalList from "../profile/personal-list";
+import AddToPersonalList from "../profile/add-to-personal-list";
 
 const GameContent = ({
   game,
@@ -40,6 +42,8 @@ const GameContent = ({
             height={300}
             objectFit="cover"
           />
+          <AddToPersonalList gameId={game.id} />
+          <PersonalList open={open} setOpen={setOpen} />
           <FavoriteGame gameId={game.id} favorite={favorite} />
           <div className="flex gap-2 p-2">
             <div className="flex flex-col">

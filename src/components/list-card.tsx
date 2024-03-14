@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import { Rating } from "@mui/material";
 import type { FavoriteWithGameId, GameWithReviews } from "@/db/queries";
-import FavoriteGame from "./favorite";
+import FavoriteGame from "./profile/favorite";
 
 export default function ListCard({
   game,
