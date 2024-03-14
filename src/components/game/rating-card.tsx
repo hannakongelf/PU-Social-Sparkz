@@ -27,7 +27,7 @@ const RatingCard = ({
   return (
     <Paper
       elevation={3}
-      className="text-center flex flex-col items-center justify-center p-4 gap-5 w-1/4"
+      className="text-center flex flex-col items-center justify-center p-4 gap-5"
     >
       {session.data?.user ? (
         <form action={action}>

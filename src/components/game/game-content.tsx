@@ -36,7 +36,7 @@ const GameContent = ({
                 : "/stock_game.jpg"
             }
             alt="Sample Image"
-            width={900}
+            width={1200}
             height={300}
             objectFit="cover"
           />
@@ -59,13 +59,6 @@ const GameContent = ({
             />
           </div>
         </section>
-        <RatingCard
-          game={game.id}
-          oldReview={
-            reviews.filter((r) => r.author.id === session.data?.user?.id)[0] ??
-            null
-          }
-        />
       </div>
 
       <h2 className="text-4xl mt-8 mb-2">{game.name}</h2>
@@ -86,14 +79,29 @@ const GameContent = ({
           <ReportForm open={open} setOpen={setOpen} id={game.id} type="GAME" />
         </>
       ) : null}
-
-      {reviews.map((review) => (
-        <ReviewContent
-          key={review.id}
-          review={review}
-          user={session.data?.user}
+      {reviews.map((r) => r.author.id).indexOf(session.data?.user.id) ===
+        -1 && (
+        <RatingCard
+          game={game.id}
+          oldReview={
+            reviews.filter((r) => r.author.id === session.data?.user?.id)[0] ??
+            null
+          }
         />
-      ))}
+      )}
+      {reviews
+        .sort(
+          (a, b) =>
+            (b.author.id === session.data?.user.id) -
+            (a.author.id === session.data?.user.id)
+        )
+        .map((review) => (
+          <ReviewContent
+            key={review.id}
+            review={review}
+            user={session.data?.user}
+          />
+        ))}
     </>
   );
 };

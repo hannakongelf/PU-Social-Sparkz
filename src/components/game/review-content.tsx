@@ -51,14 +51,16 @@ const ReviewContent = ({
               {edit ? "Cancel" : "Edit"}
             </Button>
           )}
-          <Button
-            onClick={() => setOpen(true)}
-            className="size-8"
-            variant="outlined"
-            color="error"
-          >
-            <FlagOutlined />
-          </Button>
+          {review?.author.id !== user?.id && (
+            <Button
+              onClick={() => setOpen(true)}
+              className="size-8"
+              variant="outlined"
+              color="error"
+            >
+              <FlagOutlined />
+            </Button>
+          )}
         </div>
         <ReportForm
           type="REVIEW"
