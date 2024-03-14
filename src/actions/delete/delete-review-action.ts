@@ -4,11 +4,11 @@ import { db } from '@/db';
 import * as paths from '@/paths';
 import { revalidatePath } from 'next/cache';
 
-export async function deleteGame(
+export async function deleteReview(
   id: number,
 ) {
   try {
-    await db.game.delete({
+    await db.review.delete({
       where: {
         id: id,
       },
