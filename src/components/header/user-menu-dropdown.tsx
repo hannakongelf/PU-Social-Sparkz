@@ -1,25 +1,23 @@
-"use client";
+'use client';
 
-import { useSession } from "next-auth/react";
+import { useSession } from 'next-auth/react';
 import {
   Avatar,
   Box,
-  Button,
   Chip,
   Container,
   IconButton,
-  Link,
   Menu,
   MenuItem,
   Toolbar,
   Tooltip,
   Typography,
-} from "@mui/material";
-import React from "react";
-import * as actions from "@/actions";
-
-import Image from "next/image";
-import ToggleColorMode from "./darkmode-toggle";
+} from '@mui/material';
+import React from 'react';
+import * as actions from '@/actions';
+import Image from 'next/image';
+import Link from 'next/link';
+import DarkmodeToggle from './darkmode-toggle';
 
 const UserMenuDropdown = () => {
   const session = useSession();
@@ -45,10 +43,10 @@ const UserMenuDropdown = () => {
 
   return (
     <div>
-      <Container maxWidth="xl">
+      <Container maxWidth='xl'>
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title='Open settings'>
               <IconButton onClick={handleOpenUserMenu}>
                 <Chip
                   avatar={
@@ -57,45 +55,43 @@ const UserMenuDropdown = () => {
                         <Image
                           src={session.data.user.image}
                           fill
-                          alt="profile image"
+                          alt='profile image'
                         />
                       </Avatar>
-                    ) : null
+                    ) : undefined
                   }
                   label={<label>{session.data?.user?.name}</label>}
-                  variant="outlined"
+                  variant='outlined'
                 />
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
+              sx={{ mt: '45px' }}
+              id='menu-appbar'
               anchorEl={anchorElUser}
               anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
+                vertical: 'top',
+                horizontal: 'right',
               }}
               keepMounted
               transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
+                vertical: 'top',
+                horizontal: 'right',
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
               <MenuItem>
-                <Link href={"/my-profile"} className={"ml-4"}>
-                  My profile
-                </Link>
+                <Link href={'/my-profile'}>My profile</Link>
               </MenuItem>
               <MenuItem>
                 <Typography>
-                  <ToggleColorMode />
+                  <DarkmodeToggle />
                 </Typography>
               </MenuItem>
               <MenuItem>
                 <form action={actions.signOut}>
-                  <button type="submit">Sign out</button>
+                  <button type='submit'>Sign out</button>
                 </form>
               </MenuItem>
             </Menu>
