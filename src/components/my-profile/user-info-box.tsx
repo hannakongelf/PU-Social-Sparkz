@@ -14,15 +14,14 @@ const UserInfoBox = () => {
         <div className="flex justify-start items-start">
           <div className="w-1/3">
             {session.data.user.image ? (
-              <img src={session.data.user.image} alt="" className="w-4/5"/>
+              <img src={session.data.user.image} alt="" className="w-4/5" />
             ) : (
               <div>Your picture could not be loaded </div>
             )}
           </div>
           <div className="flex flex-col ">
             <label>{session.data.user.name}</label>
-            <label>Username</label>
-            <label>Bio</label>
+            <label>{session.data.user.mail}</label>
 
             <form action={actions.signOut}>
               <Button type="submit" variant="contained">

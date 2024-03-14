@@ -85,16 +85,19 @@ const UserMenuDropdown = () => {
             >
               <MenuItem>
                 <Link href={"/my-profile"} className={"ml-4"}>
-                  <Typography>My profile</Typography>
+                  My profile
                 </Link>
               </MenuItem>
               <MenuItem>
-                  <Typography>
-                    <ToggleColorMode />
-                  </Typography>
+                <Typography>
+                  <ToggleColorMode />
+                </Typography>
               </MenuItem>
-              <MenuItem><form action={actions.signOut}> <Typography>Sign out</Typography></form></MenuItem>
-                
+              <MenuItem>
+                <form action={actions.signOut}>
+                  <button type="submit">Sign out</button>
+                </form>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
