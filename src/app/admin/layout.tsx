@@ -11,7 +11,7 @@ export default function RootLayout({
   const subPage = ['reports', 'users', 'games', 'reviews'];
   return (
     <main className='flex mt-4'>
-      <section className='w-1/3 mr-4'>
+      <section className='w-1/5 mr-4'>
         <List>
           {subPage.map((page, idx) => (
             <Link key={page + idx} href={paths.admin(page)}>
