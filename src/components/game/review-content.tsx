@@ -51,7 +51,7 @@ const ReviewContent = ({
               {edit ? "Cancel" : "Edit"}
             </Button>
           )}
-          {review?.author.id !== user?.id && (
+          {review?.author.id !== user?.id && user && (
             <Button
               onClick={() => setOpen(true)}
               className="size-8"
