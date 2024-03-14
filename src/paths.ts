@@ -3,7 +3,15 @@ export function gamePath(id: number) {
 }
 
 export function home() {
-  return '/';
+  return "/";
+}
+
+export function profile() {
+  return "/my-profile";
+}
+
+export function personalLists() {
+  return "/personal-lists";
 }
 
 export function admin(slug: string = '') {
