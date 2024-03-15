@@ -1,17 +1,18 @@
 'use server';
 
-import { auth } from '@/auth';
 import { db } from '@/db';
 import * as paths from '@/paths';
 import { revalidatePath } from 'next/cache';
 
-export async function deleteGame(id: number) {
+export async function deleteUser(
+  id: string,
+) {
   try {
-    await db.game.delete({
+    await db.user.delete({
       where: {
         id: id,
       },
     });
-  } catch (err: unknown) {}
+  } catch (err: unknown){};
   revalidatePath(paths.admin());
 }
