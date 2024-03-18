@@ -1,10 +1,12 @@
 'use client';
 
-import { Box, Button, Modal, TextField } from '@mui/material';
 import { SetStateAction, Dispatch } from 'react';
 import { useFormState } from 'react-dom';
 import * as actions from '@/actions';
 import { reportType } from '@prisma/client';
+import Modal from '@mui/material/Modal';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 const ReportForm = ({
   open,

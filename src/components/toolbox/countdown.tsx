@@ -1,10 +1,11 @@
-"use client";
+'use client';
 
-import { ChangeEvent, useState } from "react";
-import { Button, TextField } from "@mui/material";
-import useCountDown from "react-countdown-hook";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import { ChangeEvent, useState } from 'react';
+import useCountDown from 'react-countdown-hook';
 
-const buttonStyle = { marginRight: "10px" };
+const buttonStyle = { marginRight: '10px' };
 
 const Countdown = () => {
   const initialTime = 6 * 60 * 1000;
@@ -25,59 +26,59 @@ const Countdown = () => {
   const formatTimeLeft = (time: number) => {
     const minutes = Math.floor(time / 60000);
     const seconds = ((time % 60000) / 1000).toFixed(0);
-    return `${minutes}:${seconds.padStart(2, "0")}`;
+    return `${minutes}:${seconds.padStart(2, '0')}`;
   };
 
   return (
-    <div className="flex flex-col items-center gap-2 align-bottom my-3">
+    <div className='flex flex-col items-center gap-2 align-bottom my-3'>
       {!hideTime && (
-        <h1 id="time-left" className="text-5xl">
+        <h1 id='time-left' className='text-5xl'>
           {formatTimeLeft(timeLeft)}
         </h1>
       )}
-      <div className="flex-row">
+      <div className='flex-row'>
         <Button
-          id="start"
+          id='start'
           style={buttonStyle}
           onClick={() => actions.start(initialTime)}
         >
           Start
         </Button>
         <TextField
-          label="Custom Time (min)"
-          variant="outlined"
-          type="number"
+          label='Custom Time (min)'
+          variant='outlined'
+          type='number'
           value={customTime}
           onChange={handleCustomTimeChange}
-          size="small"
+          size='small'
           style={buttonStyle}
         />
         <Button
-          id="start-custom"
+          id='start-custom'
           style={buttonStyle}
           onClick={startCustomTimer}
         >
           Start Custom
         </Button>
-        <Button id="pause" style={buttonStyle} onClick={() => actions.pause()}>
+        <Button id='pause' style={buttonStyle} onClick={() => actions.pause()}>
           Pause
         </Button>
         <Button
-          id="resume"
+          id='resume'
           style={buttonStyle}
           onClick={() => actions.resume()}
         >
           Resume
         </Button>
-        <Button id="reset" style={buttonStyle} onClick={() => actions.reset()}>
+        <Button id='reset' style={buttonStyle} onClick={() => actions.reset()}>
           Reset
         </Button>
         <Button
-          id="reset"
+          id='reset'
           style={buttonStyle}
           onClick={() => setHideTime(!hideTime)}
         >
-          {hideTime ? "Show timer" : "Hide Timer"}
+          {hideTime ? 'Show timer' : 'Hide Timer'}
         </Button>
       </div>
     </div>

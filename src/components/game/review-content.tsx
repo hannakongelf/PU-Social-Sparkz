@@ -2,20 +2,22 @@
 
 import { useState } from 'react';
 import { useFormState } from 'react-dom';
-import { Button, Rating, TextField } from '@mui/material';
-import { FlagOutlined, Send } from '@mui/icons-material';
+import Send from '@mui/icons-material/Send';
+import FlagOutlined from '@mui/icons-material/FlagOutlined';
 import ReportForm from '@/components/report-form';
 import * as actions from '@/actions';
 import StarRating from '@/components/common/star-rating';
 import { ReviewWithAuthor } from '@/db/queries';
-import { User } from '@prisma/client';
+import Rating from '@mui/material/Rating';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 const ReviewContent = ({
   review,
-  user,
+  userId,
 }: {
   review: ReviewWithAuthor;
-  user: User;
+  userId: string | null;
 }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [edit, setEdit] = useState<boolean>(false);
@@ -41,7 +43,7 @@ const ReviewContent = ({
           )}
         </div>
         <div className='flex content-start space-x-1'>
-          {user?.id && user?.id === review.author.id && (
+          {userId && userId === review.author.id && (
             <Button
               onClick={() => setEdit(!edit)}
               className='size-8'
@@ -51,7 +53,7 @@ const ReviewContent = ({
               {edit ? 'Cancel' : 'Edit'}
             </Button>
           )}
-          {review?.author.id !== user?.id && user && (
+          {review?.author.id !== userId && (
             <Button
               onClick={() => setOpen(true)}
               className='size-8'

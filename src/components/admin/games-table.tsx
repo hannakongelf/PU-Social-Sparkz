@@ -10,7 +10,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { DeleteForever } from '@mui/icons-material';
+import DeleteForever from '@mui/icons-material/DeleteForever';
 import IconButton from '@mui/material/IconButton';
 
 export default function GamesTable({ data }: { data: Game[] }) {
@@ -50,7 +50,7 @@ export default function GamesTable({ data }: { data: Game[] }) {
                   {game.name}
                 </Link>
               </TableCell>
-              <TableCell align='right'>
+              <TableCell align='right' className='max-w-48 truncate'>
                 {game.description.substring(0, 100)}
                 {game.description.length > 100 ? '...' : null}
               </TableCell>

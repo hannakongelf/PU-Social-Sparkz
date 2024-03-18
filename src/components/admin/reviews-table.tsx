@@ -1,6 +1,6 @@
 'use client';
 
-import { DeleteForever } from '@mui/icons-material';
+import DeleteForever from '@mui/icons-material/DeleteForever';
 import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -9,7 +9,6 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { Review } from '@prisma/client';
 import Link from 'next/link';
 import * as paths from '@/paths';
 import { deleteReview } from '@/actions';
@@ -48,7 +47,7 @@ const ReviewTable = ({ reviews }: { reviews: ReviewWithAuthor[] }) => {
                 </Link>
               </TableCell>
               <TableCell align='right'>{review.author.name}</TableCell>
-              <TableCell align='right' className='truncate'>
+              <TableCell align='right' className='max-w-48 truncate'>
                 {review.description ? (
                   <>
                     {review.description.substring(0, 100)}

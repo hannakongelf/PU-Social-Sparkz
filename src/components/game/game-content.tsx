@@ -1,6 +1,5 @@
 'use client';
 
-import { Button, Rating } from '@mui/material';
 import ReviewContent from '@/components/game/review-content';
 import RatingCard from '@/components/game/rating-card';
 import Image from 'next/image';
@@ -10,6 +9,10 @@ import { useState } from 'react';
 import ReportForm from '../report-form';
 import { useSession } from 'next-auth/react';
 import FavoriteGame from '../favorite';
+import Rating from '@mui/material/Rating';
+import Button from '@mui/material/Button';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
+import Countdown from '../toolbox/countdown';
 
 const GameContent = ({
   game,
@@ -21,11 +24,12 @@ const GameContent = ({
   favorite: FavoriteWithGameId;
 }) => {
   const [open, setOpen] = useState<boolean>(false);
-
+  const [showTimer, setShowTimer] = useState(false);
+  const [animationParent] = useAutoAnimate();
   const session = useSession();
 
   return (
-    <>
+    <div ref={animationParent}>
       <div className='flex gap-2'>
         <section className='bg-[#845EC2] text-white shadow-2xl rounded'>
           <h1 className='text-center p-4'>{game.type}</h1>
@@ -41,26 +45,40 @@ const GameContent = ({
             objectFit='cover'
           />
           <FavoriteGame gameId={game.id} favorite={favorite} />
-          <div className='flex gap-2 p-2'>
-            <div className='flex flex-col'>
-              <p>Brukeres vurdering av leken</p>
-              <p>
-                Fra {game.playerMin} til {game.playerMax} spillere
-              </p>
-            </div>
-
-            <Rating
-              name='read-only'
-              value={
-                reviews.map((r) => r.rating).reduce((a, b) => a + b, 0) /
-                reviews.filter((r) => !!r.rating).length
-              }
-              readOnly
-            />
+          <div className='flex gap-2 p-2 justify-between w-full'>
+            <section>
+              <div className='flex flex-col'>
+                <p>Brukeres vurdering av leken</p>
+                <p>
+                  Fra {game.playerMin} til {game.playerMax} spillere
+                </p>
+              </div>
+              <Rating
+                name='read-only'
+                value={
+                  reviews.map((r) => r.rating).reduce((a, b) => a + b, 0) /
+                  reviews.filter((r) => !!r.rating).length
+                }
+                readOnly
+              />
+            </section>
+            <Button
+              type='submit'
+              variant='contained'
+              onClick={() => {
+                setShowTimer(!showTimer);
+              }}
+            >
+              {showTimer ? 'Hide Timer' : 'Show Timer'}
+            </Button>
           </div>
         </section>
       </div>
-
+      {showTimer && (
+        <div className='my-4 border-[#845EC2] border-solid border-4 rounded-sm'>
+          <Countdown />
+        </div>
+      )}
       <h2 className='text-4xl mt-8 mb-2'>{game.name}</h2>
       <p>{game.description}</p>
 
@@ -93,22 +111,21 @@ const GameContent = ({
             />
           )
         : null}
-      {session.data?.user
-        ? reviews
-            .sort(
-              (a, b) =>
-                (b.author.id === session.data?.user.id) -
-                (a.author.id === session.data?.user.id)
-            )
-            .map((review) => (
-              <ReviewContent
-                key={review.id}
-                review={review}
-                user={session.data.user}
-              />
-            ))
-        : null}
-    </>
+      {reviews
+        .sort((a, b) => {
+          if (!session.data?.user) return 0;
+          if (b.author.id === session.data.user.id) return 1;
+          else if (a.author.id === session.data?.user.id) return -1;
+          return 0;
+        })
+        .map((review) => (
+          <ReviewContent
+            key={review.id}
+            review={review}
+            userId={session.data?.user?.id || null}
+          />
+        ))}
+    </div>
   );
 };
 

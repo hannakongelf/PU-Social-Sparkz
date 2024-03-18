@@ -9,3 +9,7 @@ export function home() {
 export function admin(slug: string = '') {
   return `/admin/${slug}`;
 }
+
+export function profile() {
+  return 'my-profile';
+}
