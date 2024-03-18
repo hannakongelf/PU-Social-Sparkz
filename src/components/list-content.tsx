@@ -7,6 +7,7 @@ import { gameType } from '@prisma/client';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 export default function ListContent({
   games,
