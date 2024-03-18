@@ -8,7 +8,6 @@ import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
-import { favoriteList } from "@/paths";
 
 const UserInfoBox = ({
   games,
