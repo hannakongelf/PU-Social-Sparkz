@@ -11,10 +11,10 @@ import Paper from '@mui/material/Paper';
 import { ReportWithContentAndAuthor } from '@/db/queries';
 import { deleteGame, deleteReview } from '@/actions';
 import Link from 'next/link';
-import { Button, IconButton } from '@mui/material';
 import { deleteReport } from '@/actions/delete/delete-report-action';
 import * as paths from '@/paths';
-import { DeleteForever } from '@mui/icons-material';
+import DeleteForever from '@mui/icons-material/DeleteForever';
+import IconButton from '@mui/material/IconButton';
 
 export default function ReportTable({
   reports,

@@ -2,13 +2,15 @@
 
 import { useState } from 'react';
 import { useFormState } from 'react-dom';
-import { Button, Rating, TextField } from '@mui/material';
-import { FlagOutlined, Send } from '@mui/icons-material';
+import Send from '@mui/icons-material/Send';
+import FlagOutlined from '@mui/icons-material/FlagOutlined';
 import ReportForm from '@/components/report-form';
 import * as actions from '@/actions';
 import StarRating from '@/components/common/star-rating';
 import { ReviewWithAuthor } from '@/db/queries';
-import { User } from '@prisma/client';
+import Rating from '@mui/material/Rating';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 const ReviewContent = ({
   review,

@@ -1,6 +1,5 @@
 'use client';
 
-import { Button, Rating } from '@mui/material';
 import ReviewContent from '@/components/game/review-content';
 import RatingCard from '@/components/game/rating-card';
 import Image from 'next/image';
@@ -10,6 +9,8 @@ import { useState } from 'react';
 import ReportForm from '../report-form';
 import { useSession } from 'next-auth/react';
 import FavoriteGame from '../favorite';
+import Rating from '@mui/material/Rating';
+import Button from '@mui/material/Button';
 
 const GameContent = ({
   game,

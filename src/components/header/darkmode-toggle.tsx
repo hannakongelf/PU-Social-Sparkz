@@ -1,8 +1,9 @@
 import { useTheme } from '@mui/material/styles';
-import { Brightness4, Brightness7 } from '@mui/icons-material';
 import { useContext } from 'react';
 import { ColorModeContext } from '@/app/providers';
 import IconButton from '@mui/material/IconButton';
+import Brightness7 from '@mui/icons-material/Brightness7';
+import Brightness4 from '@mui/icons-material/Brightness4';
 
 export default function DarkmodeToggle({ text }: { text?: boolean }) {
   const theme = useTheme();

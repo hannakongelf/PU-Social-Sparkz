@@ -11,7 +11,7 @@ import Paper from '@mui/material/Paper';
 import { User } from '@prisma/client';
 import IconButton from '@mui/material/IconButton';
 import { deleteUser } from '@/actions/delete/delete-user-action';
-import { DeleteForever } from '@mui/icons-material';
+import DeleteForever from '@mui/icons-material/DeleteForever';
 
 export default function UserTable({ users }: Readonly<{ users: User[] }>) {
   return (

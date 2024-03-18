@@ -10,7 +10,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { DeleteForever } from '@mui/icons-material';
+import DeleteForever from '@mui/icons-material/DeleteForever';
 import IconButton from '@mui/material/IconButton';
 
 export default function GamesTable({ data }: { data: Game[] }) {

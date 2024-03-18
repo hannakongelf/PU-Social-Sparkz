@@ -1,24 +1,23 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
-import {
-  Avatar,
-  Box,
-  Chip,
-  Container,
-  IconButton,
-  Menu,
-  MenuItem,
-  Toolbar,
-  Tooltip,
-  Typography,
-} from '@mui/material';
+
 import React from 'react';
 import * as actions from '@/actions';
 import Image from 'next/image';
 import Link from 'next/link';
 import DarkmodeToggle from './darkmode-toggle';
 import * as paths from '@/paths';
+import Container from '@mui/material/Container';
+import Toolbar from '@mui/material/Toolbar';
+import Box from '@mui/material/Box';
+import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
+import Chip from '@mui/material/Chip';
+import Avatar from '@mui/material/Avatar';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Typography from '@mui/material/Typography';
 
 const UserMenuDropdown = () => {
   const session = useSession();

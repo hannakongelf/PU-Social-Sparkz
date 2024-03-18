@@ -1,26 +1,29 @@
-"use client";
+'use client';
 
-import * as actions from "@/actions";
-import { useSession } from "next-auth/react";
-import { Button, Typography } from "@mui/material";
-import Image from "next/image";
-import ListMygames from "./list-my-games";
-import { Game, User } from "@prisma/client";
+import * as actions from '@/actions';
+import { Button, Typography } from '@mui/material';
+import Image from 'next/image';
+import ListMygames from './list-my-games';
+import { Game, User } from '@prisma/client';
 
 const UserInfoBox = ({
   games,
-  user,
   favorites,
+  user,
 }: {
   games: Game[];
-  user: User | undefined;
   favorites: Game[];
+  user: {
+    image?: string | null;
+    name?: string | null;
+    email?: string | null;
+  };
 }) => {
   if (!user) {
     return (
       <section>
         <form action={actions.signIn}>
-          <Button type="submit" variant="contained">
+          <Button type='submit' variant='contained'>
             Sign in
           </Button>
         </form>
@@ -29,28 +32,28 @@ const UserInfoBox = ({
   }
 
   return (
-    <section className="w-4/5">
-      <div className="flex justify-start items-center">
-        <div className="w-1/3">
+    <section className='w-4/5'>
+      <div className='flex justify-start items-center'>
+        <div className='w-1/3'>
           {user.image ? (
             <Image
               src={user.image}
               width={200}
               height={200}
-              alt=""
-              className="w-4/8"
+              alt=''
+              className='w-4/8'
             />
           ) : (
             <div>Your picture could not be loaded </div>
           )}
         </div>
-        <div className="flex flex-col ">
+        <div className='flex flex-col '>
           <Typography>My Profile</Typography>
           <Typography>{user.name}</Typography>
           <Typography>{user.email}</Typography>
 
           <form action={actions.signOut}>
-            <Button type="submit" variant="contained" size="small">
+            <Button type='submit' variant='contained' size='small'>
               Sign out
             </Button>
           </form>
@@ -58,8 +61,6 @@ const UserInfoBox = ({
       </div>
       <Typography>My Games</Typography>
       <ListMygames games={games} />
-      {/* <MyGamesAndLists> */}
-
       <Typography>My Favorite Games</Typography>
       <ListMygames games={favorites} />
 
