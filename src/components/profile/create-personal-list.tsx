@@ -3,16 +3,11 @@
 import * as React from "react";
 import { useFormState } from "react-dom";
 import * as actions from "@/actions";
-import { Button, Paper, TextField } from "@mui/material";
-import { Dispatch, SetStateAction } from "react";
+import Paper from "@mui/material/Paper";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
-const PersonalList = ({
-  open,
-  setOpen,
-}: {
-  open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
-}) => {
+const CreatePersonalList = () => {
   const [formState, action] = useFormState(actions.createPersonalList, {
     errors: {},
   });
@@ -49,4 +44,4 @@ const PersonalList = ({
   );
 };
 
-export default PersonalList;
+export default CreatePersonalList;

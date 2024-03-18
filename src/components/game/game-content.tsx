@@ -4,23 +4,25 @@ import { Button, Rating } from "@mui/material";
 import ReviewContent from "@/components/game/review-content";
 import RatingCard from "@/components/game/rating-card";
 import Image from "next/image";
-import { Game } from "@prisma/client";
+import { Game, Queue } from "@prisma/client";
 import { FavoriteWithGameId, ReviewWithAuthor } from "@/db/queries";
 import { useState } from "react";
 import ReportForm from "../report-form";
 import { useSession } from "next-auth/react";
 import FavoriteGame from "../profile/favorite";
-import PersonalList from "../profile/personal-list";
+import CreatePersonalList from "../profile/create-personal-list";
 import AddToPersonalList from "../profile/add-to-personal-list";
 
 const GameContent = ({
   game,
   reviews,
   favorite,
+  userLists,
 }: {
   game: Game;
   reviews: ReviewWithAuthor[];
   favorite: FavoriteWithGameId;
+  userLists: Queue[];
 }) => {
   const [open, setOpen] = useState<boolean>(false);
 
@@ -42,8 +44,7 @@ const GameContent = ({
             height={300}
             objectFit="cover"
           />
-          <AddToPersonalList gameId={game.id} />
-          <PersonalList open={open} setOpen={setOpen} />
+          <AddToPersonalList gameId={game.id} userLists={userLists} />
           <FavoriteGame gameId={game.id} favorite={favorite} />
           <div className="flex gap-2 p-2">
             <div className="flex flex-col">

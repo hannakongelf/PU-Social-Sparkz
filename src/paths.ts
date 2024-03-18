@@ -13,3 +13,11 @@ export function profile() {
 export function personalLists() {
   return "/personal-lists";
 }
+
+export function personalList(id: string) {
+  return `/personal-lists/${id}`;
+}
+
+export function createPersonalList() {
+  return "/create-personal-list";
+}

@@ -24,7 +24,6 @@ export async function createPersonalList(
   formState: CreatePersonalListState,
   formData: FormData
 ): Promise<CreatePersonalListState> {
-  //TODO: fordi vi ikke har returnert noe (redirect)
   const session = await auth();
   if (!session || !session.user)
     return {
@@ -67,4 +66,5 @@ export async function createPersonalList(
   }
   revalidatePath(paths.profile());
   revalidatePath(paths.personalLists());
+  redirect(paths.personalLists());
 }
