@@ -8,6 +8,12 @@ export const getAllGames = async () => {
   });
 };
 
+export const getAllGamesNoReview = async () => {
+  return db.game.findMany({
+
+  });
+};
+
 export const getGameById = async (id: number) => {
   return db.game.findUnique({
     where: {
