@@ -1,12 +1,12 @@
 "use client";
 
-import { GameWithReviews } from "@/db/queries";
+import { Game } from "@prisma/client";
 import { Button } from "@mui/material";
 import Link from "next/link";
 import { useState } from "react";
 import WheelComponent from "react-wheel-of-prizes";
 
-const SpinTheWheel = ({ games }: { games: GameWithReviews[] }) => {
+const SpinTheWheel = ({ games }: { games: Game[] }) => {
   const [winner, setWinner] = useState<number | null>(null);
   const segments = games.map((g) => g.name);
   const segColors = games.map(

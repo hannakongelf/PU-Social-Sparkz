@@ -10,6 +10,8 @@ import { useState } from "react";
 import ReportForm from "../report-form";
 import { useSession } from "next-auth/react";
 import FavoriteGame from "../favorite";
+import Countdown from "../toolbox/countdown";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 const GameContent = ({
   game,
@@ -21,11 +23,12 @@ const GameContent = ({
   favorite: FavoriteWithGameId;
 }) => {
   const [open, setOpen] = useState<boolean>(false);
-
+  const [showTimer, setShowTimer] = useState(false);
+  const [animationParent] = useAutoAnimate();
   const session = useSession();
 
   return (
-    <>
+    <div ref={animationParent}>
       <div className="flex gap-2">
         <section className="bg-[#845EC2] text-white shadow-2xl rounded">
           <h1 className="text-center p-4">{game.type}</h1>
@@ -48,7 +51,6 @@ const GameContent = ({
                 Fra {game.playerMin} til {game.playerMax} spillere
               </p>
             </div>
-
             <Rating
               name="read-only"
               value={
@@ -57,10 +59,24 @@ const GameContent = ({
               }
               readOnly
             />
+            <Button
+              type="submit"
+              variant="contained"
+              className="flex justify-end"
+              onClick={() => {
+                setShowTimer(!showTimer);
+              }}
+            >
+              {showTimer ? "Hide Timer" : "Show Timer"}
+            </Button>
           </div>
         </section>
       </div>
-
+      {showTimer && (
+        <div className="my-4 border-[#845EC2] border-solid border-4 rounded-sm">
+          <Countdown />
+        </div>
+      )}
       <h2 className="text-4xl mt-8 mb-2">{game.name}</h2>
       <p>{game.description}</p>
 
@@ -102,7 +118,7 @@ const GameContent = ({
             user={session.data?.user}
           />
         ))}
-    </>
+    </div>
   );
 };
 
