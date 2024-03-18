@@ -9,6 +9,7 @@ export default async function Home() {
   return (
     <main>
       <ListContent games={games} />
+      test
     </main>
   );
 }
