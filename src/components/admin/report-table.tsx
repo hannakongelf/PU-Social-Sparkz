@@ -54,7 +54,7 @@ export default function ReportTable({
               <TableCell align='right'>{r.description}</TableCell>
               <TableCell align='right'>{r.contentType}</TableCell>
               <TableCell align='right'>{r.reportId}</TableCell>
-              <TableCell align='right'>
+              <TableCell align='right' className='max-w-48 truncate'>
                 {r.contentDescription.substring(0, 100)}
                 {r.contentDescription.length > 100 ? '...' : ''}
               </TableCell>

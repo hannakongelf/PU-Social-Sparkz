@@ -11,6 +11,8 @@ import { useSession } from 'next-auth/react';
 import FavoriteGame from '../favorite';
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
+import Countdown from '../toolbox/countdown';
 
 const GameContent = ({
   game,
@@ -43,25 +45,26 @@ const GameContent = ({
             objectFit='cover'
           />
           <FavoriteGame gameId={game.id} favorite={favorite} />
-          <div className='flex gap-2 p-2'>
-            <div className='flex flex-col'>
-              <p>Brukeres vurdering av leken</p>
-              <p>
-                Fra {game.playerMin} til {game.playerMax} spillere
-              </p>
-            </div>
-            <Rating
-              name='read-only'
-              value={
-                reviews.map((r) => r.rating).reduce((a, b) => a + b, 0) /
-                reviews.filter((r) => !!r.rating).length
-              }
-              readOnly
-            />
+          <div className='flex gap-2 p-2 justify-between w-full'>
+            <section>
+              <div className='flex flex-col'>
+                <p>Brukeres vurdering av leken</p>
+                <p>
+                  Fra {game.playerMin} til {game.playerMax} spillere
+                </p>
+              </div>
+              <Rating
+                name='read-only'
+                value={
+                  reviews.map((r) => r.rating).reduce((a, b) => a + b, 0) /
+                  reviews.filter((r) => !!r.rating).length
+                }
+                readOnly
+              />
+            </section>
             <Button
               type='submit'
               variant='contained'
-              className='flex justify-end'
               onClick={() => {
                 setShowTimer(!showTimer);
               }}

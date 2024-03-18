@@ -50,7 +50,7 @@ export default function GamesTable({ data }: { data: Game[] }) {
                   {game.name}
                 </Link>
               </TableCell>
-              <TableCell align='right'>
+              <TableCell align='right' className='max-w-48 truncate'>
                 {game.description.substring(0, 100)}
                 {game.description.length > 100 ? '...' : null}
               </TableCell>
