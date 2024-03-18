@@ -1,28 +1,25 @@
 "use client";
 
 import AddBoxIcon from "@mui/icons-material/AddBox";
-import {
-  Button,
-  IconButton,
-  List,
-  ListItem,
-  ListItemText,
-} from "@mui/material";
-import Link from "next/link";
 import { useSession } from "next-auth/react";
-import * as actions from "@/actions";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { Queue } from "@prisma/client";
+import { addToPersonalList } from "@/actions";
+import CreatePersonalList from "./create-personal-list";
+import IconButton from "@mui/material/IconButton/IconButton";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
 
 interface AddPersonalList {
   gameId: number;
   userLists: Queue[];
-  setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const AddToPersonalList = ({ gameId, userLists, setOpen }: AddPersonalList) => {
+const AddToPersonalList = ({ gameId, userLists }: AddPersonalList) => {
   const session = useSession();
-  const [show, setShow] = useState<boolean>(false);
+  const [showMenu, setShowMenu] = useState<boolean>(false);
+  const [showForm, setShowForm] = useState<boolean>(false);
 
   if (!session) return null;
   else if (session.data?.user)
@@ -32,15 +29,19 @@ const AddToPersonalList = ({ gameId, userLists, setOpen }: AddPersonalList) => {
           type="submit"
           aria-label="favorite"
           className="bg-purple-500"
+          onClick={() => {
+            setShowMenu(!showMenu);
+            setShowForm(false);
+          }}
         >
           <AddBoxIcon />
         </IconButton>
-        {show ? (
+        {showMenu && (
           <List>
             {userLists.map((list) => {
               return (
                 <form
-                  action={actions.addToPersonalList.bind(null, gameId, list.id)}
+                  action={addToPersonalList.bind(null, gameId, list.id)}
                   key={list.id}
                 >
                   <ListItem>
@@ -50,11 +51,12 @@ const AddToPersonalList = ({ gameId, userLists, setOpen }: AddPersonalList) => {
               );
             })}
 
-            <ListItem onClick={() => setOpen(true)}>
+            <ListItem onClick={() => setShowForm(!showForm)}>
               <ListItemText primary="Create new personal list" />
             </ListItem>
           </List>
-        ) : null}
+        )}
+        {showForm && <CreatePersonalList />}
       </>
     );
 };

@@ -6,3 +6,4 @@ export { createReport } from "@/actions/create-report";
 export { addFavoriteGame } from "@/actions/add-favorite-game";
 export { removeFavoriteGame } from "@/actions/remove-favorite-game";
 export { createPersonalList } from "@/actions/create-personal-list";
+export { addToPersonalList } from "@/actions/add-to-personal-list";
