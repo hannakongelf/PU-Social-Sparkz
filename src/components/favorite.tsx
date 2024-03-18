@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { IconButton } from '@mui/material';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import type { FavoriteWithGameId } from '@/db/queries';
-import { useSession } from 'next-auth/react';
-import * as actions from '@/actions';
+import { IconButton } from "@mui/material";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import type { FavoriteWithGameId } from "@/db/queries";
+import { useSession } from "next-auth/react";
+import * as actions from "@/actions";
 
 interface Favorite {
   className?: string;
@@ -26,9 +26,10 @@ const FavoriteGame = ({ gameId, favorite }: Favorite) => {
       {!isFavorite ? (
         <form action={actions.addFavoriteGame.bind(null, gameId)}>
           <IconButton
-            type='submit'
-            aria-label='favorite'
-            className='bg-purple-500'
+            type="submit"
+            aria-label="favorite"
+            className="bg-purple-500"
+            color="inherit"
           >
             <FavoriteBorderIcon />
           </IconButton>
@@ -36,9 +37,10 @@ const FavoriteGame = ({ gameId, favorite }: Favorite) => {
       ) : (
         <form action={actions.removeFavoriteGame.bind(null, gameId)}>
           <IconButton
-            type='submit'
-            aria-label='favorite'
-            className='bg-purple-500'
+            type="submit"
+            aria-label="favorite"
+            className="bg-purple-500"
+            color="inherit"
           >
             <FavoriteIcon />
           </IconButton>

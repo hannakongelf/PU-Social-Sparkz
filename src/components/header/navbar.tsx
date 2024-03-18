@@ -19,11 +19,11 @@ const Navbar = () => {
           </Link>
         </section>
         <section className="flex items-center">
-          <AuthHeader />
           <CreateHeader />
           <Link href={"/toolbox"} className={"ml-4"}>
             <Button className="bg-purple-500">Toolbox</Button>
           </Link>
+          <AuthHeader />
         </section>
       </div>
     </nav>

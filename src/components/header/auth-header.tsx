@@ -2,7 +2,8 @@
 
 import * as actions from '@/actions';
 import { useSession } from 'next-auth/react';
-import { Button } from '@mui/material';
+import { Button, Link } from '@mui/material';
+import UserMenuDropdown from './user-menu-dropdown';
 
 const AuthHeader = () => {
   const session = useSession();
@@ -11,19 +12,14 @@ const AuthHeader = () => {
   else if (session.data?.user)
     return (
       <section className='flex gap-4 items-center'>
-        <div>{session.data.user.name}</div>
-        <form action={actions.signOut}>
-          <Button type='submit' variant='contained'>
-            Sign out
-          </Button>
-        </form>
+        <UserMenuDropdown/>
       </section>
     );
   else
     return (
       <section>
         <form action={actions.signIn}>
-          <Button type='submit' variant='contained'>
+          <Button type='submit' size="small" variant='contained'>
             Sign in
           </Button>
         </form>

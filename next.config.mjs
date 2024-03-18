@@ -2,6 +2,12 @@
 const nextConfig = {
   images: {
     domains: ['cdn.pixabay.com'],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com"
+      }
+    ]
   },
 
 };
