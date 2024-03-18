@@ -62,7 +62,11 @@ const UserInfoBox = ({
       <Typography>My Games</Typography>
       <ListMygames games={games} />
       <Link href={`/favorite-lists-with-games/${favoriteList.id}/`}>
-        <Button>My favorite games</Button>
+        <Button
+          action={actions.goToYourFavoriteList.bind(null, favoriteList.id)}
+        >
+          My favorite games
+        </Button>
       </Link>
       <Typography>My Lists</Typography>
     </section>

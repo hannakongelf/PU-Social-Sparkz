@@ -7,8 +7,10 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import { CardContent, Typography, Rating } from "@mui/material";
 import { favoriteList } from "@/paths";
+import { useFormState } from "react-dom";
+import * as actions from "@/actions";
 
-export default function FavoriteList({ favoriteGame }: { favoriteGame: Game }) {
+const FavoriteList = ({ favoriteGame }: { favoriteGame: Game }) => {
   if (!favoriteGame) return null;
 
   return (
@@ -45,4 +47,6 @@ export default function FavoriteList({ favoriteGame }: { favoriteGame: Game }) {
       </Link>
     </Card>
   );
-}
+};
+
+export default FavoriteList;
