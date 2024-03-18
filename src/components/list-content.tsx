@@ -2,11 +2,19 @@
 
 import { useState, useEffect } from 'react';
 import ListCard from '@/components/list-card';
-import { Button, Paper, TextField } from '@mui/material';
 import type { FavoriteWithGameId, GameWithReviews } from '@/db/queries';
 import { gameType } from '@prisma/client';
+import Paper from '@mui/material/Paper';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
-export default function ListContent({ games, favorite }: { games: GameWithReviews[], favorite: FavoriteWithGameId }) {
+export default function ListContent({
+  games,
+  favorite,
+}: {
+  games: GameWithReviews[];
+  favorite: FavoriteWithGameId;
+}) {
   const [filteredGames, setFilteredGames] = useState<GameWithReviews[]>(games);
   const [searchTerm, setSearchTerm] = useState('');
   const [category, setCategory] = useState<gameType | null>(null);
@@ -101,7 +109,7 @@ export default function ListContent({ games, favorite }: { games: GameWithReview
 
       <div className='grid grid-cols-5 gap-5'>
         {filteredGames.map((g) => (
-          <ListCard game={g} key={g.id} favorite={favorite}/>
+          <ListCard game={g} key={g.id} favorite={favorite} />
         ))}
       </div>
     </div>

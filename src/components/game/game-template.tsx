@@ -3,18 +3,16 @@
 import * as React from 'react';
 import { useFormState } from 'react-dom';
 import * as actions from '@/actions';
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Paper,
-  Select,
-  TextField,
-  SelectChangeEvent,
-  FormHelperText,
-} from '@mui/material';
 import { gameType } from '@prisma/client';
+import { SelectChangeEvent } from '@mui/material/Select';
+import Paper from '@mui/material/Paper';
+import TextField from '@mui/material/TextField';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import Button from '@mui/material/Button';
 
 const GameTemplate = () => {
   const [formState, action] = useFormState(actions.createGame, {

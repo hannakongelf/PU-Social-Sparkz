@@ -1,6 +1,10 @@
 import { db } from '@/db';
 
 export const getAllGames = async () => {
+  return db.game.findMany();
+};
+
+export const getAllGamesWithReview = async () => {
   return db.game.findMany({
     include: {
       review: true,

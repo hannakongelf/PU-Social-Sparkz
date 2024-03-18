@@ -1,30 +1,24 @@
-"use server";
+'use server';
 
-import * as React from "react";
-import {
-  GameWithReviews,
-  getAllFavoritesGameId,
-  getAllGames,
-  getGameById,
-  getReviewsByGame,
-} from "@/db/queries";
-import ListContent from "@/components/list-content";
-import UserInfoBox from "@/components/my-profile/user-info-box";
-import { useSession } from "next-auth/react";
-import { Game, gameType } from "@prisma/client";
-import { getGamesByAuthor } from "@/db/queries/game";
-import ListMyGames from "@/components/my-profile/list-my-games";
-import { auth } from "@/auth";
-import { getFavoritesByUser } from "@/db/queries/favorite";
+import * as React from 'react';
+
+import UserInfoBox from '@/components/my-profile/user-info-box';
+import { Game } from '@prisma/client';
+import { getGamesByAuthor } from '@/db/queries/game';
+import { getFavoritesByUser } from '@/db/queries/favorite';
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
+import * as paths from '@/paths';
 
 export default async function Page() {
   const session = await auth();
-  const games: Game[] = await getGamesByAuthor(session?.user?.id ?? "1");
-  const favorites: Game[] = await getFavoritesByUser(session?.user?.id ?? "1");
+  if (!session || !session.user) redirect(paths.home());
+  const games: Game[] = await getGamesByAuthor(session.user.id);
+  const favorites: Game[] = await getFavoritesByUser(session.user.id);
 
   return (
-    <main className="flex justify-center items-center">
-      <UserInfoBox games={games} user={session?.user} favorites={favorites} />
+    <main className='flex justify-center items-center'>
+      <UserInfoBox games={games} user={session.user} favorites={favorites} />
     </main>
   );
 }

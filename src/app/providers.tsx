@@ -1,7 +1,8 @@
 'use client';
 
-import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { SessionProvider } from 'next-auth/react';
 import { createContext, useMemo, useState } from 'react';
 
