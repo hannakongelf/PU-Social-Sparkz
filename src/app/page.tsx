@@ -1,14 +1,17 @@
 "use server";
 
-import { GameWithReviews, getAllGames } from "@/db/queries";
+import {
+  type GameWithReviews,
+  getAllGamesWithReview,
+  getAllFavoritesGameId,
+} from "@/db/queries";
 import ListContent from "@/components/list-content";
-import { getAllFavoritesGames } from "@/db/queries/favorite";
 import { auth } from "@/auth";
 
 export default async function Home() {
-  const games: GameWithReviews[] = await getAllGames();
+  const games: GameWithReviews[] = await getAllGamesWithReview();
   const session = await auth();
-  const favorite = await getAllFavoritesGames(session?.user?.id ?? "");
+  const favorite = await getAllFavoritesGameId(session?.user?.id ?? "");
 
   return (
     <main>

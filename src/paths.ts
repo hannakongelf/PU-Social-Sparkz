@@ -21,3 +21,11 @@ export function personalList(id: string) {
 export function createPersonalList() {
   return "/create-personal-list";
 }
+
+export function admin(slug: string = '') {
+  return `/admin/${slug}`;
+}
+
+export function profile() {
+  return 'my-profile';
+}

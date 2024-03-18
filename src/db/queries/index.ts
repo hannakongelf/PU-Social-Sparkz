@@ -1,8 +1,22 @@
-import type { User, Review, Game, Favorite, Queue } from "@prisma/client";
-
-export { getAllGames, getGameById, getGameWithAuthor } from "@/db/queries/game";
+import type {
+  User,
+  Review,
+  Game,
+  Favorite,
+  Report,
+  Queue,
+} from "@prisma/client";
 
 export {
+  getAllGames,
+  getAllGamesWithReview,
+  getGameById,
+  getGameWithAuthor,
+  getGamesByAuthor,
+} from "@/db/queries/game";
+
+export {
+  getAllReviewsWithAuthor,
   getGameReviewByAuthor,
   getReviewsByAuthor,
   getReviewsByGame,
