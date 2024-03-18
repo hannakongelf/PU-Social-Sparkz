@@ -48,7 +48,7 @@ const ReviewTable = ({ reviews }: { reviews: ReviewWithAuthor[] }) => {
                 </Link>
               </TableCell>
               <TableCell align='right'>{review.author.name}</TableCell>
-              <TableCell align='right'>
+              <TableCell align='right' className='truncate'>
                 {review.description ? (
                   <>
                     {review.description.substring(0, 100)}
