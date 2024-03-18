@@ -1,13 +1,12 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import ListCard from '@/components/list-card';
-import type { FavoriteWithGameId, GameWithReviews } from '@/db/queries';
-import { gameType } from '@prisma/client';
-import Paper from '@mui/material/Paper';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import { useAutoAnimate } from '@formkit/auto-animate/react';
+import { useState, useEffect } from "react";
+import ListCard from "@/components/list-card";
+import type { FavoriteWithGameId, GameWithReviews } from "@/db/queries";
+import { gameType } from "@prisma/client";
+import Paper from "@mui/material/Paper";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
 export default function ListContent({
   games,
@@ -17,16 +16,15 @@ export default function ListContent({
   favorite: FavoriteWithGameId;
 }) {
   const [filteredGames, setFilteredGames] = useState<GameWithReviews[]>(games);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [category, setCategory] = useState<gameType | null>(null);
   const [sortKey, setSortKey] = useState<keyof GameWithReviews | null>(null);
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
-  const [animationParent] = useAutoAnimate();
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
 
   useEffect(() => {
     let tempFilteredGames = games.filter((game) => {
       const matchesSearchTerm =
-        searchTerm === '' ||
+        searchTerm === "" ||
         game.name.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesCategory = category === null || game.type === category;
       return matchesSearchTerm && matchesCategory;
@@ -37,14 +35,14 @@ export default function ListContent({
         let valueA = a[sortKey];
         let valueB = b[sortKey];
 
-        if (typeof valueA === 'string' && typeof valueB === 'string') {
+        if (typeof valueA === "string" && typeof valueB === "string") {
           valueA = valueA.toLowerCase();
           valueB = valueB.toLowerCase();
         }
 
         if (!valueA || !valueB) return 0;
 
-        if (sortDirection === 'asc') {
+        if (sortDirection === "asc") {
           return valueA < valueB ? -1 : valueA > valueB ? 1 : 0;
         } else {
           return valueA > valueB ? -1 : valueA < valueB ? 1 : 0;
@@ -61,34 +59,34 @@ export default function ListContent({
 
   const handleSortChange = (key: keyof GameWithReviews) => {
     setSortKey(key);
-    setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+    setSortDirection(sortDirection === "asc" ? "desc" : "asc");
   };
 
   return (
     <div>
       <Paper
         elevation={1}
-        className='pt-1 pb-1 pr-6 pl-6 mb-8 mt-10  flex justify-between'
+        className="pt-1 pb-1 pr-6 pl-6 mb-8 mt-10  flex justify-between"
       >
-        <div className='my-6 flex justify-center'>
+        <div className="my-6 flex justify-center">
           <TextField
-            id='outlined-basic'
-            label='Search'
-            variant='outlined'
+            id="outlined-basic"
+            label="Search"
+            variant="outlined"
             value={searchTerm}
             onChange={handleSearchChange}
-            size='small'
+            size="small"
           />
         </div>
 
-        <Button onClick={() => handleSortChange('name')} size='small'>
+        <Button onClick={() => handleSortChange("name")} size="small">
           Sort by Name {sortDirection}
         </Button>
 
-        <div className='flex justify-center my-9 flex-wrap gap-2'>
+        <div className="flex justify-center my-9 flex-wrap gap-2">
           {Object.values(gameType).map((t) => (
             <Button
-              size='small'
+              size="small"
               key={t}
               onClick={() => {
                 setCategory(t);
@@ -101,15 +99,15 @@ export default function ListContent({
             onClick={() => {
               setCategory(null);
             }}
-            variant='contained'
-            size='small'
+            variant="contained"
+            size="small"
           >
             Reset category filter
           </Button>
         </div>
       </Paper>
 
-      <div className='grid grid-cols-5 gap-5' ref={animationParent}>
+      <div className="grid grid-cols-5 gap-5">
         {filteredGames.map((g) => (
           <ListCard game={g} key={g.id} favorite={favorite} />
         ))}

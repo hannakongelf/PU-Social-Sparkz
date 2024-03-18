@@ -3,16 +3,17 @@
 import ReviewContent from "@/components/game/review-content";
 import RatingCard from "@/components/game/rating-card";
 import Image from "next/image";
-import { Game } from "@prisma/client";
+import { Game, Queue } from "@prisma/client";
 import { FavoriteWithGameId, ReviewWithAuthor } from "@/db/queries";
 import { useState } from "react";
 import ReportForm from "../report-form";
 import { useSession } from "next-auth/react";
-import FavoriteGame from "../favorite";
 import Rating from "@mui/material/Rating";
 import Button from "@mui/material/Button";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import Countdown from "../toolbox/countdown";
+import AddToPersonalList from "../profile/add-to-personal-list";
+import FavoriteGame from "../profile/favorite";
 
 const GameContent = ({
   game,

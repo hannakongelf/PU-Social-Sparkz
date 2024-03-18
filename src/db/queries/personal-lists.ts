@@ -30,3 +30,14 @@ export const getPersonalListWithGames = async (id: string) => {
     },
   });
 };
+
+export const getGamesInList = async (queueId: string) => {
+  return db.queueOnGame.findUnique({
+    where: {
+      id: queueId,
+    },
+    include: {
+      game: true,
+    },
+  });
+};

@@ -112,6 +112,7 @@ model Favorite {
 
 model Queue {
   id                String        @id @default(cuid())
+  name              String
   author            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId            String
   queueContainsGame QueueOnGame[]

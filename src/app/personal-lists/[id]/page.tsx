@@ -3,7 +3,6 @@
 import { auth } from "@/auth";
 import PersonalListContent from "@/components/profile/show-personal-lists-content";
 import PersonalListCard from "@/components/profile/show-personal-lists-template";
-import { QueueWithGames, getAllPersonalLists } from "@/db/queries";
 import { getAllFavoritesGames } from "@/db/queries/favorite";
 import { getPersonalListWithGames } from "@/db/queries/personal-lists";
 
