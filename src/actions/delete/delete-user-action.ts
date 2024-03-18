@@ -7,6 +7,8 @@ import { revalidatePath } from 'next/cache';
 
 export async function deleteUser(id: string) {
   const session = await auth();
+  if (!session || !session.user?.admin)
+    throw new Error('You must be an admin to delete a user.');
   try {
     await db.user.delete({
       where: {

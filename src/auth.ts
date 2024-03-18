@@ -27,9 +27,6 @@ export const {
     Google({
       clientId: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
-      profile(profile) {
-        return { admin: profile.admin ?? false, ...profile };
-      },
     }),
   ],
   callbacks: {
