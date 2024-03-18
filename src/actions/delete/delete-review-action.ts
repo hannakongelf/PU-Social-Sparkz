@@ -10,11 +10,12 @@ export async function deleteReview(id: number) {
   if (!session || !session.user?.admin)
     throw new Error('You must be an admin to delete a review.');
   try {
-    await db.review.delete({
+    const review = await db.review.delete({
       where: {
         id: id,
       },
     });
+    revalidatePath(paths.gamePath(review.gameId));
   } catch (err: unknown) {}
   revalidatePath(paths.admin());
 }

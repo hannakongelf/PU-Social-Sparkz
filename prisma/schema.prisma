@@ -36,14 +36,14 @@ model Session {
 }
 
 model User {
-  id            String     @id @default(cuid())
+  id            String    @id @default(cuid())
   name          String?
-  email         String?    @unique
+  email         String?   @unique
   emailVerified DateTime?
   image         String?
   // createdAt     DateTime   @default(now()) @map(name: "created_at")
   // updatedAt     DateTime?  @updatedAt @map(name: "updated_at")
-  admin         Boolean    @default(false)
+  admin         Boolean   @default(false)
   accounts      Account[]
   sessions      Session[]
   games         Game[]
@@ -106,7 +106,7 @@ model Review {
 model Favorite {
   id     String @id @default(cuid())
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  games   Game[]
+  games  Game[]
   userId String @unique
 }
 
@@ -127,7 +127,7 @@ model QueueOnGame {
 
 model Report {
   id          String     @id @default(cuid())
-  author      User       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  author      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      String
   reportId    Int //This is the FK of the reported object
   contentType reportType //Type of reported object

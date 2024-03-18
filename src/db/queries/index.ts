@@ -1,4 +1,4 @@
-import type { User, Review, Game, Favorite } from '@prisma/client';
+import type { User, Review, Game, Favorite, Report } from '@prisma/client';
 
 export {
   getAllGames,
@@ -9,6 +9,7 @@ export {
 } from '@/db/queries/game';
 
 export {
+  getAllReviewsWithAuthor,
   getGameReviewByAuthor,
   getReviewsByAuthor,
   getReviewsByGame,
@@ -17,6 +18,8 @@ export {
 export { getUserById } from '@/db/queries/user';
 
 export { getAllFavoritesGameId } from '@/db/queries/favorite';
+
+export { getReportsWithContentDescription } from '@/db/queries/report';
 
 // Types
 
@@ -35,3 +38,11 @@ export type FavoriteWithGameId =
       }[];
     })
   | null;
+
+export type ReportWithContentAndAuthor = Report & {
+  contentDescription: string;
+  gameId: number;
+  author: {
+    name: string | null;
+  };
+};

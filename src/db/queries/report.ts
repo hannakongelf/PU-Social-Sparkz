@@ -1,58 +1,51 @@
-import { db } from "@/db";
-import { Report } from "@prisma/client";
-
-// Assuming this type mirrors the fields in your Prisma Report model
-export interface ReportwithContentAndLink extends Report {
-  contentDescription: string;
-  link: string;
-}
+import { db } from '@/db';
+import { Report, gameType } from '@prisma/client';
+import { ReportWithContentAndAuthor } from '.';
 
 export const getReportsWithContentDescription = async (): Promise<
-  ReportwithContentAndLink[]
+  ReportWithContentAndAuthor[]
 > => {
-  // Fetch all reports
   const reports = await db.report.findMany({
     include: {
       author: {
         select: {
           name: true,
-        }
-      }
-    }
+        },
+      },
+    },
   });
-  // An async function to fetch the description based on report contentType
-  async function fetchDescription(report: Report): Promise<string[]> {
-    let description = "";
-    let link = "";
-    if (report.contentType === "GAME") {
+
+  async function fetchDescription(report: Report): Promise<[string, number]> {
+    let description = '';
+    let gameId = -1;
+    if (report.contentType === 'GAME') {
       const game = await db.game.findUnique({
         where: { id: report.reportId },
         select: { description: true, id: true },
       });
-      description = game?.description || "";
-      link = `/detail/${game?.id}` || "";
-    } else if (report.contentType === "REVIEW") {
+      if (!game) throw new Error('Game does not exist');
+      description = game.description;
+      gameId = game.id;
+    } else if (report.contentType === 'REVIEW') {
       const review = await db.review.findUnique({
         where: { id: report.reportId },
         select: { description: true, gameId: true },
       });
-      description = review?.description || "";
-      link = `/detail/${review?.gameId}` || "";
+      // if (!review) throw new Error('Review does not exist');
+      description = review?.description || '';
+      gameId = review?.gameId || -1;
     }
-    return [description, link];
+    return [description, gameId];
   }
 
-  // Map over reports to fetch and assign descriptions
-  const reportsWithDescriptions: ReportwithContentAndLink[] = await Promise.all(
-    reports.map(async (report): Promise<Report> => {
-      const description = await fetchDescription(report);
+  return await Promise.all(
+    reports.map(async (report) => {
+      const data = await fetchDescription(report);
       return {
         ...report,
-        contentDescription: description[0],
-        link: description[1],
+        contentDescription: data[0],
+        gameId: data[1],
       };
     })
   );
-
-  return reportsWithDescriptions;
 };

@@ -45,7 +45,7 @@ export default function GamesTable({ data }: { data: Game[] }) {
                 <Link
                   target='_blank'
                   href={paths.gamePath(game.id)}
-                  className='border-b'
+                  className='border-b text-blue-500 border-blue-500'
                 >
                   {game.name}
                 </Link>

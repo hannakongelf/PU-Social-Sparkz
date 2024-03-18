@@ -13,7 +13,7 @@ const GamesAdminPage = async () => {
   return (
     <div>
       <h1 className='text-4xl mb-8'>Games</h1>
-      <GamesTable data={games} />;
+      <GamesTable data={games} />
     </div>
   );
 };

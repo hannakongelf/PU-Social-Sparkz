@@ -17,4 +17,5 @@ export async function deleteGame(id: number) {
     });
   } catch (err: unknown) {}
   revalidatePath(paths.admin());
+  revalidatePath(paths.home());
 }

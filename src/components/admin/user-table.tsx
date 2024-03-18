@@ -9,9 +9,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { User } from '@prisma/client';
-import Link from 'next/link';
-import { Button } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
 import { deleteUser } from '@/actions/delete/delete-user-action';
+import { DeleteForever } from '@mui/icons-material';
 
 export default function UserTable({ users }: Readonly<{ users: User[] }>) {
   return (
@@ -19,7 +19,7 @@ export default function UserTable({ users }: Readonly<{ users: User[] }>) {
       <Table sx={{ minWidth: 900 }} aria-label='simple table'>
         <TableHead>
           <TableRow>
-            <TableCell align='right'>User ID</TableCell>
+            <TableCell>User ID</TableCell>
             <TableCell align='right'>User name</TableCell>
             <TableCell align='right'>User email</TableCell>
             <TableCell align='right'>Delete</TableCell>
@@ -31,16 +31,16 @@ export default function UserTable({ users }: Readonly<{ users: User[] }>) {
               key={u.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell align='right'>{u.id}</TableCell>
-              <TableCell align='right'>
-                <Link className={'text-blue-500'} href={`/user/${u.id}`}>
-                  {u.name}
-                </Link>
+              <TableCell component='th' scope='row'>
+                {u.id}
               </TableCell>
+              <TableCell align='right'>{u.name}</TableCell>
               <TableCell align='right'>{u.email}</TableCell>
               <TableCell align='right'>
                 <form action={() => deleteUser(u.id)}>
-                  <Button type='submit'>Delete User</Button>
+                  <IconButton type='submit' color='error'>
+                    <DeleteForever />
+                  </IconButton>
                 </form>
               </TableCell>
             </TableRow>
