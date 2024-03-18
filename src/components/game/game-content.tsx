@@ -93,21 +93,20 @@ const GameContent = ({
             />
           )
         : null}
-      {session.data?.user
-        ? reviews
-            .sort(
-              (a, b) =>
-                (b.author.id === session.data?.user.id) -
-                (a.author.id === session.data?.user.id)
-            )
-            .map((review) => (
-              <ReviewContent
-                key={review.id}
-                review={review}
-                user={session.data.user}
-              />
-            ))
-        : null}
+      {reviews
+        .sort((a, b) => {
+          if (!session.data?.user) return 0;
+          if (b.author.id === session.data.user.id) return 1;
+          else if (a.author.id === session.data?.user.id) return -1;
+          return 0;
+        })
+        .map((review) => (
+          <ReviewContent
+            key={review.id}
+            review={review}
+            userId={session.data?.user?.id || null}
+          />
+        ))}
     </>
   );
 };

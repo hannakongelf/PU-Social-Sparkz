@@ -12,10 +12,10 @@ import { User } from '@prisma/client';
 
 const ReviewContent = ({
   review,
-  user,
+  userId,
 }: {
   review: ReviewWithAuthor;
-  user: User;
+  userId: string | null;
 }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [edit, setEdit] = useState<boolean>(false);
@@ -41,7 +41,7 @@ const ReviewContent = ({
           )}
         </div>
         <div className='flex content-start space-x-1'>
-          {user?.id && user?.id === review.author.id && (
+          {userId && userId === review.author.id && (
             <Button
               onClick={() => setEdit(!edit)}
               className='size-8'
@@ -51,7 +51,7 @@ const ReviewContent = ({
               {edit ? 'Cancel' : 'Edit'}
             </Button>
           )}
-          {review?.author.id !== user?.id && user && (
+          {review?.author.id !== userId && (
             <Button
               onClick={() => setOpen(true)}
               className='size-8'

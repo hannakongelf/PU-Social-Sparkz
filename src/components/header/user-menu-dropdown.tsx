@@ -18,13 +18,10 @@ import * as actions from '@/actions';
 import Image from 'next/image';
 import Link from 'next/link';
 import DarkmodeToggle from './darkmode-toggle';
+import * as paths from '@/paths';
 
 const UserMenuDropdown = () => {
   const session = useSession();
-
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
@@ -32,14 +29,11 @@ const UserMenuDropdown = () => {
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  if (!session || !session.data?.user) return null;
 
   return (
     <div>
@@ -50,7 +44,7 @@ const UserMenuDropdown = () => {
               <IconButton onClick={handleOpenUserMenu}>
                 <Chip
                   avatar={
-                    session.data?.user?.image ? (
+                    session.data.user.image ? (
                       <Avatar>
                         <Image
                           src={session.data.user.image}
@@ -60,7 +54,7 @@ const UserMenuDropdown = () => {
                       </Avatar>
                     ) : undefined
                   }
-                  label={<label>{session.data?.user?.name}</label>}
+                  label={<label>{session.data.user.name}</label>}
                   variant='outlined'
                 />
               </IconButton>
@@ -85,8 +79,18 @@ const UserMenuDropdown = () => {
                 <Link href={'/my-profile'}>My profile</Link>
               </MenuItem>
               <MenuItem>
+                <Link href={'/create'}>
+                  <Typography>Create new game</Typography>
+                </Link>
+              </MenuItem>
+              {session.data.user.admin ? (
+                <MenuItem>
+                  <Link href={paths.profile()}>Admin page</Link>
+                </MenuItem>
+              ) : null}
+              <MenuItem>
                 <Typography>
-                  <DarkmodeToggle />
+                  <DarkmodeToggle text />
                 </Typography>
               </MenuItem>
               <MenuItem>
