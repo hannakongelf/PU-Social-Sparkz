@@ -4,8 +4,8 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
-import { Rating } from "@mui/material";
 import type { FavoriteWithGameId, GameWithReviews } from "@/db/queries";
+import Rating from "@mui/material/Rating";
 import FavoriteGame from "./profile/favorite";
 
 export default function ListCard({
