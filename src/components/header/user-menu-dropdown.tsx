@@ -75,7 +75,7 @@ const UserMenuDropdown = () => {
               onClose={handleCloseUserMenu}
             >
               <MenuItem>
-                <Link href={'/my-profile'}>My profile</Link>
+                <Link href={paths.profile()}>My profile</Link>
               </MenuItem>
               <MenuItem>
                 <Link href={'/create'}>
@@ -84,7 +84,7 @@ const UserMenuDropdown = () => {
               </MenuItem>
               {session.data.user.admin ? (
                 <MenuItem>
-                  <Link href={paths.profile()}>Admin page</Link>
+                  <Link href={paths.admin()}>Admin page</Link>
                 </MenuItem>
               ) : null}
               <MenuItem>
