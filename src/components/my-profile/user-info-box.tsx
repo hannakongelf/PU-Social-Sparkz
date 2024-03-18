@@ -7,7 +7,15 @@ import Image from "next/image";
 import ListMygames from "./list-my-games";
 import { Game, User } from "@prisma/client";
 
-const UserInfoBox = ({ games, user }: { games: Game[]; user: User }) => {
+const UserInfoBox = ({
+  games,
+  user,
+  favorites,
+}: {
+  games: Game[];
+  user: User | undefined;
+  favorites: Game[];
+}) => {
   if (!user) {
     return (
       <section>
@@ -53,6 +61,7 @@ const UserInfoBox = ({ games, user }: { games: Game[]; user: User }) => {
       {/* <MyGamesAndLists> */}
 
       <Typography>My Favorite Games</Typography>
+      <ListMygames games={favorites} />
 
       <Typography>My Lists</Typography>
     </section>
