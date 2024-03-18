@@ -1,10 +1,12 @@
 'use client';
 
 import * as actions from '@/actions';
-import { Button, Typography } from '@mui/material';
 import Image from 'next/image';
 import ListMygames from './list-my-games';
-import { Game, User } from '@prisma/client';
+import { Game } from '@prisma/client';
+import Button from '@mui/material/Button';
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
 
 const UserInfoBox = ({
   games,
@@ -35,17 +37,14 @@ const UserInfoBox = ({
     <section className='w-4/5'>
       <div className='flex justify-start items-center'>
         <div className='w-1/3'>
-          {user.image ? (
+          <Avatar sx={{ height: 200, width: 200 }}>
             <Image
-              src={user.image}
+              src={user.image || ''}
               width={200}
               height={200}
-              alt=''
-              className='w-4/8'
+              alt='Profile image'
             />
-          ) : (
-            <div>Your picture could not be loaded </div>
-          )}
+          </Avatar>
         </div>
         <div className='flex flex-col '>
           <Typography>My Profile</Typography>
