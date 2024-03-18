@@ -3,7 +3,7 @@
 import {
   type GameWithReviews,
   getAllGamesWithReview,
-  getAllFavoritesGameId,
+  getAllFavoritesGames,
 } from "@/db/queries";
 import ListContent from "@/components/list-content";
 import { auth } from "@/auth";
@@ -11,7 +11,7 @@ import { auth } from "@/auth";
 export default async function Home() {
   const games: GameWithReviews[] = await getAllGamesWithReview();
   const session = await auth();
-  const favorite = await getAllFavoritesGameId(session?.user?.id ?? "");
+  const favorite = await getAllFavoritesGames(session?.user?.id ?? "");
 
   return (
     <main>
