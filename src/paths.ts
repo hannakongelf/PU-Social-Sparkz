@@ -5,3 +5,11 @@ export function gamePath(id: number) {
 export function home() {
   return '/';
 }
+
+export function admin(slug: string = '') {
+  return `/admin/${slug}`;
+}
+
+export function profile() {
+  return 'my-profile';
+}
