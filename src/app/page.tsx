@@ -16,7 +16,6 @@ export default async function Home() {
   return (
     <main>
       <ListContent games={games} favorite={favorite} />
-      tets
     </main>
   );
 }
