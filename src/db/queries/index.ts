@@ -5,7 +5,7 @@ import type {
   Favorite,
   Report,
   Queue,
-} from "@prisma/client";
+} from '@prisma/client';
 
 export {
   getAllGames,
@@ -13,24 +13,24 @@ export {
   getGameById,
   getGameWithAuthor,
   getGamesByAuthor,
-} from "@/db/queries/game";
+} from '@/db/queries/game';
 
 export {
   getAllReviewsWithAuthor,
   getGameReviewByAuthor,
   getReviewsByAuthor,
   getReviewsByGame,
-} from "@/db/queries/reviews";
+} from '@/db/queries/reviews';
 
-export { getUserById } from "@/db/queries/user";
+export { getUserById } from '@/db/queries/user';
 
-export { getAllFavoritesGames } from "@/db/queries/favorite";
+export { getAllFavoritesGames } from '@/db/queries/favorite';
 
 export {
   getAllPersonalLists,
   getPersonalListById,
   getPersonalListWithGames,
-} from "@/db/queries/personal-lists";
+} from '@/db/queries/personal-lists';
 
 // Types
 
@@ -47,6 +47,12 @@ export type FavoriteWithGameId =
       games: {
         id: number;
       }[];
+    })
+  | null;
+
+export type FavoriteWithGames =
+  | (Favorite & {
+      games: GameWithReviews[];
     })
   | null;
 

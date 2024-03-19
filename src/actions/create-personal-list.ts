@@ -1,16 +1,16 @@
-"use server";
+'use server';
 
-import { auth } from "@/auth";
-import { db } from "@/db";
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
-import { z } from "zod";
-import * as paths from "@/paths";
+import { auth } from '@/auth';
+import { db } from '@/db';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
+import { z } from 'zod';
+import * as paths from '@/paths';
 
 const createPersonalListSchema = z.object({
   name: z
     .string()
-    .min(2, { message: "Name must be longer than one character." }),
+    .min(2, { message: 'Name must be longer than one character.' }),
 });
 
 interface CreatePersonalListState {
@@ -28,23 +28,22 @@ export async function createPersonalList(
   if (!session || !session.user)
     return {
       errors: {
-        _form: ["You must be signed in to create a new game."],
+        _form: ['You must be signed in to create a new game.'],
       },
     };
 
   const result = createPersonalListSchema.safeParse({
-    name: formData.get("name"),
+    name: formData.get('name'),
   });
+
   if (!result.success) {
-    console.log(result);
     return {
       errors: result.error.flatten().fieldErrors,
     };
   }
 
-  let newPersonalList;
   try {
-    newPersonalList = await db.queue.create({
+    await db.queue.create({
       data: {
         name: result.data.name,
         userId: session.user.id,
@@ -60,7 +59,7 @@ export async function createPersonalList(
     else
       return {
         errors: {
-          _form: ["Something went wrong."],
+          _form: ['Something went wrong.'],
         },
       };
   }

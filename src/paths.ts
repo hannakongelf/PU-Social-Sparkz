@@ -3,18 +3,14 @@ export function gamePath(id: number) {
 }
 
 export function home() {
-  return "/";
+  return '/';
 }
 
 export function profile() {
-  return "/my-profile";
+  return '/my-profile';
 }
 
-export function personalLists() {
-  return "/personal-lists";
-}
-
-export function personalList(id: string) {
+export function personalList(id: string = '') {
   return `/personal-lists/${id}`;
 }
 
@@ -23,13 +19,13 @@ export function specificGames(id: string) {
 }
 
 export function createPersonalList() {
-  return "/create-personal-list";
+  return '/create-personal-list';
 }
 
-export function admin(slug: string = "") {
+export function admin(slug: string = '') {
   return `/admin/${slug}`;
 }
 
-export function favoriteList(id: string) {
-  return `/favorite-lists-with-games/${id}/`;
+export function favorite() {
+  return '/favorite';
 }
