@@ -7,7 +7,7 @@ export function home() {
 }
 
 export function profile() {
-  return '/my-profile';
+  return '/profile';
 }
 
 export function personalList(id: string = '') {
