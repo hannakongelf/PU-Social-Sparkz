@@ -18,14 +18,7 @@ export default async function Page() {
 
   return (
     <main className="flex justify-center items-center">
-      <UserInfoBox
-        games={games}
-        user={session.user}
-        favorites={favorites}
-        redirectToFavoritePage={function (): void {
-          throw new Error("Function not implemented.");
-        }}
-      />
+      <UserInfoBox games={games} user={session.user} favoriteList={favorites} />
     </main>
   );
 }

@@ -15,7 +15,7 @@ const UserInfoBox = ({
   favoriteList,
 }: {
   games: Game[];
-  favoriteList: Favorite;
+  favoriteList: Game[];
   user: {
     image?: string | null;
     name?: string | null;
