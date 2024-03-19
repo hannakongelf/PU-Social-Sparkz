@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import { useFormState } from 'react-dom';
-import * as actions from '@/actions';
+import * as React from "react";
+import { useFormState } from "react-dom";
+import * as actions from "@/actions";
 import {
   Button,
   FormControl,
@@ -13,60 +13,64 @@ import {
   TextField,
   SelectChangeEvent,
   FormHelperText,
-} from '@mui/material';
-import { gameType } from '@prisma/client';
+} from "@mui/material";
+import { gameType } from "@prisma/client";
 
 const GameTemplate = () => {
   const [formState, action] = useFormState(actions.createGame, {
     errors: {},
   });
 
-  const [selectedCategory, setSelectedCategory] = React.useState('');
+  const images = { 1: "" };
+
+  const [selectedCategory, setSelectedCategory] = React.useState("");
+  const [selectedImage, setSelectedImage] = React.useState("/stock_game.jpg");
 
   const handleCategoryChange = (event: SelectChangeEvent<string>) => {
     setSelectedCategory(event.target.value);
   };
   return (
-    <div className='flex-col justify-center mt-10'>
-      <div className='flex justify-center pt-8 pb-8 bg-[#845EC2] bg-im'>
-        <h1 className='text-4xl flex justify-center text-white'>
+    <div className="flex-col justify-center mt-10">
+      <div className="flex justify-center pt-8 pb-8 bg-[#845EC2] bg-im">
+        <h1 className="text-4xl flex justify-center text-white">
           Create New Game
         </h1>
       </div>
-      <Paper elevation={3} className='flex justify-center mb-5 pb-10'>
-        <form action={action} noValidate className='w-4/5'>
-          <p className='mb-4 mt-5 text-center'>
+      <Paper elevation={3} className="flex justify-center mb-5 pb-10">
+        <form action={action} noValidate className="w-4/5">
+          <p className="mb-4 mt-5 text-center">
             Please fill out the fields below. Please note that some fields are
             required, while others are optional.
           </p>
 
-          <div className='flex flex-col mb-3'>
-            <label htmlFor='name'>
-              Game name: <span className='text-red-500'>*</span>
+          <div className="flex flex-col mb-3">
+            <label htmlFor="name">
+              Game name: <span className="text-red-500">*</span>
             </label>
             <TextField
-              name='name'
+              name="name"
               error={!!formState.errors.name}
               helperText={formState.errors.name}
             />
           </div>
 
-          <div className='flex flex-col mb-3'>
-            <label htmlFor='pic'>Upload a picture-url:</label>
+          <div className="flex flex-col mb-3 hidden">
+            <label htmlFor="pic">Upload a picture-url:</label>
             <TextField
               error={!!formState.errors.image}
               helperText={formState.errors.image}
-              name='pic'
+              name="pic"
+              value={selectedImage}
             />
           </div>
 
-          <div className='flex flex-col mb-3'>
-            <label htmlFor='description'>
-              Game description: <span className='text-red-500'>*</span>
+          <div className="flex flex-col mb-3">
+            <label htmlFor="description">
+              Game description: <span className="text-red-500">*</span>
             </label>
             <TextField
-              id='desc'
-              name='description'
+              id="desc"
+              name="description"
               multiline
               minRows={3}
               error={!!formState.errors.description}
@@ -74,13 +78,13 @@ const GameTemplate = () => {
             />
           </div>
 
-          <div className='flex flex-col mb-3'>
-            <label htmlFor='minplayers'>
-              Minimum number of players: <span className='text-red-500'>*</span>
+          <div className="flex flex-col mb-3">
+            <label htmlFor="minplayers">
+              Minimum number of players: <span className="text-red-500">*</span>
             </label>
             <TextField
-              type='number'
-              name='minplayers'
+              type="number"
+              name="minplayers"
               required
               defaultValue={2}
               InputProps={{
@@ -93,13 +97,13 @@ const GameTemplate = () => {
             />
           </div>
 
-          <div className='flex flex-col mb-3'>
-            <label htmlFor='maxplayers'>
-              Maximum number of players: <span className='text-red-500'>*</span>
+          <div className="flex flex-col mb-3">
+            <label htmlFor="maxplayers">
+              Maximum number of players: <span className="text-red-500">*</span>
             </label>
             <TextField
-              type='number'
-              name='maxplayers'
+              type="number"
+              name="maxplayers"
               required
               defaultValue={2}
               InputProps={{
@@ -112,24 +116,24 @@ const GameTemplate = () => {
             />
           </div>
 
-          <div className='flex flex-col mb-3'>
-            <label htmlFor='category'>
+          <div className="flex flex-col mb-3">
+            <label htmlFor="category">
               Please select a suiting category for your game:
             </label>
           </div>
           <div>
             <FormControl sx={{ m: 1, minWidth: 200 }}>
-              <InputLabel id='category'>Category</InputLabel>
+              <InputLabel id="category">Category</InputLabel>
               <Select
-                labelId='category'
-                id='category'
+                labelId="category"
+                id="category"
                 value={selectedCategory}
-                label='Category'
-                name='category'
+                label="Category"
+                name="category"
                 onChange={(e) => handleCategoryChange(e)}
                 error={!!formState.errors.category}
               >
-                <MenuItem value=''>
+                <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
                 {Object.values(gameType).map((type, idx) => {
@@ -146,8 +150,8 @@ const GameTemplate = () => {
             </FormControl>
           </div>
 
-          <div className='mt-3'>
-            <Button type='submit' variant='contained' className='mb-5'>
+          <div className="mt-3">
+            <Button type="submit" variant="contained" className="mb-5">
               Create game
             </Button>
           </div>
