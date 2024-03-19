@@ -28,21 +28,24 @@ const RatingCard = ({
 
   if (session.status === 'loading') return null;
   return (
-    <Paper
-      elevation={3}
-      className='text-center flex flex-col items-center justify-center p-4 gap-5'
-    >
+    <Paper elevation={3} className='flex flex-col p-4 gap-5'>
       {session.data?.user ? (
         <form action={action}>
-          <Typography>What do you think about this game?</Typography>
-          <StarRating
-            precision={1}
-            name='rating'
-            defaultValue={oldReview?.rating}
-          />
-          {formState?.errors.rating && (
-            <p className='text-xs text-red-500'>{formState.errors.rating}</p>
-          )}
+          <div className='flex gap-8'>
+            <Typography>What do you think about this game?</Typography>
+            <div>
+              <StarRating
+                precision={1}
+                name='rating'
+                defaultValue={oldReview?.rating}
+              />
+              {formState?.errors.rating && (
+                <p className='text-xs text-red-500'>
+                  {formState.errors.rating}
+                </p>
+              )}
+            </div>
+          </div>
 
           <div className='py-4'>
             <TextField
@@ -52,6 +55,9 @@ const RatingCard = ({
               error={!!formState?.errors.description}
               helperText={formState?.errors.description}
               defaultValue={oldReview?.description}
+              multiline
+              minRows={2}
+              className='w-full'
             />
           </div>
 

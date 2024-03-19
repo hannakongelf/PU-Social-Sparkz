@@ -64,6 +64,6 @@ export async function createPersonalList(
       };
   }
   revalidatePath(paths.profile());
-  revalidatePath(paths.personalLists());
-  redirect(paths.personalLists());
+  revalidatePath(paths.personalList());
+  redirect(paths.personalList());
 }

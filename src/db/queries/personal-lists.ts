@@ -1,4 +1,4 @@
-import { db } from "@/db";
+import { db } from '@/db';
 
 export const getAllPersonalLists = async () => {
   return db.queue.findMany({});
@@ -32,7 +32,7 @@ export const getPersonalListWithGames = async (id: string) => {
 };
 
 export const getGamesInList = async (queueId: string) => {
-  return db.queueOnGame.findUnique({
+  return db.queueOnGame.findMany({
     where: {
       id: queueId,
     },
