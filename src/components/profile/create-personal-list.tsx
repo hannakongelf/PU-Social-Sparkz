@@ -7,10 +7,13 @@ import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-const CreatePersonalList = () => {
-  const [formState, action] = useFormState(actions.createPersonalList, {
-    errors: {},
-  });
+const CreatePersonalList = ({ gameId }: { gameId: number }) => {
+  const [formState, action] = useFormState(
+    actions.createPersonalList.bind(null, gameId),
+    {
+      errors: {},
+    }
+  );
 
   return (
     <Paper elevation={3} className='flex-col justify-center mt-10'>

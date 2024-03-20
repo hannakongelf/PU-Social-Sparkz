@@ -7,11 +7,7 @@ export const getAllGames = async () => {
 export const getAllGamesWithReview = async () => {
   return db.game.findMany({
     include: {
-      review: {
-        select: {
-          rating: true,
-        },
-      },
+      review: true,
     },
   });
 };

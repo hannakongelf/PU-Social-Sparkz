@@ -1,5 +1,5 @@
 import UserTable from '@/components/admin/user-table';
-import { getAllUsers } from '@/db/queries/user';
+import { getAllUsers } from '@/db/queries';
 import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import * as paths from '@/paths';

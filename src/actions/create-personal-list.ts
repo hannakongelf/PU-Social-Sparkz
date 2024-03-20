@@ -21,6 +21,7 @@ interface CreatePersonalListState {
 }
 
 export async function createPersonalList(
+  gameId: number,
   formState: CreatePersonalListState,
   formData: FormData
 ): Promise<CreatePersonalListState> {
@@ -47,6 +48,11 @@ export async function createPersonalList(
       data: {
         name: result.data.name,
         userId: session.user.id,
+        queueContainsGame: {
+          create: {
+            gameId,
+          },
+        },
       },
     });
   } catch (err: unknown) {

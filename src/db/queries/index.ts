@@ -3,8 +3,8 @@ import type {
   Review,
   Game,
   Favorite,
-  Report,
   Queue,
+  Report,
 } from '@prisma/client';
 
 export {
@@ -22,7 +22,7 @@ export {
   getReviewsByGame,
 } from '@/db/queries/reviews';
 
-export { getUserById } from '@/db/queries/user';
+export { getUserById, getAllUsers } from '@/db/queries/user';
 
 export { getAllFavoritesGames } from '@/db/queries/favorite';
 
@@ -30,7 +30,11 @@ export {
   getAllPersonalLists,
   getPersonalListById,
   getPersonalListWithGames,
+  getListNameById,
+  getGamesInList,
 } from '@/db/queries/personal-lists';
+
+export { getReportsWithContentDescription } from '@/db/queries/report';
 
 // Types
 
@@ -61,3 +65,11 @@ export type QueueWithGames =
       games: Game[];
     })
   | null;
+
+export type ReportWithContentAndAuthor = Report & {
+  author: {
+    name: string | null;
+  };
+  contentDescription: string;
+  gameId: number;
+};
