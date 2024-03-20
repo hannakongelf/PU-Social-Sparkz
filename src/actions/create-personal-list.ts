@@ -43,8 +43,9 @@ export async function createPersonalList(
     };
   }
 
+  let queue;
   try {
-    await db.queue.create({
+    queue = await db.queue.create({
       data: {
         name: result.data.name,
         userId: session.user.id,
@@ -71,5 +72,5 @@ export async function createPersonalList(
   }
   revalidatePath(paths.profile());
   revalidatePath(paths.personalList());
-  redirect(paths.personalList());
+  redirect(paths.personalList(queue.id));
 }

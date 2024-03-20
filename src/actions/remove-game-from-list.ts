@@ -1,3 +1,5 @@
+'use server';
+
 import { db } from '@/db';
 import * as paths from '@/paths';
 import { revalidatePath } from 'next/cache';
@@ -12,6 +14,6 @@ export async function removeGameFromList(gameId: number, queueId: string) {
         },
       },
     });
-  } catch (err) {}
+  } catch {}
   revalidatePath(paths.personalList(queueId));
 }

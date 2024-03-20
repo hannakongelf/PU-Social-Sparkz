@@ -4,6 +4,8 @@ import { auth } from '@/auth';
 import PersonalListCard from '@/components/profile/lists-template';
 import { getAllFavoritesGames } from '@/db/queries/favorite';
 import { getPersonalListByAuthor } from '@/db/queries/personal-lists';
+import Delete from '@mui/icons-material/Delete';
+import * as actions from '@/actions';
 
 export default async function PersonalLists() {
   const session = await auth();
@@ -19,7 +21,18 @@ export default async function PersonalLists() {
           <PersonalListCard list={{ ...favoriteList, name: 'Favorites' }} />
         )}
         {personalLists.map((list) => (
-          <PersonalListCard key={list.id} list={list} />
+          <div key={list.id}>
+            <PersonalListCard list={list} />
+            <form
+              action={actions.deletePersonalList.bind(null, list.id)}
+              className='my-2'
+            >
+              <button type='submit'>
+                Delete list
+                <Delete color='error' className='mr-8' />
+              </button>
+            </form>
+          </div>
         ))}
       </div>
     </>

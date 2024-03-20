@@ -121,7 +121,7 @@ model Queue {
 model QueueOnGame {
   game    Game   @relation(fields: [gameId], references: [id], onDelete: Cascade)
   gameId  Int
-  queue   Queue  @relation(fields: [queueId], references: [id])
+  queue   Queue  @relation(fields: [queueId], references: [id], onDelete: Cascade)
   queueId String
 
   @@id(name: "id", [gameId, queueId])

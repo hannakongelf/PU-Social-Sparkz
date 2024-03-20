@@ -56,12 +56,30 @@ const UserInfoBox = ({
           </form>
         </div>
       </div>
-      <section className='flex items-center mt-4 gap-4 border-b shadow-sm px-4 mb-4'>
-        <Button onClick={() => setActive('games')}>My Games</Button>
-        {/* <ListMygames games={games} /> */}
-        <Button onClick={() => setActive('favorite')}>My favorite games</Button>
-        <Button onClick={() => setActive('list')}>My Lists</Button>
-      </section>
+      <div className='flex justify-between my-4 border-b shadow-sm px-4'>
+        <section className='flex items-center gap-4'>
+          <Button onClick={() => setActive('games')}>My Games</Button>
+          <Button onClick={() => setActive('favorite')}>
+            My favorite games
+          </Button>
+          <Button onClick={() => setActive('list')}>My Lists</Button>
+        </section>
+        {active !== 'games' && (
+          <Link
+            href={
+              active === 'favorite'
+                ? paths.favorite()
+                : active === 'list'
+                ? paths.personalList()
+                : ''
+            }
+          >
+            <Button size='small' variant='contained'>
+              Advanced view
+            </Button>
+          </Link>
+        )}
+      </div>
       <div className='grid grid-cols-4 gap-5'>
         {active === 'games' ? (
           <>
