@@ -46,8 +46,10 @@ const GameContent = ({
             width={1200}
             height={300}
           />
-          <AddToPersonalList gameId={game.id} userLists={userLists} />
+
           <FavoriteGame gameId={game.id} favorite={favorite} />
+          <AddToPersonalList gameId={game.id} userLists={userLists} />
+
           <div className='flex gap-2 p-2 justify-between w-full'>
             <section>
               <div className='flex flex-col'>

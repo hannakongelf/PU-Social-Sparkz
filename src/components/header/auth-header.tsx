@@ -17,7 +17,7 @@ const AuthHeader = () => {
     );
   else
     return (
-      <section>
+      <section className='mr-6'>
         <form action={actions.signIn}>
           <Button type='submit' size='small' variant='contained'>
             Sign in
