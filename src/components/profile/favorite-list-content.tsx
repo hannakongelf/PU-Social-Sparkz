@@ -1,10 +1,7 @@
 'use client';
 
 import Paper from '@mui/material/Paper';
-import * as paths from '@/paths';
-import { redirect } from 'next/navigation';
 import { FavoriteWithGames } from '@/db/queries';
-import { useSession } from 'next-auth/react';
 import ListCard from '../list-card';
 
 export default function FavoriteListContent({
@@ -12,11 +9,6 @@ export default function FavoriteListContent({
 }: {
   favorite: FavoriteWithGames;
 }) {
-  const session = useSession();
-  if (!session.data || !session.data.user) {
-    redirect(paths.home());
-  }
-
   if (!favorite) return <div>You dont have any favorite games</div>;
 
   return (

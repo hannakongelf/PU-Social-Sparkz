@@ -18,6 +18,7 @@ export default async function FavoritePage() {
 
   return (
     <main>
+      <h1 className='text-2xl font-semibold mt-4'>Favorites</h1>
       <FavoriteListContent favorite={favorite} />
     </main>
   );
