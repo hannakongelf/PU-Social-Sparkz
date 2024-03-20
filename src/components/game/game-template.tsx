@@ -72,6 +72,12 @@ const GameTemplate = () => {
                 />
               ))}
             </div>
+            <input
+              name='pic'
+              type='text'
+              className='hidden'
+              value={selectedImage}
+            />
           </div>
 
           <div className='flex flex-col mb-3'>

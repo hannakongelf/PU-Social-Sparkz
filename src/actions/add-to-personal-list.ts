@@ -10,10 +10,16 @@ export async function addToPersonalList(gameId: number, queueId: string) {
   if (!session || !session.user)
     throw new Error('You must be logged in to add game to a list.');
   try {
-    await db.queueOnGame.create({
+    await db.queue.update({
+      where: {
+        id: queueId,
+      },
       data: {
-        gameId,
-        queueId,
+        queueContainsGame: {
+          create: {
+            gameId,
+          },
+        },
       },
     });
   } catch {}

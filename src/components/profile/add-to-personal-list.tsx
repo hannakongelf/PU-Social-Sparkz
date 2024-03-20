@@ -44,28 +44,33 @@ const AddToPersonalList = ({ gameId, userLists }: AddPersonalList) => {
         </Tooltip>
         {showMenu && (
           <List className='flex flex-col items-center'>
-            {userLists.map((list) => {
-              return (
-                <form
-                  action={addToPersonalList.bind(null, gameId, list.id)}
-                  key={list.id}
-                  className='w-1/2 mb-2'
-                >
-                  <Button
-                    type='submit'
-                    variant='contained'
-                    className='w-full text-center'
+            <section className='max-h-72 overflow-auto w-full flex flex-col items-center'>
+              {userLists.map((list) => {
+                return (
+                  <form
+                    action={addToPersonalList.bind(null, gameId, list.id)}
+                    key={list.id}
+                    className='w-1/2 mb-2'
                   >
-                    <ListItem className='justify-center'>
-                      <ListItemText primary={list.name} />
-                    </ListItem>
-                  </Button>
-                </form>
-              );
-            })}
-
+                    <Button
+                      type='submit'
+                      variant='contained'
+                      className='w-full text-center'
+                    >
+                      <ListItem>
+                        <ListItemText
+                          className='text-center'
+                          primary={list.name}
+                        />
+                      </ListItem>
+                    </Button>
+                  </form>
+                );
+              })}
+            </section>
             <Button
               variant='contained'
+              color='secondary'
               onClick={() => setShowForm(!showForm)}
               className='hover:cursor-pointer w-1/2 mt-2'
             >
