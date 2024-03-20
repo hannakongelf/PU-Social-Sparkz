@@ -6,6 +6,8 @@ import Paper from '@mui/material/Paper';
 import { Game, Queue } from '@prisma/client';
 import { redirect } from 'next/navigation';
 import * as paths from '@/paths';
+import Delete from '@mui/icons-material/Delete';
+import * as actions from '@/actions';
 
 export default async function Page({
   params: { id },
@@ -27,11 +29,21 @@ export default async function Page({
       >
         <div className='grid grid-cols-5 gap-5'>
           {games.map((game) => (
-            <ListCard
-              key={game.id}
-              game={{ ...game, review: [] }}
-              favorite={'not needed'}
-            />
+            <div key={game.id}>
+              <ListCard
+                game={{ ...game, review: [] }}
+                favorite={'not needed'}
+              />
+              <form
+                action={actions.removeGameFromList.bind(null, game.id, list.id)}
+                className='my-2'
+              >
+                <button type='submit'>
+                  Remove from list
+                  <Delete color='error' className='mr-8' />
+                </button>
+              </form>
+            </div>
           ))}
         </div>
       </Paper>
