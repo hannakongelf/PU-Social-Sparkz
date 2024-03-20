@@ -32,12 +32,22 @@ export const getPersonalListWithGames = async (id: string) => {
 };
 
 export const getGamesInList = async (queueId: string) => {
-  return db.queueOnGame.findMany({
+  const arr = db.queueOnGame.findMany({
     where: {
-      id: queueId,
+      queueId: queueId,
     },
     include: {
       game: true,
     },
+  });
+  return (await arr).map(e => e.game)
+};
+
+export const getListNameById = async (queueId: string) => {
+  return db.queue.findFirst({
+    where: {
+      id: queueId,
+    },
+
   });
 };

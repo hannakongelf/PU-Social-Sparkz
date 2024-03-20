@@ -15,6 +15,7 @@ export default function ListCard({
   game: GameWithReviews;
   favorite: FavoriteWithGameId | 'not needed';
 }) {
+  
   return (
     <Card
       sx={{

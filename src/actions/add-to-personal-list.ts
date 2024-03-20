@@ -19,5 +19,5 @@ export async function addToPersonalList(gameId: number, queueId: string) {
   } catch {}
 
   revalidatePath(paths.gamePath(gameId));
-  revalidatePath(paths.home());
+  revalidatePath(paths.personalList());
 }
