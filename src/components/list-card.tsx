@@ -5,16 +5,17 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import type { FavoriteWithGameId, GameWithReviews } from '@/db/queries';
-import FavoriteGame from './favorite';
 import Rating from '@mui/material/Rating';
+import FavoriteGame from './profile/favorite';
 
 export default function ListCard({
   game,
   favorite,
 }: {
   game: GameWithReviews;
-  favorite: FavoriteWithGameId;
+  favorite: FavoriteWithGameId | 'not needed';
 }) {
+  
   return (
     <Card
       sx={{
@@ -44,11 +45,13 @@ export default function ListCard({
         />
       </Link>
 
-      <FavoriteGame
-        className='absolute bottom-10 right-0 mb-2 mr-2'
-        gameId={game.id}
-        favorite={favorite}
-      />
+      {favorite !== 'not needed' && (
+        <FavoriteGame
+          className='absolute bottom-10 right-0 mb-2 mr-2'
+          gameId={game.id}
+          favorite={favorite}
+        />
+      )}
 
       <Link href={`/detail/${game.id}/`}>
         <CardContent className='relative bottom-5'>

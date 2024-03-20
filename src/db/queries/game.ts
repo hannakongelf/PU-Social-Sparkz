@@ -7,15 +7,17 @@ export const getAllGames = async () => {
 export const getAllGamesWithReview = async () => {
   return db.game.findMany({
     include: {
-      review: true,
+      review: {
+        select: {
+          rating: true,
+        },
+      },
     },
   });
 };
 
 export const getAllGamesNoReview = async () => {
-  return db.game.findMany({
-
-  });
+  return db.game.findMany({});
 };
 
 export const getGameById = async (id: number) => {
@@ -41,6 +43,9 @@ export const getGamesByAuthor = async (id: string) => {
   return db.game.findMany({
     where: {
       userId: id,
+    },
+    include: {
+      review: true,
     },
   });
 };

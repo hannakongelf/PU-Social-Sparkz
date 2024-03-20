@@ -3,10 +3,12 @@
 import { auth } from "@/auth";
 import GameContent from "@/components/game/game-content";
 import {
-  getAllFavoritesGameId,
+  getAllFavoritesGames,
+  getAllPersonalLists,
   getGameById,
   getReviewsByGame,
 } from "@/db/queries";
+import { getPersonalListByAuthor } from "@/db/queries/personal-lists";
 
 export default async function Page({
   params: { id },
@@ -16,7 +18,8 @@ export default async function Page({
   const session = await auth();
   const game = await getGameById(parseInt(id));
   const reviews = await getReviewsByGame(parseInt(id));
-  const favorite = await getAllFavoritesGameId(session?.user?.id || "");
+  const favorite = await getAllFavoritesGames(session?.user?.id || "");
+  const userLists = await getPersonalListByAuthor(session?.user?.id || "");
 
   return (
     <main className="flex flex-col content-center">
@@ -26,6 +29,7 @@ export default async function Page({
           game={game}
           reviews={reviews}
           favorite={favorite}
+          userLists={userLists}
         />
       ) : (
         <p>Game not found.</p>

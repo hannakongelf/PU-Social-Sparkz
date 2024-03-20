@@ -7,3 +7,5 @@ export { addFavoriteGame } from '@/actions/add-favorite-game';
 export { removeFavoriteGame } from '@/actions/remove-favorite-game';
 export { deleteGame } from '@/actions/delete/delete-game-action';
 export { deleteReview } from '@/actions/delete/delete-review-action';
+export { createPersonalList } from '@/actions/create-personal-list';
+export { addToPersonalList } from '@/actions/add-to-personal-list';
