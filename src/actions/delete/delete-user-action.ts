@@ -10,6 +10,12 @@ export async function deleteUser(id: string) {
   if (!session || !session.user?.admin)
     throw new Error('You must be an admin to delete a user.');
   try {
+    const user = await db.user.findUnique({
+      where: {
+        id,
+      },
+    });
+    if (user?.admin) throw new Error('You cant delete an admin user.');
     await db.user.delete({
       where: {
         id: id,

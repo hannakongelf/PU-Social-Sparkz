@@ -1,0 +1,19 @@
+'use server';
+
+import { db } from '@/db';
+import * as paths from '@/paths';
+import { revalidatePath } from 'next/cache';
+
+export async function removeGameFromList(gameId: number, queueId: string) {
+  try {
+    await db.queueOnGame.delete({
+      where: {
+        id: {
+          gameId,
+          queueId,
+        },
+      },
+    });
+  } catch {}
+  revalidatePath(paths.personalList(queueId));
+}

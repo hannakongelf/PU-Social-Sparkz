@@ -9,3 +9,5 @@ export { deleteGame } from '@/actions/delete/delete-game-action';
 export { deleteReview } from '@/actions/delete/delete-review-action';
 export { createPersonalList } from '@/actions/create-personal-list';
 export { addToPersonalList } from '@/actions/add-to-personal-list';
+export { removeGameFromList } from '@/actions/remove-game-from-list';
+export { deletePersonalList } from '@/actions/delete/delete-personal-list';

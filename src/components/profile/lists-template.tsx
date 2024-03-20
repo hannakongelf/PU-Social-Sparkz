@@ -28,7 +28,13 @@ export default function PersonalListCard({ list }: { list: Queue }) {
       }}
       className='static content-center'
     >
-      <Link href={paths.personalList(list.id)}>
+      <Link
+        href={
+          list.name === 'Favorites'
+            ? paths.favorite()
+            : paths.personalList(list.id)
+        }
+      >
         <CardMedia
           sx={{ height: 140 }}
           image={'/stock_game.jpg'}

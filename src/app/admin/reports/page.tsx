@@ -1,8 +1,8 @@
 import ReportTable from '@/components/admin/report-table';
-import { getReportsWithContentDescription } from '@/db/queries';
 import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import * as paths from '@/paths';
+import { getReportsWithContentDescription } from '@/db/queries';
 
 const AdminReportsPage = async () => {
   const session = await auth();
