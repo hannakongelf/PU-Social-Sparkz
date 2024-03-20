@@ -7,6 +7,7 @@ import { gameType } from "@prisma/client";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 export default function ListContent({
   games,
@@ -20,6 +21,7 @@ export default function ListContent({
   const [category, setCategory] = useState<gameType | null>(null);
   const [sortKey, setSortKey] = useState<keyof GameWithReviews | null>(null);
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
+  const [animationParent] = useAutoAnimate();
 
   useEffect(() => {
     let tempFilteredGames = games.filter((game) => {
@@ -107,7 +109,7 @@ export default function ListContent({
         </div>
       </Paper>
 
-      <div className="grid grid-cols-5 gap-5">
+      <div className="grid grid-cols-5 gap-5" ref={animationParent}>
         {filteredGames.map((g) => (
           <ListCard game={g} key={g.id} favorite={favorite} />
         ))}
