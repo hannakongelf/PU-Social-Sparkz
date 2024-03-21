@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import Button from '@mui/material/Button';
-import { Game } from '@prisma/client';
-import Link from 'next/link';
-import { useState } from 'react';
-import WheelComponent from 'react-wheel-of-prizes';
+import Button from "@mui/material/Button";
+import { Game } from "@prisma/client";
+import Link from "next/link";
+import { useState } from "react";
+import WheelComponent from "react-wheel-of-prizes";
 
 const SpinTheWheel = ({ games }: { games: Game[] }) => {
   const [winner, setWinner] = useState<number | null>(null);
@@ -23,23 +23,23 @@ const SpinTheWheel = ({ games }: { games: Game[] }) => {
   };
 
   return (
-    <div className='flex flex-col align-middle items-center my-5'>
+    <div className="flex flex-col items-center justify-center my-5">
       <WheelComponent
         segments={segments}
         segColors={segColors}
         onFinished={(winner: any) => onFinished(winner)}
-        primaryColor='black'
-        contrastColor='white'
-        buttonText='Spinn!'
+        primaryColor="black"
+        contrastColor="white"
+        buttonText="Spinn!"
         isOnlyOnce={false}
         size={290}
         upDuration={250}
         downDuration={250}
-        fontFamily='Inter'
+        fontFamily="Inter"
       />
       {winner !== null && (
         <Link href={`/detail/${winner ?? 0}`}>
-          <Button type='submit' variant='contained' className='mb-5'>
+          <Button type="submit" variant="contained" className="mb-5">
             Spill denne leken
           </Button>
         </Link>
