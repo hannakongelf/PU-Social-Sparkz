@@ -74,18 +74,18 @@ const UserMenuDropdown = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem>
-                <Link href={paths.profile()}>My profile</Link>
-              </MenuItem>
-              <MenuItem>
-                <Link href={'/create'}>
-                  <Typography>Create new game</Typography>
-                </Link>
-              </MenuItem>
-              {session.data.user.admin ? (
+              <Link href={paths.profile()}>
+                <MenuItem>My profile</MenuItem>
+              </Link>
+              <Link href={'/create'}>
                 <MenuItem>
-                  <Link href={paths.admin()}>Admin page</Link>
+                  <Typography>Create new game</Typography>
                 </MenuItem>
+              </Link>
+              {session.data.user.admin ? (
+                <Link href={paths.admin()}>
+                  <MenuItem>Admin page</MenuItem>
+                </Link>
               ) : null}
               <MenuItem>
                 <Typography>
@@ -94,7 +94,16 @@ const UserMenuDropdown = () => {
               </MenuItem>
               <MenuItem>
                 <form action={actions.signOut}>
-                  <button type='submit'>Sign out</button>
+                  <button
+                    type='submit'
+                    onClick={() => {
+                      setTimeout(() => {
+                        location.reload();
+                      }, 1000);
+                    }}
+                  >
+                    Sign out
+                  </button>
                 </form>
               </MenuItem>
             </Menu>

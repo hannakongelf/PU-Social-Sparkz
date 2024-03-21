@@ -50,7 +50,16 @@ const UserInfoBox = ({
           <Typography>{user.email}</Typography>
 
           <form action={actions.signOut} className='mt-4'>
-            <Button type='submit' variant='contained' size='small'>
+            <Button
+              type='submit'
+              variant='contained'
+              size='small'
+              onClick={() => {
+                setTimeout(() => {
+                  location.reload();
+                }, 1000);
+              }}
+            >
               Sign out
             </Button>
           </form>
